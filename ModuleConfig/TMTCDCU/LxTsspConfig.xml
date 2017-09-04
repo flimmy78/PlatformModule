@@ -1,0 +1,358 @@
+<?xml version='1.0' encoding='gb2312'?>
+<configuration>
+    <!-- 公共信息 -->
+    <PublicInfo Note="公共信息管理" DeviceID="0100" SubSysID="00" Name="libLxTsspModules.so" StationID="2311">
+        <Object Note="公共信息管理" Num="1" Alias=" " ID="502A" IndexStart="0">
+            <StationID>2311</StationID>
+            <SubSysID>00</SubSysID>
+            <DeviceID>0100</DeviceID>
+            <IsLocalControl>TRUE</IsLocalControl>
+            <Mode Description="中心监控" Name="中心监控" ID="TM"/>
+            <DefaultMode ID="TM"/>
+            <ShowModeSelect>false</ShowModeSelect>
+            <IsModeSwitch>False</IsModeSwitch>
+        </Object>
+    </PublicInfo>
+    <!-- 公用服务模块的配置-->
+    <CommonModule>
+        <!-- 模块模板的配置-->
+        <Module Note="平台模块集" DeviceID="0100" SubSysID="0" Name="libLxTsspModules.so" StationID="2311">
+            <Object Note="用户管理" Num="1" Alias=" " ID="5003" IndexStart="0"/>
+            <Object Note="用户管理界面" Num="1" Alias=" " ID="5004" IndexStart="0"/>
+            <Object Note="用户登录界面" Num="1" Alias=" " ID="5005" IndexStart="0">
+                <IP Address="192.26.3.100"/>
+            </Object>
+            <Object Note="日志管理" Num="1" Alias=" " ID="5007" IndexStart="0"/>
+            <Object Note="参数宏管理" Num="1" Alias=" " ID="500A" IndexStart="0"/>
+            <Object Note="通信管理" Num="1" Alias=" " ID="5016" IndexStart="0">
+               <Channel DESC="下变频器1" RemoteIP="225.225.0.5" LocalIP="192.26.3.100" TYPE="1" READWRITE="3" ID="DownAlter1" RemotePORT="5064" LocalPORT="5062"/>           
+               <Channel DESC="下变频器2" RemoteIP="225.225.0.5" LocalIP="192.26.3.100" TYPE="1" READWRITE="3" ID="DownAlter2" RemotePORT="5060" LocalPORT="5058"/>                        
+               <Channel DESC="校验变频器" RemoteIP="225.225.0.5" LocalIP="192.26.3.100" TYPE="1" READWRITE="3" ID="UpAlter" RemotePORT="5052" LocalPORT="5050"/>           
+               <Channel DESC="S频段功放" RemoteIP="192.168.3.85" LocalIP="192.26.1.150" TYPE="2" READWRITE="3" ID="S_Power" RemotePORT="14003" LocalPORT="14001"/>
+		   <Channel DESC="L频段功放" RemoteIP="192.168.3.86" LocalIP="192.26.1.150" TYPE="2" READWRITE="3" ID="L_Power" RemotePORT="15003" LocalPORT="15001"/>            
+	         <Channel DESC="下行中频矩阵" RemoteIP="192.26.3.65" LocalIP="192.26.3.100" TYPE="2" READWRITE="3" ID="DOWNNetSwitch" RemotePORT="5082" LocalPORT="5080"/>
+		   <Channel DESC="上行中频矩阵" RemoteIP="192.26.3.60" LocalIP="192.26.3.100" TYPE="2" READWRITE="3" ID="UPNetSwitch" RemotePORT="5086" LocalPORT="5084"/>
+    		   <Channel DESC="测试开关矩阵" RemoteIP="225.225.0.0" LocalIP="192.26.3.100" TYPE="1" READWRITE="3" ID="TestNetSwitch" RemotePORT="5090" LocalPORT="5088"/>
+		   <Channel DESC="射频切换开关" RemoteIP="225.225.0.0" LocalIP="192.26.3.100" TYPE="1" READWRITE="3" ID="Sswitch" RemotePORT="5094" LocalPORT="5092"/>
+		   <Channel DESC="射频分路组合" RemoteIP="225.225.0.0" LocalIP="192.26.3.100" TYPE="1" READWRITE="3" ID="SLDC" RemotePORT="5098" LocalPORT="5096"/>
+		   <Channel DESC="联试应答机" RemoteIP="225.225.0.3" LocalIP="192.26.3.100" TYPE="1" READWRITE="3" ID="RSP" RemotePORT="5102" LocalPORT="5100"/>
+		   <Channel DESC="校零信标一体机" RemoteIP="225.225.0.3" LocalIP="192.26.3.100" TYPE="1" READWRITE="3" ID="ZEROSTD" RemotePORT="5106" LocalPORT="5104"/>
+		   <Channel DESC="铷钟机箱" RemoteIP="225.225.0.4" LocalIP="192.26.3.100" TYPE="1" READWRITE="3" ID="RCLOCK" RemotePORT="5108" LocalPORT="5108"/>
+		   <Channel DESC="频率基准源" RemoteIP="225.225.0.4" LocalIP="192.26.3.100" TYPE="1" READWRITE="3" ID="FREQB" RemotePORT="5114" LocalPORT="5112"/>
+		   <Channel DESC="监控接口" RemoteIP="225.225.0.0" LocalIP="192.26.3.100" TYPE="1" READWRITE="3" ID="SMCU" RemotePORT="5556" LocalPORT="5050"/>
+		   <Channel DESC="时码器" RemoteIP="225.225.0.2" LocalIP="192.26.3.100" TYPE="1" READWRITE="3" ID="Timer" RemotePORT="5400" LocalPORT="5002"/>
+		   <Channel DESC="检前1" RemoteIP="225.225.0.0" LocalIP="192.26.3.100" TYPE="1" READWRITE="3" ID="Record0" RemotePORT="5031" LocalPORT="5030"/>
+		   <Channel DESC="检前2" RemoteIP="225.225.0.0" LocalIP="192.26.3.100" TYPE="1" READWRITE="3" ID="Record1" RemotePORT="5033" LocalPORT="5032"/>
+		   <Channel DESC="链监" RemoteIP="225.225.0.3" LocalIP="192.26.3.100" TYPE="1" READWRITE="3" ID="InnerLink" RemotePORT="5072" LocalPORT="5071"/>
+		   <Channel DESC="测试计算机" RemoteIP="225.225.0.3" LocalIP="192.26.3.100" TYPE="1" READWRITE="3" ID="TestU" RemotePORT="5122" LocalPORT="5120"/>
+		   <Channel DESC="数传单遥控监控接口A机" RemoteIP="225.225.0.10" LocalIP="192.26.3.100" TYPE="1" READWRITE="3" ID="DDTTCSMCU1" RemotePORT="5556" LocalPORT="5050"/>
+		   <Channel DESC="数传单遥控监控接口B机" RemoteIP="225.225.0.11" LocalIP="192.26.3.100" TYPE="1" READWRITE="3" ID="DDTTCSMCU2" RemotePORT="5556" LocalPORT="5050"/>                     
+            </Object>
+	     <Object Note="通信管理界面" Num="1" Alias=" " ID="5017" IndexStart="0"/>
+            <Object Note="硬件访问管理" Num="1" Alias=" " ID="501A" IndexStart="0"/>
+            <Object Note="消息管理" Num="1" Alias=" " ID="501E" IndexStart="0">
+                <ChannelID Description="下变频器1" NetworkID="DownAlter1" SID="2F00" DID="100"/>
+                <ChannelID Description="下变频器2" NetworkID="DownAlter2" SID="2F01" DID="100"/>            
+                <ChannelID Description="校验变频器"  NetworkID="UpAlter" SID="3A00" DID="100"/>
+		    <ChannelID Description="S频段功放"  NetworkID="S_Power" SID="3200" DID="100"/>
+		    <ChannelID Description="L频段功放"  NetworkID="L_Power" SID="3202" DID="100"/>
+		    <ChannelID Description="下行中频矩阵"  NetworkID="DOWNNetSwitch" SID="3C00" DID="100"/>		  
+		    <ChannelID Description="上行中频矩阵"  NetworkID="UPNetSwitch" SID="3B00" DID="100"/>
+		    <ChannelID Description="测试开关矩阵"  NetworkID="TestNetSwitch" SID="3D00" DID="100"/>
+  		    <ChannelID Description="射频切换开关"  NetworkID="Sswitch" SID="2D00" DID="100"/>
+  		    <ChannelID Description="射频分路组合"  NetworkID="SLDC" SID="2C00" DID="100"/>
+  		    <ChannelID Description="联试应答机"  NetworkID="RSP" SID="500" DID="100"/>
+  		    <ChannelID Description="校零信标一体机"  NetworkID="ZEROSTD" SID="4A00" DID="100"/>
+  		    <ChannelID Description="铷钟机箱"  NetworkID="RCLOCK" SID="3F00" DID="100"/>
+  		    <ChannelID Description="频率基准源"  NetworkID="FREQB" SID="3E00" DID="100"/>
+		    <ChannelID Description="时码器" NetworkID="Timer" SID="4100" DID="100"/>           
+                <ChannelID Description="检前1" NetworkID="Record1" SID="1200" DID="100"/>           
+                <ChannelID Description="检前2" NetworkID="Record2" SID="1201" DID="100"/>             
+            </Object>
+            <Object Note="界面管理" Num="1" Alias=" " ID="5022" IndexStart="0"/>
+            <Object Note="状态管理" Num="1" Alias=" " ID="5030" IndexStart="0"/>
+            <Object Note="数据缓冲区管理" Num="1" Alias=" " ID="5035" IndexStart="0"/>
+            <Object Note="系统工作模式选择" Num="1" Alias=" " ID="5039" IndexStart="0"/>
+        </Module>
+        <!--<Module Note="平台工具" DeviceID="0100" SubSysID="00" Name="libLxTsspTools.so" StationID="2311">
+            <Object Note="模块及对象查看" Num="1" Alias=" " ID="503D" IndexStart="0"/>
+        </Module>-->
+        <Module Note="平台工具" DeviceID="0100" SubSysID="00" Name="libInfoSearch.so" StationID="2311">
+            <Object Note="信息元查看" Num="1" Alias=" " ID="50EE" IndexStart="0"/>
+        </Module>
+        <Module Note="参数编辑" DeviceID="0100" SubSysID="00" Name="libMacroEdit.so" StationID="2311">
+            <Object Note="参数编辑" Num="2" Alias=" " ID="5103" IndexStart="0"/>
+        </Module>
+    </CommonModule>
+    <TM>
+        <Module Note="系统监控模块" DeviceID="0100" SubSysID="00" Name="libSMCUGUI.so" StationID="2311">
+            <Object Note="系统监控模块" Num="1" Alias=" " ID="5100" IndexStart="0"/>
+        </Module>
+	<Module Note="时码板监控" DeviceID="0100" SubSysID="00" Name="libTimeBoardMonitor.so" StationID="2311">
+            <Object Note="时码板监控" Num="1" Alias=" " ID="8002" IndexStart="0"/>
+        </Module>
+
+	<Module Note="时码板API" DeviceID="0101" SubSysID="01" Name="libTimeBoardApi.so" StationID="2518">
+            <Object Note="时码板API" Num="1" TimeFreq="100" ID="8007" Alias=" " IndexStart="0"/>
+        </Module>
+
+        <Module Note="下变频器1参数设置" DeviceID="2F00" SubSysID="00" Name="libDCParaSetGUI.so" StationID="2311">
+            <Object Note="下变频器参数设置" Num="1" Alias=" " ID="510A" IndexStart="0"/>
+        </Module>
+	<Module Note="下变频器2参数设置" DeviceID="2F01" SubSysID="00" Name="libDCParaSetGUI.so" StationID="2311">
+            <Object Note="下变频器参数设置" Num="1" Alias=" " ID="510A" IndexStart="0"/>
+        </Module>
+        <Module Note="校验变频器参数设置" DeviceID="3A00" SubSysID="00" Name="libUCParaSetGUI.so" StationID="2311">
+            <Object Note="校验变频器参数设置" Num="1" Alias=" " ID="510B" IndexStart="0"/>
+        </Module>
+        <Module Note="设备状态采集" DeviceID="0100" SubSysID="00" Name="libCMC_DevicesStatusCollect.so" StationID="2311">
+            <Object Note="设备状态采集" Num="1" Alias=" " ID="5125" IndexStart="0"/>
+        </Module>       
+
+	<Module Note="调频基带监控" DeviceID="0400" SubSysID="00" Name="libFMBBE_DCU.so" StationID="2311">
+            <Object Note="调频基带监控" Num="2" Alias=" " ID="5110" IndexStart="0"/>
+        </Module>
+        <Module Note="调频遥测解调参数设置" DeviceID="0400" SubSysID="00" Name="libFM_DemoduSetGUI.so" StationID="2311">
+            <Object Note="FM遥测解调" Num="2" Alias=" " ID="5111" IndexStart="0"/>
+        </Module>
+        <Module Note="调频遥测模拟源参数设置" DeviceID="0400" SubSysID="00" Name="libFM_CodeTMEmuSetGUI.so" StationID="2311">
+            <Object Note="FM遥测模拟源" Num="2" Alias=" " ID="5112" IndexStart="0"/>
+        </Module>
+        <Module Note="调频调制器参数设置" DeviceID="0400" SubSysID="00" Name="libFM_ModuSetGUI.so" StationID="2311">
+            <Object Note="FM调制器" Num="2" Alias=" " ID="5113" IndexStart="0"/>
+        </Module>
+        <Module Note="调频遥测接收参数设置" DeviceID="0400" SubSysID="00" Name="libFM_ReceiveSetGUI.so" StationID="2311">
+            <Object Note="FM接收" Num="2" Alias=" " ID="5114" IndexStart="0"/>
+        </Module>
+	<Module Note="跟踪接收机输出参数设置" DeviceID="0400" SubSysID="00" Name="libFM_TrackRecvOutputSet.so" StationID="2311">
+            <Object Note="FM角误差输出" Num="2" Alias=" " ID="5125" IndexStart="0"/>
+        </Module>
+
+	<Module Note="BPSK基带监控" DeviceID="0400" SubSysID="01" Name="libBPSKBBE_DCU.so" StationID="2311">
+            <Object Note="BPSK基带监控" Num="2" Alias=" " ID="5115" IndexStart="0"/>
+        </Module>
+        <Module Note="BPSK遥测解调参数设置" DeviceID="0400" SubSysID="01" Name="libBPSK_DemoduSetGUI.so" StationID="2311">
+            <Object Note="BPSK遥测解调" Num="2" Alias=" " ID="5116" IndexStart="0"/>
+        </Module>
+        <Module Note="BPSK遥测模拟源参数设置" DeviceID="0400" SubSysID="01" Name="libBPSK_CodeTMEmuSetGUI.so" StationID="2311">
+            <Object Note="BPSK遥测模拟源" Num="2" Alias=" " ID="5117" IndexStart="0"/>
+        </Module>
+        <Module Note="BPSK调制器参数设置" DeviceID="0400" SubSysID="01" Name="libBPSK_ModuSetGUI.so" StationID="2311">
+            <Object Note="BPSK调制器" Num="2" Alias=" " ID="5118" IndexStart="0"/>
+        </Module>
+        <Module Note="BPSK遥测接收参数设置" DeviceID="0400" SubSysID="01" Name="libBPSK_ReceiveSetGUI.so" StationID="2311">
+            <Object Note="BPSK接收" Num="2" Alias=" " ID="5119" IndexStart="0"/>
+        </Module>
+
+
+	<Module Note="扩频基带监控" DeviceID="0400" SubSysID="02" Name="libSSBBE_DCU.so" StationID="2311">
+            <Object Note="扩频基带监控" Num="2" Alias=" " ID="511A" IndexStart="0"/>
+        </Module>
+        <Module Note="扩频遥测解调参数设置" DeviceID="0400" SubSysID="02" Name="libSS_TMParamSet.so" StationID="2311">
+            <Object Note="扩频遥测解调" Num="2" Alias=" " ID="511B" IndexStart="0"/>
+        </Module>
+        <Module Note="扩频遥测模拟源参数设置" DeviceID="0400" SubSysID="02" Name="libSS_TMSimParamSet.so" StationID="2311">
+            <Object Note="扩频遥测模拟源" Num="2" Alias=" " ID="511C" IndexStart="0"/>
+        </Module>
+        <Module Note="扩频调制器参数设置" DeviceID="0400" SubSysID="02" Name="libSS_ModuParaSet.so" StationID="2311">
+            <Object Note="扩频调制器" Num="2" Alias=" " ID="511D" IndexStart="0"/>
+        </Module>
+        <Module Note="扩频遥测接收参数设置" DeviceID="0400" SubSysID="02" Name="libSS_RevParamSet.so" StationID="2311">
+            <Object Note="扩频接收" Num="2" Alias=" " ID="511E" IndexStart="0"/>
+        </Module>
+
+
+	<Module Note="基带一监控界面聚合" DeviceID="0400" SubSysID="00"  Name="libUIAggregator.so" StationID="2311" >
+            <Object Num="1" Alias=" " Note="基带一监控界面聚合" IndexStart="0" ID="5018" ConfigFile="BBE_1_UIConfig.xml"/>
+        </Module>
+	<Module Note="基带二监控界面聚合" DeviceID="0401" SubSysID="00"  Name="libUIAggregator.so" StationID="2311" >
+            <Object Num="1" Alias=" " Note="基带二监控界面聚合" IndexStart="0" ID="5018" ConfigFile="BBE_2_UIConfig.xml"/>
+        </Module>
+	 <Module Note="检前记录器监控界面聚合" DeviceID="1200" SubSysID="00"  Name="libUIAggregator.so" StationID="2311" >
+            <Object Num="1" Alias=" " Note="检前记录器监控界面聚合" IndexStart="0" ID="5018" ConfigFile="RecordUIConfig.xml"/>
+        </Module>
+
+	<Module Note="检前记录器监控" DeviceID="1200" SubSysID="00"  Name="libRecordMonitor.so" StationID="2311" >
+            <Object Num="3" Alias=" " Note="检前记录器监控" IndexStart="0" ID="5120" />
+        </Module>
+
+	<Module Note="标准化接口和状态采集" DeviceID="0100" SubSysID="00"  Name="libStdInterface_CmdProc.so" StationID="2311" >
+            <Object Num="1" Alias=" " Note="标准化接口和状态采集" IndexStart="0" ID="5124" RecvChannel="SMCU" SendChannel="SMCU" />
+        </Module>
+
+	<Module Note="時码器监控" DeviceID="4100" SubSysID="00" Name="libTimerMC.so" StationID="2311">
+            <Object Note="時码器监控" Num="1" Alias=" " ID="5122" IndexStart="0"/>
+        </Module>
+
+	<Module Note="FMAK参数设置" DeviceID="0700" SubSysID="00" Name="libFMSCBBEParamSet.so" StationID="2311">
+            <Object Note="PSK-FM安控" Num="1" Alias=" " ID="510D" IndexStart="0"/>
+        </Module>
+        <Module Note="ZZMAK参数设置" DeviceID="0700" SubSysID="01" Name="libZZMSCBBEParaSet.so" StationID="2311">
+            <Object Note="多音调频安控" Num="1" Alias=" " ID="510F" IndexStart="0"/>
+        </Module>
+	<Module Note="FMAK参数设置" DeviceID="0701" SubSysID="00" Name="libFMSCBBEParamSet.so" StationID="2311">
+            <Object Note="PSK-FM安控" Num="1" Alias=" " ID="510D" IndexStart="0"/>
+        </Module>
+        <Module Note="ZZMAK参数设置" DeviceID="0701" SubSysID="01" Name="libZZMSCBBEParaSet.so" StationID="2311">
+            <Object Note="多音调频安控" Num="1" Alias=" " ID="510F" IndexStart="0"/>
+        </Module>
+	<Module Note="安控基带监控界面聚合" DeviceID="0700" SubSysID="00"  Name="libUIAggregator.so" StationID="2311" >
+            <Object Num="1" Alias=" " Note="安控基带监控界面聚合" IndexStart="0" ID="5018" ConfigFile="AK_DCU_UIConfig.xml"/>
+        </Module>
+	<Module Note="ACU监控" DeviceID="0200" SubSysID="00" Name="libACU_DCU.so" StationID="2311">
+            <Object Note="ACU监控" Num="1" Alias=" " ID="5107" IndexStart="0"/>
+        </Module>
+	<Module Note="FMAK监控" DeviceID="0700" SubSysID="00" Name="libFMAKDcu.so" StationID="2311">
+            <Object Note="FMAK参数设置" Num="1" Alias=" " ID="510C" IndexStart="0"/>
+        </Module>
+        <Module Note="ZZMAK监控" DeviceID="0700" SubSysID="01" Name="libZZMAKDcu.so" StationID="2311">
+            <Object Note="ZZMAK参数设置" Num="1" Alias=" " ID="510E" IndexStart="0"/>
+        </Module>
+
+	<Module Note="DTE监控" DeviceID="0300" SubSysID="00" Name="libDTE_MC.so" StationID="2311">
+            <Object Note="DTE监控" Num="1" Alias=" " ID="5121" IndexStart="0"/>
+        </Module>
+
+	<Module Note="内部链监收发" DeviceID="0100" SubSysID="00" Name="libLANLinkMsgSendAndRecv.so" StationID="2311">
+            <Object Note="内部链监收发" Num="1" ID="800C" Alias=" " IndexStart="0" INTERLINK="InnerLink" LINKCONFIG="InnerLink.xml" />
+        </Module>	
+
+	<Module Note="自动化测试标校" DeviceID="0100" SubSysID="00" Name="libAutoTestCalibrate.so" StationID="2311">
+            <Object Note="自动化测试标校" Num="1" Alias=" " ID="5104" IndexStart="0"/>
+        </Module>
+	<Module Note="系统故障诊断" DeviceID="0100" SubSysID="00" Name="libSysFaultDetect.so" StationID="2311">
+            <Object Note="系统故障诊断" Num="1" Alias=" " ID="5105" IndexStart="0"/>
+        </Module>
+
+
+	<Module Note="数传信号源参数设置" DeviceID="0400" SubSysID="03" Name="libDDTBBE_ModSourceSet.so" StationID="2311">
+            <Object Note="数传信号源参数设置" SubSysID="00" Num="2" Alias=" " ID="5130" IndexStart="0"/>
+        </Module>
+	<Module Note="数传解调参数设置" DeviceID="0400" SubSysID="03" Name="libDDTBBE_CodFrmSynSet.so" StationID="2311">
+            <Object Note="数传解调参数设置" SubSysID="00" Num="2" Alias=" " ID="5131" IndexStart="0"/>
+        </Module>
+	<Module Note="分集合成参数设置" DeviceID="0400" SubSysID="03" Name="libSK_BBEDivCombaraSet.so" StationID="2311">
+            <Object Note="分集合成参数设置" SubSysID="00" Num="2" Alias=" " ID="5132" IndexStart="0"/>
+        </Module>
+	<Module Note="数传接收机参数设置" DeviceID="0400" SubSysID="03" Name="libDDTBBE_RecSet.so" StationID="2311">
+            <Object Note="数传接收机参数设置" SubSysID="00" Num="2" Alias=" " ID="5133" IndexStart="0"/>
+        </Module>
+	<Module Note="存储转发单元设置" DeviceID="0400" SubSysID="03" Name="libBBE_SZSet.so" StationID="2311">
+            <Object Note="存储转发单元设置" SubSysID="00" Num="2" Alias=" " ID="5144" IndexStart="0"/>
+        </Module>
+	<Module Note="数传检测输出参数设置" DeviceID="0400" SubSysID="03" Name="libDDTBBE_TestOutSet.so" StationID="2311">
+            <Object Note="数传检测输出参数设置" SubSysID="00" Num="2" Alias=" " ID="5145" IndexStart="0"/>
+        </Module>
+	<Module Note="DDT_BBE系统参数设置" DeviceID="0400" SubSysID="03" Name="libDDTBBE_SysParaSet.so" StationID="2311">
+            <Object Note="DDT_BBE系统参数设置" SubSysID="00" Num="2" Alias=" " ID="5134" IndexStart="0"/>
+        </Module>
+
+	<Module Note="单遥控系统工作参数设置" DeviceID="0400" SubSysID="04" Name="libSS2BBE_SysParamSet.so" StationID="2311">
+            <Object Note="单遥控系统工作参数设置" SubSysID="00" Num="2" Alias=" " ID="5153" IndexStart="0"/>
+        </Module>
+	<Module Note="单遥控扩频码参数设置" DeviceID="0400" SubSysID="04" Name="libSS2PNCodeSet.so" StationID="2311">
+            <Object Note="单遥控扩频码参数设置" SubSysID="00" Num="2" Alias=" " ID="5160" IndexStart="0"/>
+        </Module>
+	<Module Note="单遥控调制参数设置" DeviceID="0400" SubSysID="04" Name="libSS2BBE_ModuParamSet.so" StationID="2311">
+            <Object Note="单遥控调制参数设置" SubSysID="00" Num="2" Alias=" " ID="5158" IndexStart="0"/>
+        </Module>
+	<Module Note="单遥控遥控参数设置" DeviceID="0400" SubSysID="04" Name="libSS2BBE_TCParamSet.so" StationID="2311">
+            <Object Note="单遥控遥控参数设置" SubSysID="00" Num="2" Alias=" " ID="5154" IndexStart="0"/>
+        </Module>
+
+	<Module Note="L频段单遥控系统工作参数设置" DeviceID="0700" SubSysID="02" Name="libSS2BBE_SysParamSet.so" StationID="2311">
+            <Object Note="L频段单遥控系统工作参数设置" SubSysID="00" Num="2" Alias=" " ID="5153" IndexStart="0"/>
+        </Module>
+	<Module Note="L频段单遥控扩频码参数设置" DeviceID="0700" SubSysID="02" Name="libSS2PNCodeSet.so" StationID="2311">
+            <Object Note="L频段单遥控扩频码参数设置" SubSysID="00" Num="2" Alias=" " ID="5160" IndexStart="0"/>
+        </Module>
+	<Module Note="L频段单遥控调制参数设置" DeviceID="0700" SubSysID="02" Name="libSS2BBE_ModuParamSet.so" StationID="2311">
+            <Object Note="L频段单遥控调制参数设置" SubSysID="00" Num="2" Alias=" " ID="5158" IndexStart="0"/>
+        </Module>
+	<Module Note="L频段单遥控遥控参数设置" DeviceID="0700" SubSysID="02" Name="libSS2BBE_TCParamSet.so" StationID="2311">
+            <Object Note="L频段单遥控遥控参数设置" SubSysID="00" Num="2" Alias=" " ID="5154" IndexStart="0"/>
+        </Module>
+
+	<Module Note="上行中频开关矩阵设置" DeviceID="3B00" SubSysID="00" Name="libUPNet_Switch.so" StationID="2311">
+            <Object Note="上行中频开关矩阵设置" Num="1" Alias=" " ID="6000" IndexStart="0"/>
+        </Module>
+	<Module Note="下行中频开关矩阵设置" DeviceID="3C00" SubSysID="00" Name="libDOWNNet_Switch.so" StationID="2311">
+            <Object Note="下行中频开关矩阵设置" Num="1" Alias=" " ID="6001" IndexStart="0"/>
+        </Module>
+	<Module Note="测试开关矩阵设置" DeviceID="3D00" SubSysID="00" Name="libTestNet_Switch.so" StationID="2311">
+            <Object Note="测试开关矩阵设置" Num="1" Alias=" " ID="6002" IndexStart="0"/>
+        </Module>
+	<Module Note="射频切换开关设置" DeviceID="2D00" SubSysID="00" Name="libSswitchDcu.so" StationID="2311">
+            <Object Note="射频切换开关设置" Num="1" Alias=" " ID="6003" IndexStart="0"/>
+        </Module>
+	<Module Note="射频分路组合设置" DeviceID="2C00" SubSysID="00" Name="libSLDCDcu.so" StationID="2311">
+            <Object Note="射频分路组合设置" Num="1" Alias=" " ID="6004" IndexStart="0"/>
+        </Module>
+        <Module Note="L频段功放高频箱参数设置" DeviceID="3202" SubSysID="00" Name="libHPATDcu.so" StationID="2311">
+            <Object Note="L频段功放高频箱参数设置" Num="1" Alias=" " ID="5108" IndexStart="0"/>
+        </Module>
+        <Module Note="S频段功放高频箱参数设置" DeviceID="3200" SubSysID="00" Name="libHPATDcu.so" StationID="2311">
+            <Object Note="S频段功放高频箱参数设置" Num="1" Alias=" " ID="5108" IndexStart="0"/>
+        </Module>
+        <Module Note="USB联试应答机监控" DeviceID="500" SubSysID="00" Name="libUSBRSPDcu.so" StationID="2311">
+            <Object Note="USB联试应答机监控" Num="1" Alias=" " ID="6005" IndexStart="0"/>
+        </Module>
+        <Module Note="SS2联试应答机监控" DeviceID="500" SubSysID="01" Name="libSS2RSPDcu.so" StationID="2311">
+            <Object Note="SS2联试应答机监控" Num="1" Alias=" " ID="6006" IndexStart="0"/>
+        </Module>
+        <Module Note="校零标校一体机监控" DeviceID="4A00" SubSysID="00" Name="libZEROSTDDcu.so" StationID="2311">
+            <Object Note="SS2校零标校一体机监控" Num="1" Alias=" " ID="6007" IndexStart="0"/>
+        </Module>
+        <Module Note="铷钟机箱监控" DeviceID="3F00" SubSysID="00" Name="libRCLOCKDcu.so" StationID="2311">
+            <Object Note="铷钟机箱监控" Num="1" Alias=" " ID="6008" IndexStart="0"/>
+        </Module>
+        <Module Note="频率基准源监控" DeviceID="3E00" SubSysID="00" Name="libFREQBDcu.so" StationID="2311">
+            <Object Note="频率基准源监控" Num="1" Alias=" " ID="6009" IndexStart="0"/>
+        </Module>
+        <Module Note="测试计算机监控" DeviceID="800" SubSysID="00" Name="libTESTUMonitor.so" StationID="2311">
+            <Object Note="测试计算机监控" Num="1" Alias=" " ID="6010" IndexStart="0"/>
+        </Module>
+        <Module Note="链路配置管理" DeviceID="100" SubSysID="00" Name="libDeviceLinkManage.so" StationID="2311">
+            <Object Note="链路配置管理" Num="2" Alias=" " ID="6011" IndexStart="0" TaskMode="0"/>
+        </Module>
+	<Module Note="联试应答机监控界面聚合" DeviceID="0500" SubSysID="00"  Name="libUIAggregator.so" StationID="2311" >
+            <Object Num="1" Alias=" " Note="联试应答机监控界面聚合" IndexStart="0" ID="5018" ConfigFile="RSP_UIConfig.xml"/>
+        </Module>
+
+	<Module Note="数传基带监控" DeviceID="0400" SubSysID="03" Name="libDDTBBE_DCU.so" StationID="2311">
+            <Object Note="数传基带监控" Num="2" Alias=" " ID="6013" IndexStart="0"/>
+        </Module>
+	<Module Note="单遥控基带监控" DeviceID="0400" SubSysID="04" Name="libTCBBE_DCU.so" StationID="2311">
+            <Object Note="单遥控基带监控" Num="2" Alias=" " ID="6014" IndexStart="0"/>
+        </Module>
+	<Module Note="单遥控安控监控" DeviceID="0700" SubSysID="03" Name="libTCBBE_DCU.so" StationID="2311">
+            <Object Note="单遥控安控监控" Num="1" Alias=" " ID="6019" IndexStart="0"/>
+        </Module>
+	<Module Note="分机设备接口" DeviceID="0100" SubSysID="00" Name="libDevCtlInterface.so" StationID="2311">
+            <Object Note="分机设备接口" Num="1" Alias=" " ID="6020" IndexStart="0"/>
+		<Object chl="DownAlter1" />
+		<Object chl="DownAlter2" />
+		<Object chl="UpAlter" />
+		<Object chl="DOWNNetSwitch" />
+		<Object chl="UPNetSwitch" />
+		<Object chl="TestNetSwitch" />
+		<Object chl="Sswitch" />
+		<Object chl="SLDC" />
+		<Object chl="RSP" />
+		<Object chl="ZEROSTD" />
+		<Object chl="RCLOCK" />
+		<Object chl="FREQB" />
+		<Object chl="Record0" />
+		<Object chl="Record1" />
+		<Object chl="DDTTCSMCU1" />
+		<Object chl="DDTTCSMCU2" />
+        </Module>
+	<Module Note="遥测遥控远程监控接口" DeviceID="0100" SubSysID="00" Name="libTMServerInterface.so" StationID="2311">
+            <Object Note="遥测遥控远程监控接口" Num="1" Alias=" " ID="6021" IndexStart="0"/>
+        </Module>
+        <!-- 模块模板的配置-->
+        <!--Module Name="libUILibTemplate.so" StationID="2311" SubSysID="01" DeviceID="0101" Note="界面共享库模板">
+      <Object ID="0002" Num="1" IndexStart="0" Alias =" " Note="界面共享库对象"/>
+    </Module-->
+    </TM>
+</configuration>

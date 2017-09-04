@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Config>
+	<!-- protocol表示协议类型，0表示下行中频开关矩阵监控接口协议V1.0，-->
+		<!--1表示基带监控协议，-->
+		<!--2表示SL频段车载综合测控系统应答机与远程监控计算机网络接口控制协议文件，以后如果有新的协议再追加 -->
+	<!-- Module节点  ObjectName表示配置的模块名称  除ObjectName、ID外节点中属性的值都为16进制形式 --> 
+	<!-- ID的属性值表示要发送数据的通道名称，可以通过此数据获取平台的通道句柄，进行数据的发送 -->
+	<!-- CMD、Type和SN 三者可以获取具体的模块名称 StateType、StationID、SubSysID、DeviceID、SN 用于生成状态共享内存id -->
+	<!-- Type、StationID、SubSysID、DeviceID和SN属性用于参数id，用于宏参数和参数设置 UintNo属性为单元号用于发送单元参数设置协议时使用 -->
+	<!-- 其中ObjectType属性表示对象类型   F001为过程控制命令 F002为参数设置命令 F003组参数设置命令 F004状态查询命令-->
+	<!-- 参数设置 -->
+	<!-- -1: 表示该项没有用. 可以忽略. -->
+
+	<Module protocol="1" ObjectName="安控全局信息" ObjectType="F002">
+		<Object CMD="200" Type="296" StateType="135" StationID="2311" SubSysID="00" DeviceID="700" SN="0" ID="LTCSMCU1" PDXPSMCU="100" PDXPDEVICES="400" UintNo="1" />
+		<Object CMD="200" Type="297" StateType="135" StationID="2311" SubSysID="00" DeviceID="701" SN="0" ID="LTCSMCU1" PDXPSMCU="100" PDXPDEVICES="400" UintNo="1" />
+	</Module>
+	<Module protocol="1" ObjectName="扩频目标数" ObjectType="F002">
+		<Object CMD="200" Type="298" StateType="EEE1" StationID="2311" SubSysID="00" DeviceID="100" SN="0" ID="DDTSMCU1" PDXPSMCU="100" PDXPDEVICES="400" UintNo="1" />
+	</Module>
+	<Module protocol="1" ObjectName="基带全局信息元" ObjectType="F002">
+		<Object CMD="200" Type="299" StateType="135" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="DDTSMCU1" PDXPSMCU="100" PDXPDEVICES="400" UintNo="1" />
+		<Object CMD="200" Type="300" StateType="135" StationID="2311" SubSysID="00" DeviceID="401" SN="0" ID="DDTSMCU1" PDXPSMCU="100" PDXPDEVICES="400" UintNo="1" />
+		<Object CMD="200" Type="295" StateType="135" StationID="2311" SubSysID="00" DeviceID="400" SN="1" ID="DDTSMCU1" PDXPSMCU="100" PDXPDEVICES="400" UintNo="1" />
+		<Object CMD="200" Type="294" StateType="135" StationID="2311" SubSysID="00" DeviceID="401" SN="1" ID="DDTSMCU1" PDXPSMCU="100" PDXPDEVICES="400" UintNo="1" />
+		<Object CMD="200" Type="293" StateType="135" StationID="2311" SubSysID="00" DeviceID="400" SN="2" ID="DDTSMCU1" PDXPSMCU="100" PDXPDEVICES="400" UintNo="1" />
+		<Object CMD="200" Type="292" StateType="135" StationID="2311" SubSysID="00" DeviceID="401" SN="2" ID="DDTSMCU1" PDXPSMCU="100" PDXPDEVICES="400" UintNo="1" />
+		<Object CMD="200" Type="291" StateType="135" StationID="2311" SubSysID="00" DeviceID="400" SN="3" ID="DDTSMCU1" PDXPSMCU="100" PDXPDEVICES="400" UintNo="1" />
+		<Object CMD="200" Type="290" StateType="135" StationID="2311" SubSysID="00" DeviceID="401" SN="3" ID="DDTSMCU1" PDXPSMCU="100" PDXPDEVICES="400" UintNo="1" />
+	</Module>
+	<Module protocol="1" ObjectName="DDT_BBE系统参数设置" ObjectType="F002">
+		<Object CMD="200" Type="E468" StateType="501" StationID="2311" SubSysID="03" DeviceID="400" SN="0" ID="DDTSMCU1" PDXPSMCU="100" PDXPDEVICES="400" UintNo="1" />
+		<Object CMD="200" Type="E468" StateType="501" StationID="2311" SubSysID="03" DeviceID="401" SN="0" ID="DDTSMCU2" PDXPSMCU="100" PDXPDEVICES="401" UintNo="1" />
+	</Module>
+	<Module protocol="1" ObjectName="数传接收机参数设置" ObjectType="F002">
+		<Object CMD="200" Type="E614" StateType="502" StationID="2311" SubSysID="03" DeviceID="400" SN="0" ID="DDTSMCU1" PDXPSMCU="100" PDXPDEVICES="400" UintNo="F" />
+		<Object CMD="200" Type="E614" StateType="502" StationID="2311" SubSysID="03" DeviceID="401" SN="0" ID="DDTSMCU2" PDXPSMCU="100" PDXPDEVICES="401" UintNo="F" />
+	</Module>
+	<Module protocol="1" ObjectName="数传解调参数设置" ObjectType="F002">
+		<Object CMD="200" Type="E616" StateType="503" StationID="2311" SubSysID="03" DeviceID="400" SN="0" ID="DDTSMCU1" PDXPSMCU="100" PDXPDEVICES="400" UintNo="10" />
+		<Object CMD="200" Type="E616" StateType="503" StationID="2311" SubSysID="03" DeviceID="400" SN="1" ID="DDTSMCU1" PDXPSMCU="100" PDXPDEVICES="400" UintNo="11" />
+		<Object CMD="200" Type="E616" StateType="503" StationID="2311" SubSysID="03" DeviceID="401" SN="0" ID="DDTSMCU2" PDXPSMCU="100" PDXPDEVICES="400" UintNo="10" />
+		<Object CMD="200" Type="E616" StateType="503" StationID="2311" SubSysID="03" DeviceID="401" SN="1" ID="DDTSMCU2" PDXPSMCU="100" PDXPDEVICES="400" UintNo="11" />
+	</Module>
+	<Module protocol="1" ObjectName="分集合成参数设置" ObjectType="F002">
+		<Object CMD="200" Type="176A" StateType="504" StationID="2311" SubSysID="03" DeviceID="400" SN="0" ID="DDTSMCU1" PDXPSMCU="100" PDXPDEVICES="400" UintNo="14" />
+		<Object CMD="200" Type="176A" StateType="504" StationID="2311" SubSysID="03" DeviceID="401" SN="0" ID="DDTSMCU2" PDXPSMCU="100" PDXPDEVICES="400" UintNo="14" />
+
+	</Module>
+	<Module protocol="1" ObjectName="数传信号源参数设置" ObjectType="F002">
+		<Object CMD="200" Type="E620" StateType="505" StationID="2311" SubSysID="03" DeviceID="400" SN="0" ID="DDTSMCU1" PDXPSMCU="100" PDXPDEVICES="400" UintNo="12" />
+		<Object CMD="200" Type="E620" StateType="505" StationID="2311" SubSysID="03" DeviceID="401" SN="0" ID="DDTSMCU2" PDXPSMCU="100" PDXPDEVICES="400" UintNo="12" />
+	</Module>
+	<Module protocol="0" ObjectName="数传检测输出参数设置" ObjectType="F002">
+		<Object CMD="200" Type="307" StateType="506" StationID="2311" SubSysID="03" DeviceID="400" SN="0" ID="DDTSMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="8" />
+        <Object CMD="200" Type="397" StateType="506" StationID="2311" SubSysID="03" DeviceID="401" SN="0" ID="DDTSMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="8" />
+	</Module>
+	<Module protocol="0" ObjectName="数传存储转发单元数据元素" ObjectType="F002">
+		<Object CMD="200" Type="307" StateType="507" StationID="2311" SubSysID="03" DeviceID="400" SN="0" ID="DDTSMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="13" />
+        <Object CMD="200" Type="397" StateType="507" StationID="2311" SubSysID="03" DeviceID="401" SN="0" ID="DDTSMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="13" />
+	</Module>	
+	
+	<Module protocol="1" ObjectName="USBBBE中频接收机参数设置" ObjectType="F002">
+		<Object CMD="200" Type="E450" StateType="E449" StationID="2311" SubSysID="05" DeviceID="400" SN="0" ID="USBSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="2" />
+		<Object CMD="200" Type="E450" StateType="E449" StationID="2311" SubSysID="05" DeviceID="400" SN="1" ID="USBSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="3" />
+		<Object CMD="200" Type="E450" StateType="E449" StationID="2311" SubSysID="05" DeviceID="401" SN="0" ID="USBSMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="2" />
+		<Object CMD="200" Type="E450" StateType="E449" StationID="2311" SubSysID="05" DeviceID="401" SN="1" ID="USBSMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="3" />
+	</Module>
+	<Module protocol="1" ObjectName="USBBBE遥测参数设置" ObjectType="F002">
+		<Object CMD="200" Type="E456" StateType="E455" StationID="2311" SubSysID="05" DeviceID="400" SN="0" ID="USBSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="8" />
+            <Object CMD="200" Type="E456" StateType="E455" StationID="2311" SubSysID="05" DeviceID="401" SN="0" ID="USBSMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="8" />
+	</Module>
+	<Module protocol="0" ObjectName="USBBBE模拟源参数设置" ObjectType="F002">
+		<Object CMD="200" Type="E462" StateType="E461" StationID="2311" SubSysID="05" DeviceID="400" SN="0" ID="USBSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="C" />
+            <Object CMD="200" Type="E462" StateType="E461" StationID="2311" SubSysID="05" DeviceID="401" SN="0" ID="USBSMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="C" />
+	</Module>
+	<Module protocol="1" ObjectName="USBBBE测距参数设置" ObjectType="F002">
+		<Object CMD="200" Type="E454" StateType="E453" StationID="2311" SubSysID="05" DeviceID="400" SN="0" ID="USBSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="5" />
+		<Object CMD="200" Type="E454" StateType="E453" StationID="2311" SubSysID="05" DeviceID="400" SN="1" ID="USBSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="6" />
+            <Object CMD="200" Type="E454" StateType="E453" StationID="2311" SubSysID="05" DeviceID="401" SN="0" ID="USBSMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="5" />
+		<Object CMD="200" Type="E454" StateType="E453" StationID="2311" SubSysID="05" DeviceID="401" SN="1" ID="USBSMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="6" />
+	</Module>
+	<Module protocol="0" ObjectName="USBBBE调制参数设置" ObjectType="F002">
+		<Object CMD="200" Type="E452" StateType="E451" StationID="2311" SubSysID="05" DeviceID="400" SN="0" ID="USBSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="4" />
+            <Object CMD="200" Type="E452" StateType="E451" StationID="2311" SubSysID="05" DeviceID="401" SN="0" ID="USBSMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="4" />
+	</Module>
+	<Module protocol="1" ObjectName="USBBBE遥控参数设置" ObjectType="F002">
+		<Object CMD="200" Type="E460" StateType="E459" StationID="2311" SubSysID="05" DeviceID="400" SN="0" ID="USBSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="7" />
+            <Object CMD="200" Type="E460" StateType="E459" StationID="2311" SubSysID="05" DeviceID="401" SN="0" ID="USBSMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="7" />
+	</Module>
+	<Module protocol="1" ObjectName="USBBBE系统参数设置" ObjectType="F002">
+		<Object CMD="200" Type="E468" StateType="E467" StationID="2311" SubSysID="05" DeviceID="400" SN="0" ID="USBSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="1" />
+             <Object CMD="200" Type="E468" StateType="E467" StationID="2311" SubSysID="05" DeviceID="401" SN="0" ID="USBSMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="1" />
+	</Module>
+			<Module protocol="0" ObjectName="USBBBE主跟踪单元" ObjectType="F002">
+		<Object CMD="200" Type="E552" StateType="E551" StationID="2311" SubSysID="05" DeviceID="400" SN="0" ID="USBSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="9" />
+		<Object CMD="200" Type="E552" StateType="E551" StationID="2311" SubSysID="05" DeviceID="401" SN="0" ID="USBSMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="9" />
+		<Object CMD="200" Type="E552" StateType="E551" StationID="2311" SubSysID="05" DeviceID="400" SN="1" ID="USBSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="10" />
+		<Object CMD="200" Type="E552" StateType="E551" StationID="2311" SubSysID="05" DeviceID="401" SN="1" ID="USBSMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="10" />
+	</Module>
+<!--ss{{-->
+	<Module protocol="0" ObjectName="扩频1系统工作参数设置" ObjectType="F002">
+		<Object CMD="200" Type="E468" StateType="E467" StationID="2311" SubSysID="06" DeviceID="400" SN="0" ID="SS1SMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="1" />
+		<Object CMD="200" Type="E468" StateType="E467" StationID="2311" SubSysID="06" DeviceID="401" SN="0" ID="SS1SMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="1" />
+	</Module>
+	<Module protocol="0" ObjectName="模式1接收参数设置" ObjectType="F002">
+		<Object CMD="200" Type="E560" StateType="E559" StationID="2311" SubSysID="06" DeviceID="400" SN="0" ID="SS1SMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="2" />
+		<Object CMD="200" Type="E560" StateType="E559" StationID="2311" SubSysID="06" DeviceID="401" SN="0" ID="SS1SMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="2" />
+	</Module>
+	<Module protocol="0" ObjectName="模式1调制参数设置" ObjectType="F002">
+		<Object CMD="200" Type="E630" StateType="E629" StationID="2311" SubSysID="06" DeviceID="400" SN="0" ID="SS1SMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="3" />
+		<Object CMD="200" Type="E630" StateType="E629" StationID="2311" SubSysID="06" DeviceID="401" SN="0" ID="SS1SMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="3" />
+	</Module>
+	<Module protocol="0" ObjectName="扩频遥控参数设置" ObjectType="F002">
+		<Object CMD="200" Type="E460" StateType="E459" StationID="2311" SubSysID="06" DeviceID="400" SN="0" ID="SS1SMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="5" />
+		<Object CMD="200" Type="E460" StateType="E459" StationID="2311" SubSysID="06" DeviceID="401" SN="0" ID="SS1SMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="5" />
+	</Module>
+	<Module protocol="0" ObjectName="扩频遥测解调参数设置" ObjectType="F002">
+		<Object CMD="200" Type="E570" StateType="E569" StationID="2311" SubSysID="06" DeviceID="400" SN="0" ID="SS1SMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="6" />
+		<Object CMD="200" Type="E570" StateType="E569" StationID="2311" SubSysID="06" DeviceID="401" SN="0" ID="SS1SMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="6" />
+		<Object CMD="200" Type="E570" StateType="E569" StationID="2311" SubSysID="07" DeviceID="400" SN="1" ID="SS2SMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="6" />
+		<Object CMD="200" Type="E570" StateType="E569" StationID="2311" SubSysID="07" DeviceID="401" SN="1" ID="SS2SMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="6" />
+	</Module>
+	<Module protocol="0" ObjectName="模式1测距测速参数设置" ObjectType="F002">
+		<Object CMD="200" Type="E568" StateType="E567" StationID="2311" SubSysID="06" DeviceID="400" SN="0" ID="SS1SMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="4" />
+		<Object CMD="200" Type="E568" StateType="E567" StationID="2311" SubSysID="06" DeviceID="401" SN="0" ID="SS1SMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="4" />
+	</Module>
+	<Module protocol="1" ObjectName="扩频遥测模拟源参数设置" ObjectType="F002">
+		<Object CMD="200" Type="E572" StateType="E571" StationID="2311" SubSysID="06" DeviceID="400" SN="0" ID="SS1SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="8" />
+		<Object CMD="200" Type="E572" StateType="E571" StationID="2311" SubSysID="06" DeviceID="401" SN="0" ID="SS1SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="8" />
+		<Object CMD="200" Type="E572" StateType="E571" StationID="2311" SubSysID="07" DeviceID="400" SN="1" ID="SS2SMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="8" />
+		<Object CMD="200" Type="E572" StateType="E571" StationID="2311" SubSysID="07" DeviceID="401" SN="1" ID="SS2SMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="8" />
+	</Module>
+	<Module protocol="0" ObjectName="扩频角误差输出参数设置" ObjectType="F002">
+		<Object CMD="200" Type="1106" StateType="1105" StationID="2311" SubSysID="06" DeviceID="400" SN="0" ID="SS1SMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="1" />
+		<Object CMD="200" Type="1106" StateType="1105" StationID="2311" SubSysID="06" DeviceID="401" SN="0" ID="SS1SMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="1" />
+	</Module>
+		<Module protocol="0" ObjectName="扩频1主跟踪单元" ObjectType="F002">
+		<Object CMD="200" Type="E552" StateType="E551" StationID="2311" SubSysID="06" DeviceID="400" SN="0" ID="SS1SMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="7" />
+		<Object CMD="200" Type="E552" StateType="E551" StationID="2311" SubSysID="06" DeviceID="401" SN="0" ID="SS1SMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="7" />
+	</Module>
+	
+		<Module protocol="0" ObjectName="扩频2主跟踪单元" ObjectType="F002">
+		<Object CMD="200" Type="E552" StateType="E551" StationID="2311" SubSysID="07" DeviceID="400" SN="0" ID="SS1SMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="7" />
+		<Object CMD="200" Type="E552" StateType="E551" StationID="2311" SubSysID="07" DeviceID="401" SN="0" ID="SS1SMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="7" />
+	</Module>
+	<Module protocol="0" ObjectName="模式1扩频码设置" ObjectType="F002">
+		<Object CMD="200" Type="E566" StateType="E565" StationID="2311" SubSysID="06" DeviceID="400" SN="0" ID="SS1SMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="9" />
+		<Object CMD="200" Type="E566" StateType="E565" StationID="2311" SubSysID="06" DeviceID="401" SN="0" ID="SS1SMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="9" />
+	</Module>
+	<Module protocol="0" ObjectName="扩频检测输出控制" ObjectType="F002">
+		<Object CMD="200" Type="E634" StateType="E633" StationID="2311" SubSysID="06" DeviceID="400" SN="0" ID="SS1SMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="1" />
+		<Object CMD="200" Type="E634" StateType="E633" StationID="2311" SubSysID="06" DeviceID="401" SN="0" ID="SS1SMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="1" />
+	</Module>
+	<Module protocol="0" ObjectName="扩频2系统工作参数设置" ObjectType="F002">
+		<Object CMD="200" Type="E468" StateType="E467" StationID="2311" SubSysID="07" DeviceID="400" SN="0" ID="SS2SMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="1" />
+		<Object CMD="200" Type="E468" StateType="E467" StationID="2311" SubSysID="07" DeviceID="401" SN="0" ID="SS2SMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="1" />
+	</Module>
+	<Module protocol="0" ObjectName="模式2接收参数设置" ObjectType="F002">
+		<Object CMD="200" Type="E560" StateType="E559" StationID="2311" SubSysID="07" DeviceID="400" SN="0" ID="SS2SMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="2" />
+		<Object CMD="200" Type="E560" StateType="E559" StationID="2311" SubSysID="07" DeviceID="401" SN="0" ID="SS2SMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="2" />
+	</Module>
+	<Module protocol="0" ObjectName="模式2调制参数设置" ObjectType="F002">
+		<Object CMD="200" Type="E564" StateType="E563" StationID="2311" SubSysID="07" DeviceID="400" SN="0" ID="SS2SMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="3" />
+		<Object CMD="200" Type="E564" StateType="E563" StationID="2311" SubSysID="07" DeviceID="401" SN="0" ID="SS2SMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="3" />
+	</Module>
+	<Module protocol="0" ObjectName="模式2测距测速参数设置" ObjectType="F002">
+		<Object CMD="200" Type="E568" StateType="E567" StationID="2311" SubSysID="07" DeviceID="400" SN="0" ID="SS2SMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="4" />
+		<Object CMD="200" Type="E568" StateType="E567" StationID="2311" SubSysID="07" DeviceID="401" SN="0" ID="SS2SMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="4" />
+	</Module>
+	<Module protocol="0" ObjectName="模式2扩频码设置" ObjectType="F002">
+		<Object CMD="200" Type="E566" StateType="E565" StationID="2311" SubSysID="07" DeviceID="400" SN="0" ID="SS2SMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="9" />
+		<Object CMD="200" Type="E566" StateType="E565" StationID="2311" SubSysID="07" DeviceID="401" SN="0" ID="SS2SMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="9" />
+	</Module>
+	<Module protocol="0" ObjectName="模式2遥控参数设置" ObjectType="F002">
+		<Object CMD="200" Type="E460" StateType="E459" StationID="2311" SubSysID="07" DeviceID="400" SN="0" ID="SS2SMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="5" />
+		<Object CMD="200" Type="E460" StateType="E459" StationID="2311" SubSysID="07" DeviceID="401" SN="0" ID="SS2SMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="5" />
+	</Module>
+<!--ss}}-->
+	<Module protocol="0" ObjectName="检前记录设备监控" ObjectType="F002">
+		<!-- 检前记录器一 -->
+		<Object CMD="200" Type="1022" StateType="1222" StationID="2311" SubSysID="00" DeviceID="1200" SN="0" ID="Record0" PDXPSMCU="RSMI" PDXPDEVICES="RSMI" UintNo="" /><!-- 工作状态 -->
+		<Object CMD="200" Type="1022" StateType="1223" StationID="2311" SubSysID="00" DeviceID="1200" SN="1" ID="Record0" PDXPSMCU="RSMI" PDXPDEVICES="RSMI" UintNo="" /><!-- 文件列表 -->
+		<Object CMD="200" Type="1022" StateType="1224" StationID="2311" SubSysID="00" DeviceID="1200" SN="2" ID="Record0" PDXPSMCU="RSMI" PDXPDEVICES="RSMI" UintNo="" /><!-- 文件信息 -->
+		<!-- 检前记录器二 -->
+		<Object CMD="200" Type="1022" StateType="1222" StationID="2311" SubSysID="00" DeviceID="1201" SN="0" ID="Record1" PDXPSMCU="RSMI" PDXPDEVICES="RSMI" UintNo="" /><!-- 工作状态 -->
+		<Object CMD="200" Type="1022" StateType="1223" StationID="2311" SubSysID="00" DeviceID="1201" SN="1" ID="Record1" PDXPSMCU="RSMI" PDXPDEVICES="RSMI" UintNo="" /><!-- 文件列表 -->
+		<Object CMD="200" Type="1022" StateType="1224" StationID="2311" SubSysID="00" DeviceID="1201" SN="2" ID="Record1" PDXPSMCU="RSMI" PDXPDEVICES="RSMI" UintNo="" /><!-- 文件信息 -->
+	</Module>
+	<Module protocol="0" ObjectName="测试开关矩阵监控" ObjectType="F002" IsAboutLink= "1">
+		<Object CMD="200" Type="EA10" StateType="EA09" StationID="2311" SubSysID="00" DeviceID="3D00" SN="0" ID="TestNetSwitch" PDXPSMCU="100" PDXPDEVICES="3D00" UintNo="" />
+	</Module>
+	<Module protocol="0" ObjectName="上行中频开关矩阵监控" ObjectType="F002" IsAboutLink= "1">
+		<Object CMD="200" Type="EA0C" StateType="EA0B" StationID="2311" SubSysID="00" DeviceID="3B00" SN="0" ID="UPNetSwitch" PDXPSMCU="100" PDXPDEVICES="3B00" UintNo="-1" />
+	</Module>
+	<Module protocol="0" ObjectName="下行中频开关矩阵监控" ObjectType="F002" IsAboutLink= "1">
+		<Object CMD="200" Type="EA0E" StateType="EA0D" StationID="2311" SubSysID="00" DeviceID="3C00" SN="0" ID="DOWNNetSwitch" PDXPSMCU="100" PDXPDEVICES="3C00" UintNo="-1" />
+	</Module>
+	<Module protocol="1" ObjectName="射频切换开关监控" ObjectType="F002" IsAboutLink= "1">
+		<Object CMD="200" Type="EA04" StateType="EA03" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="Sswitch" PDXPSMCU="100" PDXPDEVICES="2D00" UintNo="" />
+	</Module>
+	<Module protocol="1" ObjectName="射频分路组合监控" ObjectType="F002" IsAboutLink= "1">
+		<Object CMD="200" Type="EA02" StateType="EA01" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="SLDC" PDXPSMCU="100" PDXPDEVICES="2C00" UintNo="" />
+	</Module>
+	<Module protocol="0" ObjectName="标准TTC联试应答机监控" ObjectType="F002">
+		<Object CMD="1200" Type="18A3" StateType="18A4" StationID="2311" SubSysID="00" DeviceID="700" SN="0" ID="RSP" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="18" /><!-- 工作状态上报 -->
+	</Module>
+	<Module protocol="0" ObjectName="非相干扩频联试应答机监控" ObjectType="F002">
+		<Object CMD="1200" Type="18A3" StateType="18A4" StationID="2311" SubSysID="00" DeviceID="700" SN="1" ID="RSP" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="18" /><!-- 工作状态上报 -->
+	</Module>
+	<!--宏查询处理-->
+	<Module protocol="1" ObjectName="宏查询" ObjectType="">
+		<!--联试应答机通用应答基分为标USB联试应答机监控和SS2联试应答机监控 宏查询时需要生存所使用的共享内存用于刷新宏参数使用-->
+		<Object CMD="200" Type="0106" StateType="0106" StationID="2311" SubSysID="00" DeviceID="500" SN="0" ID="RSP" PDXPSMCU="0100" PDXPDEVICES="1400" UintNo=""/><!-- USB联试应答机监控宏查询  -->
+		<Object CMD="200" Type="0106" StateType="0106" StationID="2311" SubSysID="00" DeviceID="500" SN="1" ID="RSP" PDXPSMCU="0100" PDXPDEVICES="1401" UintNo="" /><!-- SS2联试应答机宏查询 -->
+	</Module>
+	<!--宏调用处理-->
+	<Module protocol="1" ObjectName="宏调用" ObjectType="">
+		<!--联试应答机通用应答基分为标USB联试应答机监控和SS2联试应答机监控  宏调用时不需要生存所使用的共享内存-->
+		<Object CMD="200" Type="0206" StateType="0206" StationID="2311" SubSysID="00" DeviceID="500" SN="0" ID="RSP" PDXPSMCU="0100" PDXPDEVICES="1400" UintNo=""/><!-- USB联试应答机监控宏调用  -->
+		<Object CMD="200" Type="0206" StateType="0206" StationID="2311" SubSysID="00" DeviceID="500" SN="1" ID="RSP" PDXPSMCU="0100" PDXPDEVICES="1401" UintNo="" /><!-- SS2联试应答机宏调用 -->
+	</Module>
+	<!--联试应答机控制命令处理-->
+	<Module protocol="1" ObjectName="联试应答机控制命令" ObjectType="">
+		<!--联试应答机通用应答基分为标USB联试应答机监控和SS2联试应答机监控  控制命令时不需要生存所使用的共享内存-->
+		<Object CMD="046E" Type="046D" StateType="046D" StationID="2311" SubSysID="00" DeviceID="500" SN="0" ID="RSP" PDXPSMCU="0100" PDXPDEVICES="1400" UintNo="" /><!-- 模式切换命令 -->
+		<Object CMD="046E" Type="046E" StateType="046E" StationID="2311" SubSysID="00" DeviceID="500" SN="0" ID="RSP" PDXPSMCU="0100" PDXPDEVICES="1400" UintNo="" /><!-- 仿真控制命令 -->
+		<Object CMD="046E" Type="046F" StateType="046F" StationID="2311" SubSysID="00" DeviceID="500" SN="0" ID="RSP" PDXPSMCU="0100" PDXPDEVICES="1400" UintNo="" /><!-- 存盘控制命令 -->
+		<Object CMD="046E" Type="0470" StateType="0470" StationID="2311" SubSysID="00" DeviceID="500" SN="0" ID="RSP" PDXPSMCU="0100" PDXPDEVICES="1400" UintNo="" /><!-- 切换控制命令 -->
+
+		<Object CMD="046E" Type="046D" StateType="046D" StationID="2311" SubSysID="00" DeviceID="500" SN="1" ID="RSP" PDXPSMCU="0100" PDXPDEVICES="1401" UintNo="" /><!-- 模式切换命令 -->
+		<Object CMD="046E" Type="046E" StateType="046E" StationID="2311" SubSysID="00" DeviceID="500" SN="1" ID="RSP" PDXPSMCU="0100" PDXPDEVICES="1401" UintNo="" /><!-- 仿真控制命令 -->
+		<Object CMD="046E" Type="046F" StateType="046F" StationID="2311" SubSysID="00" DeviceID="500" SN="1" ID="RSP" PDXPSMCU="0100" PDXPDEVICES="1401" UintNo="" /><!-- 存盘控制命令 -->
+		<Object CMD="046E" Type="0470" StateType="0470" StationID="2311" SubSysID="00" DeviceID="500" SN="1" ID="RSP" PDXPSMCU="0100" PDXPDEVICES="1401" UintNo="" /><!-- 切换控制命令 -->
+	</Module>
+	<Module protocol="0" ObjectName="校零信标一体机监控" ObjectType="F002">
+		<Object CMD="200" Type="EA14" StateType="EA13" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="ZEROSTD" PDXPSMCU="100" PDXPDEVICES="4A00" UintNo="18" />
+	</Module>
+	<Module protocol="0" ObjectName="铷钟机箱监控" ObjectType="F002">
+		<Object CMD="200" Type="EA20" StateType="EA20" StationID="2311" SubSysID="00" DeviceID="2500" SN="0" ID="RCLOCK" PDXPSMCU="100" PDXPDEVICES="3F00" UintNo="1" />
+	</Module>
+	<Module protocol="1" ObjectName="频率基准源监控" ObjectType="F002">
+		<Object CMD="200" Type="EA12" StateType="EA11" StationID="2311" SubSysID="00" DeviceID="3E00" SN="0" ID="FREQB" PDXPSMCU="100" PDXPDEVICES="3E00" UintNo="18" />
+	</Module>
+	<Module protocol="0" ObjectName="遥测系统监控与远控接口" ObjectType="F002">
+		<Object CMD="200" Type="352" StateType="552" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="SMCU" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="1" />
+	</Module>
+	<Module protocol="1" ObjectName="分机设备接口" ObjectType="F002">
+		<Object CMD="200" Type="353" StateType="553" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="SMCU" PDXPSMCU="" PDXPDEVICES="" UintNo="" />
+	</Module>
+	<Module protocol="0" ObjectName="遥测远控与系统监控接口" ObjectType="F002">
+		<Object CMD="200" Type="354" StateType="554" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="SMCU" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="1" />
+	</Module>
+	<Module protocol="0" ObjectName="测控系统监控与远控接口" ObjectType="F002">
+		<Object CMD="200" Type="355" StateType="555" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="SMCU" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="1" />
+	</Module>
+	<Module protocol="0" ObjectName="测控远控与系统监控接口" ObjectType="F002">
+		<Object CMD="200" Type="356" StateType="556" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="SMCU" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="1" />
+	</Module>	
+	
+	<Module protocol="1" ObjectName="状态查询命令" ObjectType="F004">
+		 <Object CMD="200" Type="419" StateType="557" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="DDTSMCU1" PDXPSMCU="23110101" PDXPDEVICES="23110191" UintNo="1"/><!-- 数传 -->
+		 <Object CMD="200" Type="420" StateType="620" StationID="2311" SubSysID="00" DeviceID="401" SN="0" ID="DDTSMCU2" PDXPSMCU="23110101" PDXPDEVICES="23110191" UintNo="1"/><!-- 数传 -->
+		 <Object CMD="200" Type="421" StateType="621" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="USBSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="1"/> <!--USBTTC -->
+		 <Object CMD="200" Type="422" StateType="622" StationID="2311" SubSysID="00" DeviceID="401" SN="0" ID="USBSMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="1"/> <!--USBTTC -->
+		 <Object CMD="200" Type="423" StateType="623" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="SS1SMCU1" PDXPSMCU="210001" PDXPDEVICES="231101C1" UintNo="1"/>  <!--ss1 -->
+		 <Object CMD="200" Type="424" StateType="624" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="SS1SMCU2" PDXPSMCU="210001" PDXPDEVICES="231101C1" UintNo="1"/>  <!--ss1 -->
+		<Object CMD="200" Type="425" StateType="625" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="SS2SMCU1" PDXPSMCU="210001" PDXPDEVICES="231101D1" UintNo="1"/> <!-- ss2 -->
+		<Object CMD="200" Type="426" StateType="626" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="SS2SMCU2" PDXPSMCU="210001" PDXPDEVICES="231101D1" UintNo="1"/> <!-- ss2 -->
+		<Object CMD="200" Type="427" StateType="627" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="TCSMCU1" PDXPSMCU="210001" PDXPDEVICES="231101D1" UintNo="1"/> <!-- tc -->
+		<Object CMD="200" Type="428" StateType="628" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="TCSMCU2" PDXPSMCU="210001" PDXPDEVICES="231101D1" UintNo="1"/> <!-- tc -->
+		<Object CMD="200" Type="550" StateType="750" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="LTCSMCU1" PDXPSMCU="210001" PDXPDEVICES="231101D1" UintNo="1"/> <!-- tc -->
+		<Object CMD="200" Type="551" StateType="751" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="LTCSMCU2" PDXPSMCU="210001" PDXPDEVICES="231101D1" UintNo="1"/> <!-- tc -->
+	</Module>	
+	<Module protocol="1" ObjectName="检前状态查询命令" ObjectType="F004">
+		<Object CMD="200" Type="361" StateType="561" StationID="2311" SubSysID="00" DeviceID="1200" SN="0" ID="Record0" PDXPSMCU="" PDXPDEVICES="RSMI" UintNo=""/><!-- 检前记录器一状态查询 -->
+		<Object CMD="200" Type="362" StateType="562" StationID="2311" SubSysID="00" DeviceID="1200" SN="0" ID="Record1" PDXPSMCU="" PDXPDEVICES="RSMI" UintNo=""/><!-- 检前记录器二状态查询 -->
+		<Object CMD="200" Type="811" StateType="5620" StationID="2311" SubSysID="00" DeviceID="1200" SN="0" ID="TMRemote" PDXPSMCU="" PDXPDEVICES="RSMI" UintNo=""/><!-- 检前记录器二状态查询 -->
+	</Module>
+
+        <Module protocol="1" ObjectName="宏查询命令" ObjectType="F004">
+		 <Object CMD="f00" Type="f00" StateType="557" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="DDTSMCU1" PDXPSMCU="23110101" PDXPDEVICES="23110191" UintNo="1"/><!-- 宏 -->
+	</Module>	
+      <Module protocol="1" ObjectName="Remote状态查询命令" ObjectType="F004">
+		 <Object CMD="f01" Type="f01" StateType="557" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="DDTSMCU1" PDXPSMCU="23110101" PDXPDEVICES="23110191" UintNo="1"/> 
+	</Module>
+	<!-- 过程控制命令标识 -->
+	<Module protocol="1" ObjectName="过程控制命令" ObjectType="F001">
+		<Object CMD="200" Type="370" StateType="FA00" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="DDTSMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="1"/><!--ddt-->
+		<Object CMD="200" Type="387" StateType="FA00" StationID="2311" SubSysID="00" DeviceID="401" SN="0" ID="DDTSMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="1"/><!--ddt-->
+		<Object CMD="200" Type="371" StateType="FB00" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="USBSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="2"/><!--usb-->
+		<Object CMD="200" Type="388" StateType="FB00" StationID="2311" SubSysID="00" DeviceID="401" SN="0" ID="USBSMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="2"/><!--usb-->
+		<Object CMD="200" Type="372" StateType="FC00" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="SS1SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="3"/><!--ss1-->
+		<Object CMD="200" Type="389" StateType="FC00" StationID="2311" SubSysID="00" DeviceID="401" SN="0" ID="SS1SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="3"/><!--ss1-->
+		<Object CMD="200" Type="373" StateType="FD00" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="SS2SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="25"/><!--ss2-->
+		<Object CMD="200" Type="390" StateType="FD00" StationID="2311" SubSysID="00" DeviceID="401" SN="0" ID="SS2SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="25"/><!--ss2-->
+		<Object CMD="200" Type="373" StateType="FE00" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="SS2SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="25"/><!--tc-->
+		<Object CMD="200" Type="390" StateType="FE00" StationID="2311" SubSysID="00" DeviceID="401" SN="0" ID="SS2SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="25"/><!--tc-->
+		<Object CMD="200" Type="373" StateType="FF00" StationID="2311" SubSysID="00" DeviceID="700" SN="0" ID="SS2SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="25"/><!--Ltc-->
+		<Object CMD="200" Type="390" StateType="FF00" StationID="2311" SubSysID="00" DeviceID="701" SN="0" ID="SS2SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="25"/><!--Ltc-->
+	</Module>
+	<Module protocol="1" ObjectName="过程控制命令1" ObjectType="F001">
+		<Object CMD="12E" Type="370" StateType="570" StationID="2311" SubSysID="00" DeviceID="400" SN="5" ID="DDTSMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="65"/><!--ddt-->
+		<Object CMD="12E" Type="387" StateType="587" StationID="2311" SubSysID="00" DeviceID="401" SN="5" ID="DDTSMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="65"/><!--ddt-->
+		<Object CMD="12A" Type="370" StateType="570" StationID="2311" SubSysID="00" DeviceID="400" SN="5" ID="DDTSMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="66"/><!--ddt-->
+		<Object CMD="12A" Type="387" StateType="587" StationID="2311" SubSysID="00" DeviceID="401" SN="5" ID="DDTSMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="66"/><!--ddt-->
+		<Object CMD="201" Type="370" StateType="570" StationID="2311" SubSysID="00" DeviceID="400" SN="5" ID="DDTSMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="38"/><!--ddt-->
+		<Object CMD="201" Type="387" StateType="587" StationID="2311" SubSysID="00" DeviceID="401" SN="5" ID="DDTSMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="38"/><!--ddt-->
+		<Object CMD="12E" Type="371" StateType="571" StationID="2311" SubSysID="00" DeviceID="400" SN="6" ID="TCSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="65"/><!--tc-->
+		<Object CMD="12E" Type="388" StateType="588" StationID="2311" SubSysID="00" DeviceID="401" SN="6" ID="TCSMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="65"/><!--tc-->
+		<Object CMD="12A" Type="370" StateType="570" StationID="2311" SubSysID="00" DeviceID="400" SN="6" ID="TCSMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="66"/><!--tc-->
+		<Object CMD="12A" Type="387" StateType="587" StationID="2311" SubSysID="00" DeviceID="401" SN="6" ID="TCSMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="66"/><!--tc-->
+		<Object CMD="201" Type="370" StateType="570" StationID="2311" SubSysID="00" DeviceID="400" SN="6" ID="TCSMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="38"/><!--tc-->
+		<Object CMD="201" Type="387" StateType="587" StationID="2311" SubSysID="00" DeviceID="401" SN="6" ID="TCSMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="38"/><!--tc-->
+		<Object CMD="201" Type="370" StateType="570" StationID="2311" SubSysID="00" DeviceID="400" SN="7" ID="USBSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="37"/><!--usb-->
+		<Object CMD="201" Type="387" StateType="587" StationID="2311" SubSysID="00" DeviceID="401" SN="7" ID="USBSMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="37"/><!--usb-->
+
+    <Object CMD="FA01" Type="26" StateType="FA00" StationID="2311" SubSysID="03" DeviceID="400" SN="5" ID="DDTSMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="26"/><!--ddt  BitErrorRate-->
+    <Object CMD="FA01" Type="26" StateType="FA00" StationID="2311" SubSysID="03" DeviceID="401" SN="5" ID="DDTSMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="26"/><!--ddt  BitErrorRate-->
+    <Object CMD="FB01" Type="26" StateType="FB00" StationID="2311" SubSysID="05" DeviceID="400" SN="7" ID="USBSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="26"/><!--usb  BitErrorRate-->
+    <Object CMD="FB01" Type="26" StateType="FB00" StationID="2311" SubSysID="05" DeviceID="401" SN="7" ID="USBSMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="26"/><!--usb  BitErrorRate-->
+    <Object CMD="FC01" Type="15" StateType="FC00" StationID="2311" SubSysID="06" DeviceID="400" SN="8" ID="SS1SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="15"/><!--ss1  BitErrorRate-->
+    <Object CMD="FC01" Type="15" StateType="FC00" StationID="2311" SubSysID="06" DeviceID="401" SN="8" ID="SS1SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="15"/><!--ss1  BitErrorRate-->
+    <Object CMD="FD01" Type="13" StateType="FD00" StationID="2311" SubSysID="07" DeviceID="400" SN="9" ID="SS2SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="13"/><!--ss2  BitErrorRate-->
+    <Object CMD="FD01" Type="13" StateType="FD00" StationID="2311" SubSysID="07" DeviceID="401" SN="9" ID="SS2SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="13"/><!--ss2  BitErrorRate-->
+    
+    <Object CMD="FA02" Type="20" StateType="FA00" StationID="2311" SubSysID="03" DeviceID="400" SN="5" ID="DDTSMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="20"/><!--ddt  CapTime-->
+    <Object CMD="FA02" Type="20" StateType="FA00" StationID="2311" SubSysID="03" DeviceID="401" SN="5" ID="DDTSMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="20"/><!--ddt  CapTime-->
+    <Object CMD="FB02" Type="17" StateType="FB00" StationID="2311" SubSysID="05" DeviceID="400" SN="7" ID="USBSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="17"/><!--usb  CapTime-->
+    <Object CMD="FB02" Type="17" StateType="FB00" StationID="2311" SubSysID="05" DeviceID="401" SN="7" ID="USBSMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="17"/><!--usb  CapTime-->
+    <Object CMD="FC02" Type="0D" StateType="FC00" StationID="2311" SubSysID="06" DeviceID="400" SN="8" ID="SS1SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="0D"/><!--ss1  CapTime-->
+    <Object CMD="FC02" Type="0D" StateType="FC00" StationID="2311" SubSysID="06" DeviceID="401" SN="8" ID="SS1SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="0D"/><!--ss1  CapTime-->
+    <Object CMD="FD02" Type="0B" StateType="FD00" StationID="2311" SubSysID="07" DeviceID="400" SN="9" ID="SS2SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="0B"/><!--ss2  CapTime-->
+    <Object CMD="FD02" Type="0B" StateType="FD00" StationID="2311" SubSysID="07" DeviceID="401" SN="9" ID="SS2SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="0B"/><!--ss2  CapTime-->
+
+	    <Object CMD="FA03" Type="25" StateType="FA00" StationID="2311" SubSysID="03" DeviceID="400" SN="5" ID="DDTSMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="25"/><!--ddt  CapRange-->
+	    <Object CMD="FA03" Type="25" StateType="FA00" StationID="2311" SubSysID="03" DeviceID="401" SN="5" ID="DDTSMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="25"/><!--ddt  CapRange-->
+	    <Object CMD="FB03" Type="1F" StateType="FB00" StationID="2311" SubSysID="05" DeviceID="400" SN="7" ID="USBSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="1F"/><!--usb  CapRange-->
+	    <Object CMD="FB03" Type="1F" StateType="FB00" StationID="2311" SubSysID="05" DeviceID="401" SN="7" ID="USBSMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="1F"/><!--usb  CapRange-->
+	    <Object CMD="FC03" Type="14" StateType="FC00" StationID="2311" SubSysID="06" DeviceID="400" SN="8" ID="SS1SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="14"/><!--ss1  CapRange-->
+	    <Object CMD="FC03" Type="14" StateType="FC00" StationID="2311" SubSysID="06" DeviceID="401" SN="8" ID="SS1SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="14"/><!--ss1  CapRange-->
+	    <Object CMD="FD03" Type="12" StateType="FD00" StationID="2311" SubSysID="07" DeviceID="400" SN="9" ID="SS2SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="12"/><!--ss2  CapRange-->
+	    <Object CMD="FD03" Type="12" StateType="FD00" StationID="2311" SubSysID="07" DeviceID="401" SN="9" ID="SS2SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="12"/><!--ss2  CapRange-->
+
+
+	    <Object CMD="FB04" Type="29" StateType="FB00" StationID="2311" SubSysID="05" DeviceID="400" SN="7" ID="USBSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="29"/><!--usb  smLoop-->
+	    <Object CMD="FB04" Type="29" StateType="FB00" StationID="2311" SubSysID="05" DeviceID="401" SN="7" ID="USBSMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="29"/><!--usb  smLoop-->
+	    <Object CMD="FC04" Type="18" StateType="FC00" StationID="2311" SubSysID="06" DeviceID="400" SN="8" ID="SS1SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="18"/><!--ss1  smLoop-->
+	    <Object CMD="FC04" Type="18" StateType="FC00" StationID="2311" SubSysID="06" DeviceID="401" SN="8" ID="SS1SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="18"/><!--ss1  smLoop-->
+	    <Object CMD="FD04" Type="16" StateType="FD00" StationID="2311" SubSysID="07" DeviceID="400" SN="9" ID="SS2SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="16"/><!--ss2  smLoop-->
+	    <Object CMD="FD04" Type="16" StateType="FD00" StationID="2311" SubSysID="07" DeviceID="401" SN="9" ID="SS2SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="16"/><!--ss2  smLoop-->
+	    <Object CMD="FD04" Type="16" StateType="FD00" StationID="2311" SubSysID="04" DeviceID="400" SN="6" ID="TCSMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="16"/><!--stc  smLoop-->
+	    <Object CMD="FD04" Type="16" StateType="FD00" StationID="2311" SubSysID="04" DeviceID="401" SN="6" ID="TCSMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="16"/><!--stc  smLoop-->
+	    <Object CMD="FD04" Type="16" StateType="FD00" StationID="2311" SubSysID="04" DeviceID="700" SN="6" ID="LTCSMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="16"/><!--Ltc  smLoop-->
+	    <Object CMD="FD04" Type="16" StateType="FD00" StationID="2311" SubSysID="04" DeviceID="701" SN="6" ID="LTCSMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="16"/><!--Ltc  smLoop-->
+
+	  
+	    <Object CMD="FB05" Type="2B" StateType="FB00" StationID="2311" SubSysID="05" DeviceID="400" SN="7" ID="USBSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="2B"/><!--usb  CJ-->
+	    <Object CMD="FB05" Type="2B" StateType="FB00" StationID="2311" SubSysID="05" DeviceID="401" SN="7" ID="USBSMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="2B"/><!--usb  CJ-->
+	    <Object CMD="FC05" Type="19" StateType="FC00" StationID="2311" SubSysID="06" DeviceID="400" SN="8" ID="SS1SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="19"/><!--ss1  CJ-->
+	    <Object CMD="FC05" Type="19" StateType="FC00" StationID="2311" SubSysID="06" DeviceID="401" SN="8" ID="SS1SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="19"/><!--ss1  CJ-->
+	    <Object CMD="FD05" Type="17" StateType="FD00" StationID="2311" SubSysID="07" DeviceID="400" SN="9" ID="SS2SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="17"/><!--ss2  CJ-->
+	    <Object CMD="FD05" Type="17" StateType="FD00" StationID="2311" SubSysID="07" DeviceID="401" SN="9" ID="SS2SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="17"/><!--ss2  CJ-->
+
+
+	    <Object CMD="FB06" Type="2C" StateType="FB00" StationID="2311" SubSysID="05" DeviceID="400" SN="7" ID="USBSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="2C"/><!--usb  CS-->
+	    <Object CMD="FB06" Type="2C" StateType="FB00" StationID="2311" SubSysID="05" DeviceID="401" SN="7" ID="USBSMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="2C"/><!--usb  CS-->
+	    <Object CMD="FC06" Type="1A" StateType="FC00" StationID="2311" SubSysID="06" DeviceID="400" SN="8" ID="SS1SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="1A"/><!--ss1  CS-->
+	    <Object CMD="FC06" Type="1A" StateType="FC00" StationID="2311" SubSysID="06" DeviceID="401" SN="8" ID="SS1SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="1A"/><!--ss1  CS-->
+	    <Object CMD="FD06" Type="18" StateType="FD00" StationID="2311" SubSysID="07" DeviceID="400" SN="9" ID="SS2SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="18"/><!--ss2  CS-->
+	    <Object CMD="FD06" Type="18" StateType="FD00" StationID="2311" SubSysID="07" DeviceID="401" SN="9" ID="SS2SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="18"/><!--ss2  CS-->
+	    
+	    <Object CMD="FB07" Type="4" StateType="FB00" StationID="2311" SubSysID="05" DeviceID="400" SN="7" ID="USBSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="4"/><!--usb  ZERO-->
+	    <Object CMD="FB07" Type="4" StateType="FB00" StationID="2311" SubSysID="05" DeviceID="401" SN="7" ID="USBSMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="4"/><!--usb  ZERO-->
+	    <Object CMD="FC07" Type="4" StateType="FC00" StationID="2311" SubSysID="06" DeviceID="400" SN="8" ID="SS1SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="4"/><!--ss1  ZERO-->
+	    <Object CMD="FC07" Type="4" StateType="FC00" StationID="2311" SubSysID="06" DeviceID="401" SN="8" ID="SS1SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="4"/><!--ss1  ZERO-->
+	    <Object CMD="FD07" Type="4" StateType="FD00" StationID="2311" SubSysID="07" DeviceID="400" SN="9" ID="SS2SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="4"/><!--ss2  ZERO-->
+	    <Object CMD="FD07" Type="4" StateType="FD00" StationID="2311" SubSysID="07" DeviceID="401" SN="9" ID="SS2SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="4"/><!--ss2  ZERO-->
+
+            <Object CMD="FB08" Type="39" StateType="FB00" StationID="2311" SubSysID="05" DeviceID="400" SN="7" ID="USBSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="39"/><!--usb  ZERO QUERY-->
+            <Object CMD="FB08" Type="39" StateType="FB00" StationID="2311" SubSysID="05" DeviceID="401" SN="7" ID="USBSMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="39"/><!--usb  ZERO QUERY-->
+            <Object CMD="FC08" Type="21" StateType="FC00" StationID="2311" SubSysID="06" DeviceID="400" SN="8" ID="SS1SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="21"/><!--ss1  ZERO QUERY-->
+            <Object CMD="FC08" Type="21" StateType="FC00" StationID="2311" SubSysID="06" DeviceID="401" SN="8" ID="SS1SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="21"/><!--ss1  ZERO QUERY-->
+            <Object CMD="FD08" Type="20" StateType="FD00" StationID="2311" SubSysID="07" DeviceID="400" SN="9" ID="SS2SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="20"/><!--ss2  ZERO QUERY-->
+            <Object CMD="FD08" Type="20" StateType="FD00" StationID="2311" SubSysID="07" DeviceID="401" SN="9" ID="SS2SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="20"/><!--ss2  ZERO QUERY-->
+	</Module>
+
+	<Module protocol="1" ObjectName="过程控制命令2" ObjectType="F001">
+		<Object CMD="12E" Type="372" StateType="572" StationID="2311" SubSysID="00" DeviceID="700" SN="6" ID="LTCSMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="65"/><!--tc safe ctrl 模式切换-->
+		<Object CMD="12E" Type="389" StateType="589" StationID="2311" SubSysID="00" DeviceID="701" SN="6" ID="LTCSMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="65"/><!--tc safe ctrl 模式切换-->
+
+		<Object CMD="0c0c" Type="372" StateType="572" StationID="2311" SubSysID="00" DeviceID="700" SN="6" ID="LTCSMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="67"/><!--tc safe ctrl 主备切换-->
+		<Object CMD="0c0c" Type="389" StateType="589" StationID="2311" SubSysID="00" DeviceID="701" SN="6" ID="LTCSMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="67"/><!--tc safe ctrl 主备切换-->
+
+		<Object CMD="7206" Type="370" StateType="570" StationID="2311" SubSysID="00" DeviceID="400" SN="7" ID="USBSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="67"/><!--usb主备切换-->
+		<Object CMD="7206" Type="387" StateType="587" StationID="2311" SubSysID="00" DeviceID="401" SN="7" ID="USBSMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="67"/><!--usb主备切换-->
+
+		<Object CMD="7304" Type="370" StateType="570" StationID="2311" SubSysID="00" DeviceID="400" SN="8" ID="SS1SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="67"/><!--ss1主备切换-->
+		<Object CMD="7304" Type="387" StateType="587" StationID="2311" SubSysID="00" DeviceID="401" SN="8" ID="SS1SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="67"/><!--ss1主备切换-->
+
+		<Object CMD="7404" Type="370" StateType="570" StationID="2311" SubSysID="00" DeviceID="400" SN="9" ID="SS2SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="67"/><!--ss2主备切换-->
+		<Object CMD="7404" Type="387" StateType="587" StationID="2311" SubSysID="00" DeviceID="401" SN="9" ID="SS2SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="67"/><!--ss2主备切换-->
+	</Module>
+
+	<Module protocol="1" ObjectName="过程控制命令3" ObjectType="F001">
+		<Object CMD="7200" Type="370" StateType="570" StationID="2311" SubSysID="00" DeviceID="400" SN="7" ID="USBSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="B"/><!--usb双捕-->
+		<Object CMD="7200" Type="387" StateType="587" StationID="2311" SubSysID="00" DeviceID="401" SN="7" ID="USBSMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="B"/><!--usb双捕-->
+		<Object CMD="7201" Type="370" StateType="570" StationID="2311" SubSysID="00" DeviceID="400" SN="7" ID="USBSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="A"/><!--usb起扫-->
+		<Object CMD="7201" Type="387" StateType="587" StationID="2311" SubSysID="00" DeviceID="401" SN="7" ID="USBSMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="A"/><!--usb起扫-->
+		<Object CMD="7202" Type="370" StateType="570" StationID="2311" SubSysID="00" DeviceID="400" SN="7" ID="USBSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="A"/><!--usb回零-->
+		<Object CMD="7202" Type="387" StateType="587" StationID="2311" SubSysID="00" DeviceID="401" SN="7" ID="USBSMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="A"/><!--usb回零-->
+		<Object CMD="7203" Type="370" StateType="570" StationID="2311" SubSysID="00" DeviceID="400" SN="7" ID="USBSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="C"/><!--usb距捕-->
+		<Object CMD="7203" Type="387" StateType="587" StationID="2311" SubSysID="00" DeviceID="401" SN="7" ID="USBSMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="C"/><!--usb距捕-->
+		<Object CMD="7204" Type="370" StateType="570" StationID="2311" SubSysID="00" DeviceID="400" SN="7" ID="USBSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="E"/><!--usb测控开始-->
+		<Object CMD="7204" Type="387" StateType="587" StationID="2311" SubSysID="00" DeviceID="401" SN="7" ID="USBSMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="E"/><!--usb测控开始-->
+		<Object CMD="7205" Type="370" StateType="570" StationID="2311" SubSysID="00" DeviceID="400" SN="7" ID="USBSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="E"/><!--usb测控结束-->
+		<Object CMD="7205" Type="387" StateType="587" StationID="2311" SubSysID="00" DeviceID="401" SN="7" ID="USBSMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="E"/><!--usb测控结束-->
+
+		<Object CMD="7300" Type="370" StateType="570" StationID="2311" SubSysID="00" DeviceID="400" SN="8" ID="SS1SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="9"/><!--ss1测控开始-->
+		<Object CMD="7300" Type="387" StateType="587" StationID="2311" SubSysID="00" DeviceID="401" SN="8" ID="SS1SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="9"/><!--ss1测控开始-->
+		<Object CMD="7301" Type="370" StateType="570" StationID="2311" SubSysID="00" DeviceID="400" SN="8" ID="SS1SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="0"/><!--ss1回零-->
+		<Object CMD="7301" Type="387" StateType="587" StationID="2311" SubSysID="00" DeviceID="401" SN="8" ID="SS1SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="0"/><!--ss1回零-->
+		<Object CMD="7302" Type="370" StateType="570" StationID="2311" SubSysID="00" DeviceID="400" SN="8" ID="SS1SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="B"/><!--ss1重捕-->
+		<Object CMD="7302" Type="387" StateType="587" StationID="2311" SubSysID="00" DeviceID="401" SN="8" ID="SS1SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="B"/><!--ss1重捕-->
+		<Object CMD="7303" Type="370" StateType="570" StationID="2311" SubSysID="00" DeviceID="400" SN="8" ID="SS1SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="9"/><!--ss1测控结束-->
+		<Object CMD="7303" Type="387" StateType="587" StationID="2311" SubSysID="00" DeviceID="401" SN="8" ID="SS1SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="9"/><!--ss1测控结束-->
+
+		<Object CMD="7400" Type="370" StateType="570" StationID="2311" SubSysID="00" DeviceID="400" SN="9" ID="SS2SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="9"/><!--ss2测控开始-->
+		<Object CMD="7400" Type="387" StateType="587" StationID="2311" SubSysID="00" DeviceID="401" SN="9" ID="SS2SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="9"/><!--ss2测控开始-->
+		<Object CMD="7401" Type="370" StateType="570" StationID="2311" SubSysID="00" DeviceID="400" SN="9" ID="SS2SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="0"/><!--ss2回零-->
+		<Object CMD="7401" Type="387" StateType="587" StationID="2311" SubSysID="00" DeviceID="401" SN="9" ID="SS2SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="0"/><!--ss2回零-->
+		<Object CMD="7402" Type="370" StateType="570" StationID="2311" SubSysID="00" DeviceID="400" SN="9" ID="SS2SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="0"/><!--ss2重捕-->
+		<Object CMD="7402" Type="387" StateType="587" StationID="2311" SubSysID="00" DeviceID="401" SN="9" ID="SS2SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="0"/><!--ss2重捕-->
+		<Object CMD="7403" Type="370" StateType="570" StationID="2311" SubSysID="00" DeviceID="400" SN="9" ID="SS2SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="9"/><!--ss2测控结束-->
+		<Object CMD="7403" Type="387" StateType="587" StationID="2311" SubSysID="00" DeviceID="401" SN="9" ID="SS2SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="9"/><!--ss2测控结束-->
+	</Module>
+	
+	<!--过程控制命令4 主要处理校零结构查询的命令控制-->
+	<Module protocol="1" ObjectName="过程控制命令4" ObjectType="F001">
+		<Object CMD="7200" Type="370" StateType="570" StationID="2311" SubSysID="05" DeviceID="400" SN="0" ID="USBSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="39"/><!--基带一校零结果查询-->
+		<Object CMD="7200" Type="387" StateType="587" StationID="2311" SubSysID="05" DeviceID="401" SN="0" ID="USBSMCU2" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="39"/><!--基带二校零结果查询-->
+		<Object CMD="7300" Type="370" StateType="570" StationID="2311" SubSysID="06" DeviceID="400" SN="0" ID="SS1SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="21"/><!--ss1校零结果查询-->
+		<Object CMD="7300" Type="387" StateType="587" StationID="2311" SubSysID="06" DeviceID="401" SN="0" ID="SS1SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="21"/><!--ss1校零结果查询-->
+		<Object CMD="7400" Type="370" StateType="570" StationID="2311" SubSysID="07" DeviceID="400" SN="0" ID="SS2SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo=""/><!--ss2校零结果查询-->
+		<Object CMD="7400" Type="387" StateType="587" StationID="2311" SubSysID="07" DeviceID="401" SN="0" ID="SS2SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo=""/><!--ss2校零结果查询-->
+	</Module>
+
+	<!--只转发指令不生存信息源-->
+	<Module protocol="1" ObjectName="存盘控制命令" ObjectType="F001">
+		<Object CMD="200" Type="361" StateType="0" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="DDTSMCU1" PDXPSMCU="" PDXPDEVICES="RSMI" UintNo=""/><!-- 基带一存盘控制命令 -->
+		<Object CMD="200" Type="362" StateType="0" StationID="2311" SubSysID="00" DeviceID="401" SN="0" ID="DDTSMCU2" PDXPSMCU="" PDXPDEVICES="RSMI" UintNo=""/><!-- 基带二存盘控制命令 -->
+		<Object CMD="8201" Type="0" StateType="0" StationID="2311" SubSysID="00" DeviceID="1200" SN="0" ID="Record0" PDXPSMCU="" PDXPDEVICES="RSMI" UintNo=""/><!-- 检前记录器一存盘控制命令 -->
+		<Object CMD="8201" Type="0" StateType="0" StationID="2311" SubSysID="00" DeviceID="1201" SN="0" ID="Record1" PDXPSMCU="" PDXPDEVICES="RSMI" UintNo=""/><!-- 检前记录器二存盘控制命令 -->
+	</Module>
+
+	<!--只转发指令不生存信息源 ss1 ss2 存盘-->
+	<Module protocol="1" ObjectName="存盘控制命令SS" ObjectType="F001">
+		<Object CMD="201" Type="370" StateType="570" StationID="2311" SubSysID="00" DeviceID="400" SN="8" ID="SS1SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="20"/><!--ss1-->
+		<Object CMD="201" Type="387" StateType="587" StationID="2311" SubSysID="00" DeviceID="401" SN="8" ID="SS1SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="20"/><!--ss1-->
+		<Object CMD="201" Type="370" StateType="570" StationID="2311" SubSysID="00" DeviceID="400" SN="9" ID="SS2SMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="1F"/><!--ss2-->
+		<Object CMD="201" Type="387" StateType="587" StationID="2311" SubSysID="00" DeviceID="401" SN="9" ID="SS2SMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="1F"/><!--ss2-->
+	</Module>
+	<!--只转发指令不生存信息源-->
+	<Module protocol="1" ObjectName="送数控制" ObjectType="F001">
+		<Object CMD="8202" Type="0" StateType="0" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="DDTSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="1"/>
+	</Module>
+
+	<!--只转发指令不生存信息源-->
+	<Module protocol="1" ObjectName="模式切换" ObjectType="F001">
+		<Object CMD="712E" Type="0" StateType="0" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="DDTSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="1"/>
+	</Module>
+
+	<Module protocol="1" ObjectName="系统工作方式切换" ObjectType="F001">
+		<Object CMD="712A" Type="0" StateType="0" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="DDTSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="1"/>
+	</Module>
+
+	<!--单遥控模式安控模式{{-->
+	<Module protocol="1" ObjectName="单遥控扩频码参数设置" ObjectType="F002">
+		<Object CMD="1" Type="1" StateType="594" StationID="2311" SubSysID="04" DeviceID="400" SN="0" ID="TCSMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="9"/>
+		<Object CMD="6" Type="6" StateType="594" StationID="2311" SubSysID="04" DeviceID="700" SN="0" ID="LTCSMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="9"/>
+		<Object CMD="10" Type="10" StateType="594" StationID="2311" SubSysID="04" DeviceID="401" SN="0" ID="TCSMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="9"/>
+		<Object CMD="11" Type="11" StateType="594" StationID="2311" SubSysID="04" DeviceID="701" SN="0" ID="LTCSMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="9"/>
+	</Module>
+	<Module protocol="1" ObjectName="单遥控调制参数设置" ObjectType="F002">
+		<Object CMD="200" Type="E564" StateType="E563" StationID="2311" SubSysID="04" DeviceID="400" SN="0" ID="TCSMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="3"/>
+		<Object CMD="200" Type="E564" StateType="E563" StationID="2311" SubSysID="04" DeviceID="700" SN="0" ID="LTCSMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="3"/>
+		<Object CMD="200" Type="E564" StateType="E563" StationID="2311" SubSysID="04" DeviceID="401" SN="0" ID="TCSMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="3"/>
+		<Object CMD="200" Type="E564" StateType="E563" StationID="2311" SubSysID="04" DeviceID="701" SN="0" ID="LTCSMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="3"/>
+	</Module>
+	<Module protocol="1" ObjectName="单遥控遥控参数设置" ObjectType="F002">
+		<Object CMD="3" Type="3" StateType="596" StationID="2311" SubSysID="04" DeviceID="400" SN="0" ID="TCSMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="5"/>
+		<Object CMD="8" Type="8" StateType="596" StationID="2311" SubSysID="04" DeviceID="700" SN="0" ID="LTCSMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="5"/>
+		<Object CMD="14" Type="14" StateType="596" StationID="2311" SubSysID="04" DeviceID="401" SN="0" ID="TCSMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="5"/>
+		<Object CMD="15" Type="15" StateType="596" StationID="2311" SubSysID="04" DeviceID="701" SN="0" ID="LTCSMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="5"/>
+	</Module>
+	<Module protocol="1" ObjectName="单遥控系统工作参数设置" ObjectType="F002">
+		<Object CMD="4" Type="4" StateType="597" StationID="2311" SubSysID="04" DeviceID="400" SN="0" ID="TCSMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="1"/>
+		<Object CMD="9" Type="9" StateType="597" StationID="2311" SubSysID="04" DeviceID="700" SN="0" ID="LTCSMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="1"/>
+		<Object CMD="16" Type="16" StateType="597" StationID="2311" SubSysID="04" DeviceID="401" SN="0" ID="TCSMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="1"/>
+		<Object CMD="17" Type="17" StateType="597" StationID="2311" SubSysID="04" DeviceID="701" SN="0" ID="LTCSMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="1"/>
+	</Module>
+	<Module protocol="1" ObjectName="单遥控发令状态" ObjectType="F002">
+		<Object CMD="5" Type="5" StateType="8005" StationID="2311" SubSysID="00" DeviceID="100" SN="0" ID="TCSMCU1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="4"/>
+		<Object CMD="18" Type="18" StateType="8005" StationID="2311" SubSysID="00" DeviceID="101" SN="0" ID="TCSMCU2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="4"/>
+	</Module>
+<!--单遥控模式安控模式}}-->
+	<Module protocol="1" ObjectName="组参数设置命令" ObjectType="F003">
+		<Object CMD="EA11" Type="0" StateType="570" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="DDTTCSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="-1"/>
+		<Object CMD="EA11" Type="0" StateType="570" StationID="2311" SubSysID="00" DeviceID="400" SN="1" ID="DDTTCSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="-1"/>
+		<Object CMD="EA11" Type="0" StateType="570" StationID="2311" SubSysID="00" DeviceID="400" SN="2" ID="DDTTCSMCU1" PDXPSMCU="210001" PDXPDEVICES="210060" UintNo="-1"/>
+	</Module>	
+	<map><!--用于区分工作状态上报报文中的不同体制, bbe表示设备1是基带1-->
+		<subMap sid="23110191" system ="DDT" bbe="基带1"/>	
+		<subMap sid="23110192" system ="DDT" bbe="基带2"/>
+		<subMap sid="231101A1" system ="TC" bbe="基带1"/>	
+		<subMap sid="231101A2" system ="TC" bbe="基带2"/>
+		<subMap sid="210062" system ="USB" bbe="基带1"/>	
+		<!--<subMap sid="231101B1" system ="USB" bbe="基带1"/>-->
+		<subMap sid="231101B2" system ="USB" bbe="基带2"/>
+		<subMap sid="231101C1" system ="SS1" bbe="基带1"/>
+		<subMap sid="231101C2" system ="SS1" bbe="基带2"/>
+		<subMap sid="231101D1" system ="SS2" bbe="基带1"/>
+		<subMap sid="231101D2" system ="SS2" bbe="基带2"/>
+	</map>
+	<Module protocol="1" ObjectName="设备联接状态" ObjectType="F000">
+	<!--用于生成标识设备联接状态的信息源 DevicesConnectStatus-->
+		<Object CMD="0" Type="380" StateType="9013" StationID="2311" SubSysID="00" DeviceID="100" SN="0" ID="SMCU" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="-1"/>
+	</Module>	
+<!--上变频器-->
+	<Module protocol="1" ObjectName="上变频器" ObjectType="F000">
+		<Object CMD="0" Type="381" StateType="581" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="DownAlter1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="-1"/>
+		<Object CMD="0" Type="382" StateType="581" StationID="2311" SubSysID="00" DeviceID="401" SN="0" ID="DownAlter2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="-1"/>
+	</Module>	
+<!--下变频器-->
+	<Module protocol="1" ObjectName="下变频器" ObjectType="F000">
+		<Object CMD="0" Type="383" StateType="582" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="DownAlter1" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="-1"/>
+		<Object CMD="0" Type="384" StateType="582" StationID="2311" SubSysID="00" DeviceID="401" SN="0" ID="DownAlter2" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="-1"/>
+	</Module>	
+<!--校验变频器-->
+	<Module protocol="1" ObjectName="校验变频器" ObjectType="F000">
+		<Object CMD="0" Type="385" StateType="583" StationID="2311" SubSysID="00" DeviceID="400" SN="0" ID="UpAlter" PDXPSMCU="210001" PDXPDEVICES="210061" UintNo="-1"/>
+	</Module>
+	<Module protocol="1" ObjectName="报文缓存" ObjectType="F002">
+		<Object CMD="5" Type="296" StateType="FFF" StationID="2311" SubSysID="00" DeviceID="0" SN="0" ID="LTCSMCU1" PDXPSMCU="100" PDXPDEVICES="400" UintNo="1" />
+	</Module>
+	<Module protocol="1" ObjectName="remote_server宏处理" ObjectType="F002">
+		<Object CMD="6" Type="296" StateType="FFE" StationID="2311" SubSysID="00" DeviceID="0" SN="0" ID="" PDXPSMCU="100" PDXPDEVICES="400" UintNo="1" />
+	</Module>	
+</Config>

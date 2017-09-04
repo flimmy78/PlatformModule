@@ -1,0 +1,567 @@
+#include "RecvDataThread.h"
+#include <time.h>
+#include <sys/time.h>
+#include "Global.h"
+#include <QtEndian>
+#include "../../Common/Log.h"
+#include "DataStructTTCDevCtlInterface.h"
+#include "DevCtlInterface_global.h"
+#include "util.h"
+#include "devices.h"
+
+bool CNetSwitch::init(USHORT devID, PlatformResource* res, bool bUp)
+{
+    QString strDeviceName = bUp ? ("上行") : ("下行");
+    strDeviceName += "中频开关矩阵监控";
+    m_pPlatformRes = res;
+    DATA_SOURCE_ALLOC(HK_IFSWMatStatu, m_pIFSWMatStatuResponse, strDeviceName, devID, 0);
+    m_timeTagID = m_pPlatformRes->m_nIDCurrent;
+    return true;
+}
+QString CNetSwitch::getAnswerFlag(UCHAR ucAnsFlag)
+{
+    QString strAnswer("未知应答标识");
+    switch (ucAnsFlag)
+    {
+    case 0xFF:
+        strAnswer = QString("正常执行");
+        break;
+    case 0x61:
+        strAnswer = QString("非法码");
+        break;
+    case 0x62:
+        strAnswer = QString("帧校验出错");
+        break;
+    case 0x63:
+        strAnswer = QString("条件不具备不执行");
+        break;
+    case 0x64:
+        strAnswer = QString("超限码，参数超限");
+        break;
+    default:
+        break;
+    }
+    return strAnswer;
+}
+void CNetSwitch::processNetSwitch(QByteArray& datagram, const QString &strName)
+{
+    m_pPlatformRes->m_pStatMgr->IncreaseTimeTag(m_timeTagID);
+    ++m_connect;
+    PROCOTOL_PACK proPack;
+    memcpy(&proPack, datagram.data(), datagram.size() > sizeof(proPack) ? sizeof(proPack) : datagram.size());
+    QString strInfo;
+    //工作状态上报
+    //上行开关矩阵 处理程序
+    if(0x0701 == proPack.C && 0xEA0D == proPack.Data.T1)
+    {
+        memcpy(m_pIFSWMatStatuResponse, &proPack.Data.Dat1.ifSwMatParaStatus, proPack.Data.L1);
+    }
+    //处理中频开关矩阵响应信息
+    else if (0x200 == proPack.C && 0xEA0C == proPack.Data.T1)
+    {
+        UCHAR ucResponse = (UCHAR)proPack.Data.Dat1.answer;
+        processResponse(strName, ucResponse);
+    }
+    //下行开关矩阵 处理程序
+    else if(0x0701 == proPack.C && 0xEA0B == proPack.Data.T1)
+    {
+        memcpy(m_pIFSWMatStatuResponse, &proPack.Data.Dat1.ifSwMatParaStatus, proPack.Data.L1);
+    }
+    else if (0x200 == proPack.C && 0xEA0E == proPack.Data.T1)
+    {
+        UCHAR ucResponse = (UCHAR)proPack.Data.Dat1.answer;
+        processResponse(strName, ucResponse);
+    }
+    //
+    else
+    {
+        strInfo = QString("%1: 收到未知协议报文!").arg(strName);
+        CLog::addLog(strInfo);
+    }
+}
+void CNetSwitch::processResponse(QString strDeviceName, UCHAR ucAnswerFlag)
+{
+    QString strType("返回结果");
+    QString strAnswer = getAnswerFlag(ucAnswerFlag);
+    QString strInfo = QString("%1 %2: %3!").arg(strDeviceName, strType, strAnswer);
+    CLog::addLog(strInfo);
+}
+void CNetSwitch::getDevInfo(char& connect)
+{
+    connect = m_connect == m_connectOld ? char(0) : char(1);
+    m_connectOld = m_connect;
+}
+
+CDevices::CDevices():
+    m_const_0(char(0)),
+    m_const_1(char(1))
+{
+    zeroConn();
+    updateConn();
+}
+
+void CDevices::zeroConn()
+{
+    m_connStdRSP = m_const_0;
+    m_connSSRSP = m_const_0;
+    m_connZEROSTD = m_const_0;
+    m_connSLDC = m_const_0;
+    m_connSswitch = m_const_0;
+    m_connTestNetSwitch = m_const_0;
+    m_connFREQB = m_const_0;
+    m_connRCLOCK = m_const_0;
+}
+
+void CDevices::updateConn()
+{
+    m_connStdRSPOld = m_connStdRSP;
+    m_connSSRSPOld = m_connSSRSP;
+    m_connZEROSTDOld = m_connZEROSTD;
+    m_connSLDCOld = m_connSLDC;
+    m_connSswitchOld = m_connSswitch;
+    m_connTestNetSwitchOld = m_connTestNetSwitch;
+    m_connFREQBOld = m_connFREQB;
+    m_connRCLOCKOld = m_connRCLOCK;
+}
+
+bool CDevices::init(PlatformResource *res)
+{
+    m_pPlatformRes = res;
+    DATA_SOURCE_ALLOC(COMBTRANSStatu, m_pCombTransStatuTTC, "标准TTC联试应答机监控", 0x700, 0);
+    DATA_SOURCE_ALLOC(COMBTRANSStatu, m_pCombTransStatuFXG, "非相干扩频联试应答机监控", 0x700, 1);
+    DATA_SOURCE_ALLOC(ZEROCALIBBEACONStatu, m_pZCBeaconStatu, "校零信标一体机监控", 0x400, 0);
+    DATA_SOURCE_ALLOC(SLDCDCUStatu, m_pSLDDcuParaStatu, "射频分路组合监控", 0x400, 0);
+    DATA_SOURCE_ALLOC(SSWITCHDCUStatu, m_pSswitchDcuStatu, "射频切换开关监控", 0x400, 0);
+    DATA_SOURCE_ALLOC(TEST_SWMATStatu, m_pTstSwMatStatu, "测试开关矩阵监控", 0x3D00, 0);
+    m_tstSwMatID = m_pPlatformRes->m_nIDCurrent;
+    DATA_SOURCE_ALLOC(FREQBDCUStatu, m_pFreDcuStatu, "频率基准源监控", 0x3E00, 0);
+    DATA_SOURCE_ALLOC(RCLOCKDCUStatu, m_pRCLOCKDCUStatu, "铷钟机箱监控", 0x2500, 0);
+    DATA_SOURCE_ALLOC(COMBTRANSPara, m_pCombTransParaTTC, RSP_MACRO_SEARCH, 0x500, 0);
+    DATA_SOURCE_ALLOC(COMBTRANSPara, m_pCombTransParaFXG, RSP_MACRO_SEARCH, 0x500, 1);
+    return true;
+}
+
+void CDevices::getDevInfo(DevicesConnectStatus *pConnectSt)
+{
+    if(!pConnectSt)return;
+    int usbRSP = m_connStdRSP == m_connStdRSPOld ? m_const_0 : m_const_1;
+    int ss2RSP = m_connSSRSP == m_connSSRSPOld ? m_const_0 : m_const_1;
+    // 1:USB 2:SS2
+    if(usbRSP == m_const_1)pConnectSt->RSP = 1;
+    else if(ss2RSP == m_const_1)pConnectSt->RSP = 2;
+    else pConnectSt->RSP = 0;
+
+    pConnectSt->zeroSTD = m_connZEROSTD == m_connZEROSTDOld ? m_const_0 : m_const_1;
+    pConnectSt->slDivcom = m_connSLDC == m_connSLDCOld ? m_const_0 : m_const_1;
+    pConnectSt->sSwitch = m_connSswitch == m_connSswitchOld ? m_const_0 : m_const_1;
+    pConnectSt->testnet_switch = m_connTestNetSwitch == m_connTestNetSwitchOld ? m_const_0 : m_const_1;
+
+    pConnectSt->freqB = m_connFREQB == m_connFREQBOld ? m_const_0 : m_const_1;
+    pConnectSt->rClock = m_connRCLOCK == m_connRCLOCKOld ?  m_const_0 : m_const_1;
+    updateConn();
+}
+
+
+void CDevices::proceProcotol(QByteArray &datagram)
+{
+    PROCOTOL_PACK proPack;
+    int nSize = sizeof(PROCOTOL_PACK);
+    memcpy(&proPack, datagram.data(), nSize > datagram.size() ? datagram.size() : nSize);
+
+    //如果数据源为标准TTC联试应答机监控
+    if (0x1400 == proPack.S)
+    {
+        ++m_connStdRSP;
+        processCombTrans(proPack);
+    }
+    //非相干扩频联试应答机监控
+    else if (0x1401 == proPack.S)
+    {
+        ++m_connSSRSP;
+        processCombTrans(proPack, false);
+    }
+    //校零信表一体机
+    else if (0x4A00 == proPack.S)
+    {
+        ++m_connZEROSTD;
+        processZEROSTDDcu(proPack);
+    }
+    //射频分路组合监控
+    else if (0x2C00 == proPack.S)
+    {
+        ++m_connSLDC;
+        processSLDDcu(proPack);
+    }
+    //射频切换开关监控
+    else if (0x2D00 == proPack.S)
+    {
+        ++m_connSswitch;
+        processSswitch(proPack);
+    }
+    //测试开关矩阵
+    else if (0x3D00 == proPack.S)
+    {
+        ++m_connTestNetSwitch;
+        m_pPlatformRes->m_pStatMgr->IncreaseTimeTag(m_tstSwMatID);
+        processTestSwitch(proPack);
+    }
+    //频率基准源监控
+    else if (0x3E00 == proPack.S)
+    {
+        ++m_connFREQB;
+        processFreqBDcu(proPack);
+    }
+    //铷钟机箱监控
+    else if (0x3F00 == proPack.S)
+    {
+        ++m_connRCLOCK;
+        processRCLOCKDcu(proPack);
+    }
+}
+
+void CDevices::processCombTrans(PROCOTOL_PACK &proPack, bool bTTC)
+{
+    QString strDeviceName = bTTC ? "标准TTC联试应答机监控" : "非相干扩频联试应答机监控";
+    if(0x046E == proPack.C) //命令应答帧
+    {
+        //模式类型
+        QString strType("未知命令");
+        if (0x046D == proPack.Data.T1)
+            strType = QString("模式切换命令");
+        else if (0x046E == proPack.Data.T1)
+            strType = QString("仿真控制命令");
+        else if (0x046F == proPack.Data.T1)
+            strType = QString("存盘控制命令");
+        else if (0x0470 == proPack.Data.T1)
+            strType = QString("切换控制命令");
+
+        //响应的内容
+        QString strAnswer = getAnswerFlag(proPack.Data.Dat1.answer);
+        QString strInfo = QString("%1 %2: %3!").arg(strDeviceName, strType, strAnswer);
+        CLog::addLog(strInfo);
+    }
+    //处理联试应答机监控工作上报状态信息
+    else if(0x1200 == proPack.C && 0x18A3 == proPack.Data.T1)
+    {
+        if (bTTC)
+            memcpy(m_pCombTransStatuTTC, &proPack.Data.Dat1.svSysStatu, proPack.Data.L1);
+        else
+            memcpy(m_pCombTransStatuFXG, &proPack.Data.Dat1.svSysStatu, proPack.Data.L1);
+    }
+    //处理联试应答机监控参数宏查询信息
+    else if (0x200 == proPack.C && 0x0106 == proPack.Data.T1)
+    {
+        //对宏参数应答数据进行处理
+        int nMarcoLen = sizeof(MARCOSEARCHPara);
+        int nMarcoCount = proPack.Data.L1 / nMarcoLen;
+        int i = 0;
+        //将数据值进行解析
+        if (bTTC)
+        {
+            m_pCombTransParaTTC->nParaCount = nMarcoCount;
+            for (; i < nMarcoCount; i++)
+            {
+                memcpy(&m_pCombTransParaTTC->paras[i], (void *)(proPack.Data.Dat1.ucTmp + i * nMarcoLen), nMarcoLen);
+            }
+            //拷贝标志到响应中 从缓存中取数据
+            memcpy(&m_pCombTransParaTTC->ucAnswerFlag, (void *)(proPack.Data.Dat1.ucTmp + i * nMarcoLen), 1);
+        }
+        else
+        {
+            m_pCombTransParaFXG->nParaCount = nMarcoCount;
+            for (; i < nMarcoCount; i++)
+            {
+                memcpy(&m_pCombTransParaFXG->paras[i], (void *)(proPack.Data.Dat1.ucTmp + i * nMarcoLen), nMarcoLen);
+            }
+            //拷贝标志到响应中 从缓存中取数据
+            memcpy(&m_pCombTransParaFXG->ucAnswerFlag, (void *)(proPack.Data.Dat1.ucTmp + i * nMarcoLen), 1);
+        }
+    }
+    //处理联试应答机监控参数宏调用信息
+    else if (0x200 == proPack.C && 0x0206 == proPack.Data.T1)
+    {
+        //QString strType("宏参数调用返回结果");
+        int nMarcoLen = sizeof(MARCOSEARCHPara);
+        int nMarcoCount = proPack.Data.L1 / nMarcoLen;
+        UCHAR ucResponse;
+        memcpy(&ucResponse, (void *)(proPack.Data.Dat1.ucTmp + nMarcoCount * nMarcoLen), 1);
+        processResponse(strDeviceName, ucResponse);
+    }
+    else
+    {
+        QString strInfo = QString("%1: 收到未知协议报文!").arg(strDeviceName);
+        CLog::addLog(strInfo);
+    }
+}
+
+void CDevices::processZEROSTDDcu(PROCOTOL_PACK &proPack)
+{
+    QString strInfo;
+    QString strDeviceName = QString("校零信标一体机");
+    //工作状态上报
+    if(0x0701 == proPack.C && 0xEA13 == proPack.Data.T1)
+    {
+        memcpy(m_pZCBeaconStatu, &proPack.Data.Dat1.zcBeaconStatu, proPack.Data.L1);
+    }
+    //处理校零信标一体机参数设置响应信息
+    else if (0x200 == proPack.C && 0xEA14 == proPack.Data.T1)
+    {
+        UCHAR ucResponse = (UCHAR)proPack.Data.Dat1.answer;
+        processResponse(strDeviceName, ucResponse);
+    }
+    else
+    {
+        strInfo = QString("%1: 收到未知协议报文!").arg(strDeviceName);
+        CLog::addLog(strInfo);
+    }
+}
+
+void CDevices::processSLDDcu(PROCOTOL_PACK &proPack)
+{
+    QString strInfo;
+    QString strDeviceName = QString("射频分路组合监控");
+    //工作状态上报
+    if(0x0701 == proPack.C && 0xEA01 == proPack.Data.T1)
+    {
+        memcpy(m_pSLDDcuParaStatu, &proPack.Data.Dat1.sldDcuParaStatu, proPack.Data.L1);
+    }
+    //处理校零信标一体机参数设置响应信息
+    else if (0x200 == proPack.C && 0xEA02 == proPack.Data.T1)
+    {
+        UCHAR ucResponse = (UCHAR)proPack.Data.Dat1.answer;
+        processResponse(strDeviceName, ucResponse);
+    }
+    else
+    {
+        strInfo = QString("%1: 收到未知协议报文!").arg(strDeviceName);
+        CLog::addLog(strInfo);
+    }
+}
+
+void CDevices::processSswitch(PROCOTOL_PACK &proPack)
+{
+    QString strInfo;
+    QString strDeviceName = QString("射频切换开关监控");
+    //工作状态上报
+    if(0x0701 == proPack.C && 0xEA03 == proPack.Data.T1)
+    {
+        memcpy(m_pSswitchDcuStatu, &proPack.Data.Dat1.ssDcuStatu, proPack.Data.L1);
+    }
+    //处理校射频切换开关监控响应信息
+    else if (0x200 == proPack.C && 0xEA04 == proPack.Data.T1)
+    {
+        UCHAR ucResponse = (UCHAR)proPack.Data.Dat1.answer;
+        processResponse(strDeviceName, ucResponse);
+    }
+    else
+    {
+        strInfo = QString("%1: 收到未知协议报文!").arg(strDeviceName);
+        CLog::addLog(strInfo);
+    }
+}
+
+void CDevices::processTestSwitch(PROCOTOL_PACK &proPack)
+{
+    QString strInfo;
+    QString strDeviceName = QString("测试开关矩阵");
+    //工作状态上报
+    if(0x0701 == proPack.C && 0xEA0F == proPack.Data.T1)
+    {
+        memcpy(m_pTstSwMatStatu, &proPack.Data.Dat1.tstSwMatStatu, proPack.Data.L1);
+    }
+    //处理测试开关矩阵响应信息
+    else if (0x200 == proPack.C && 0xEA10 == proPack.Data.T1)
+    {
+        UCHAR ucResponse = (UCHAR)proPack.Data.Dat1.answer;
+        processResponse(strDeviceName, ucResponse);
+    }
+    else
+    {
+        strInfo = QString("%1: 收到未知协议报文!").arg(strDeviceName);
+        CLog::addLog(strInfo);
+    }
+}
+
+void CDevices::processFreqBDcu(PROCOTOL_PACK &proPack)
+{
+    QString strInfo;
+    QString strDeviceName = QString("频率基准源监控");
+    //工作状态上报
+    if(0x0701 == proPack.C && 0xEA11 == proPack.Data.T1)
+    {
+        memcpy(m_pFreDcuStatu, &proPack.Data.Dat1.freDcuStatu, proPack.Data.L1);
+    }
+    //处理频率基准源监控响应信息
+    else if (0x200 == proPack.C && 0xEA12 == proPack.Data.T1)
+    {
+        UCHAR ucResponse = (CHAR)proPack.Data.Dat1.answer;
+        processResponse(strDeviceName, ucResponse);
+    }
+    else
+    {
+        strInfo = QString("%1: 收到未知协议报文!").arg(strDeviceName);
+        CLog::addLog(strInfo);
+    }
+}
+
+void CDevices::processRCLOCKDcu(PROCOTOL_PACK &proPack)
+{
+    //判断数据长度是否
+    QString strInfo;
+    QString strDeviceName = QString("铷钟机箱监控");
+    //工作状态上报
+    //if(0x0701 == proPack.C && 0xEA20 == proPack.Data.T1)
+    if(0xEA20 == proPack.Data.T1)
+    {
+        //判断数据长度是否大于 21字节
+        if (proPack.Data.L1 < 21)
+        {
+            strInfo = QString("%1: 数据报文长度小于21!").arg(strDeviceName);
+            CLog::addLog(strInfo);
+            return;
+        }
+        analyseRCLOCKDcu(proPack.Data.Dat1.ucTmp, proPack.Data.L1);
+    }
+    //处理频率基准源监控响应信息
+    else if (0x200 == proPack.C && 0xEA19 == proPack.Data.T1)
+    {
+        UCHAR ucResponse = (CHAR)proPack.Data.Dat1.answer;
+        processResponse(strDeviceName, ucResponse);
+    }
+    else
+    {
+        strInfo = QString("%1: 收到未知协议报文!").arg(strDeviceName);
+        CLog::addLog(strInfo);
+    }
+}
+
+
+void CDevices::analyseRCLOCKDcu(UCHAR *pData, unsigned int nLen)
+{
+    if (pData == NULL || nLen <= 0)
+        return;
+
+    int nIndex = 0;
+    int nTmpLen = 0;
+    //时间区间
+    nTmpLen = sizeof(m_pRCLOCKDCUStatu->ucTimeZone);
+    memcpy(&m_pRCLOCKDCUStatu->ucTimeZone, pData, nTmpLen);
+    nIndex += nTmpLen;
+    //时间信息
+    //年
+    nTmpLen = sizeof(m_pRCLOCKDCUStatu->sYear);
+    memcpy(&m_pRCLOCKDCUStatu->sYear, pData + nIndex, nTmpLen);
+    nIndex += nTmpLen;
+    //月
+    nTmpLen = sizeof(m_pRCLOCKDCUStatu->ucMonth);
+    memcpy(&m_pRCLOCKDCUStatu->ucMonth, pData + nIndex, nTmpLen);
+    nIndex += nTmpLen;
+    //日
+    nTmpLen = sizeof(m_pRCLOCKDCUStatu->ucDay);
+    memcpy(&m_pRCLOCKDCUStatu->ucDay, pData + nIndex, nTmpLen);
+    nIndex += nTmpLen;
+    //时
+    nTmpLen = sizeof(m_pRCLOCKDCUStatu->ucHour);
+    memcpy(&m_pRCLOCKDCUStatu->ucHour, pData + nIndex, nTmpLen);
+    nIndex += nTmpLen;
+    //分
+    nTmpLen = sizeof(m_pRCLOCKDCUStatu->ucMin);
+    memcpy(&m_pRCLOCKDCUStatu->ucMin, pData + nIndex, nTmpLen);
+    nIndex += nTmpLen;
+    //秒
+    nTmpLen = sizeof(m_pRCLOCKDCUStatu->ucSec);
+    memcpy(&m_pRCLOCKDCUStatu->ucSec, pData + nIndex, nTmpLen);
+    nIndex += nTmpLen;
+    //获取参考有效状态数据
+    m_pRCLOCKDCUStatu->ucReferentInvalid = pData[nIndex];
+    nIndex += nTmpLen;
+    UCHAR ucTmp;
+    nTmpLen = sizeof(UCHAR);
+    memcpy(&ucTmp, pData + nIndex, nTmpLen);
+    nIndex += nTmpLen;
+    m_pRCLOCKDCUStatu->ucReferentSel = ucTmp;
+    //参考选择 解析gps状态 和 Bit1北斗状态
+    m_pRCLOCKDCUStatu->ucGPSStatus = ucTmp & 0x01;
+    m_pRCLOCKDCUStatu->ucNorthStatus = ucTmp &0x02;   
+    //获取10MHz输出状态数据
+    memcpy(&ucTmp, pData + nIndex, nTmpLen);
+    nIndex += nTmpLen;
+    //1路10MHz输出状态
+    m_pRCLOCKDCUStatu->ucOne10MHzInput = ucTmp & 0x01;
+    //2路10MHz输出状态
+    m_pRCLOCKDCUStatu->ucTwo10MHzInput = ucTmp & 0x02;
+    //3路10MHz输出状态
+    m_pRCLOCKDCUStatu->ucThird10MHzInput = ucTmp & 0x04;
+    //4路10MHz输出状态
+    m_pRCLOCKDCUStatu->ucFour10MHzInput = ucTmp & 0x08;
+    //获取IPP输出状态数据
+    memcpy(&ucTmp, pData + nIndex, nTmpLen);
+    nIndex += nTmpLen;
+    //1路1PPS输出状态
+    m_pRCLOCKDCUStatu->ucOne1PPSInput = ucTmp & 0x01;
+    //2路1PPS输出状态
+    m_pRCLOCKDCUStatu->ucTwo1PPSInput = ucTmp &0x02;
+    //同步状态  0-未同步 1-同步
+    m_pRCLOCKDCUStatu->ucSyncStatus = pData[nIndex];
+    nIndex += nTmpLen;
+    //铷钟锁定状态 0-未锁定 1-锁定
+    m_pRCLOCKDCUStatu->ucRCLOCK = pData[nIndex];
+    nIndex += nTmpLen;
+    //解调秒状态 0-无  1-有
+    m_pRCLOCKDCUStatu->ucDemodulateSec = pData[nIndex];
+    nIndex += nTmpLen;
+    //守时状态 0-未守时 1-守时
+    m_pRCLOCKDCUStatu->ucPunctual = pData[nIndex];
+    nIndex += nTmpLen;
+    //告警状态 0-不告警 1-告警
+    m_pRCLOCKDCUStatu->ucWarning = pData[nIndex];
+    nIndex += nTmpLen;
+    //电源状态 0-异常 1-正常
+    m_pRCLOCKDCUStatu->ucPower = pData[nIndex];
+    nIndex += nTmpLen;
+    //控制模式：0-本控 1-分控
+    m_pRCLOCKDCUStatu->ucConMode = pData[nIndex];
+    nIndex += nTmpLen;
+    //驯服模式 0-驯服 1-不驯服
+    m_pRCLOCKDCUStatu->ucTameCtrl = pData[nIndex];
+    nIndex += nTmpLen;
+    //同步方式：0-手动 1-自动
+    m_pRCLOCKDCUStatu->ucSyncCtrl = pData[nIndex];
+    nIndex += nTmpLen;
+}
+
+void CDevices::processResponse(QString strDeviceName, UCHAR ucAnswerFlag)
+{
+    QString strType("返回结果");
+    QString strAnswer = getAnswerFlag(ucAnswerFlag);
+    QString strInfo = QString("%1 %2: %3!").arg(strDeviceName, strType, strAnswer);
+    CLog::addLog(strInfo);
+}
+
+QString CDevices::getAnswerFlag(UCHAR ucAnsFlag)
+{
+    QString strAnswer("未知应答标识");
+    switch (ucAnsFlag)
+    {
+    case 0xFF:
+        strAnswer = QString("正常执行");
+        break;
+    case 0x61:
+        strAnswer = QString("非法码");
+        break;
+    case 0x62:
+        strAnswer = QString("帧校验出错");
+        break;
+    case 0x63:
+        strAnswer = QString("条件不具备不执行");
+        break;
+    case 0x64:
+        strAnswer = QString("超限码，参数超限");
+        break;
+    default:
+        break;
+    }
+    return strAnswer;
+}
+
+

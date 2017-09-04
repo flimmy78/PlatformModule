@@ -1,0 +1,14 @@
+#ifndef SLDCDCUGUI_GLOBAL_H
+#define SLDCDCUGUI_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(SLDCDCUGUISHARED_LIBRARY)
+#  define SLDCDCUGUISHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define SLDCDCUGUISHARED_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // SLDCDCUGUI_GLOBAL_H
+
+

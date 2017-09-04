@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Config>
+	<!-- Matrix num表示需要绘制的矩阵的行数和列数 -->
+	<Matrix num="16" />
+	<!--Num1 Num2 中fix 表示是否固定数值-->
+	<!--Param中value表示数字 desc表示线上描述的信息-->
+	<Num id="1" fix="0">
+		<Param value="2" desc="上行1" />
+		<Param value="5" desc="上行2" />
+		<Param value="1" desc="上行3" />
+		<Param value="4" desc="遥测校验" />
+		<Param value="5" desc="多普调频安控小环" />
+		<Param value="6" desc="扩频1小环" />
+		<Param value="7" desc="扩频2小环" />
+		<Param value="8" desc="和闭环" />
+		<Param value="9" desc="差闭环" />
+		<Param value="10" desc="自动化测试信号" />
+		<Param value="11" desc="输出11" />
+		<Param value="12" desc="输出12" />
+		<Param value="13" desc="输出13" />
+		<Param value="14" desc="输出14" />
+		<Param value="15" desc="输出15" />
+		<Param value="16" desc="输出16" />
+	</Num>
+	<Num id="2" fix="1">
+		<Param value="1" desc="信号源信号" />
+		<Param value="2" desc="调频基带1校验" />
+		<Param value="3" desc="调频基带2校验" />
+		<Param value="4" desc="扩频基带1上行" />
+		<Param value="5" desc="扩频基带2上行" />
+		<Param value="6" desc="多普调频安控" />
+		<Param value="7" desc="多普调频安控小环" />
+		<Param value="8" desc="扩频安控小环" />
+		<Param value="9" desc="备份小环" />
+		<Param value="10" desc="输入10" />
+		<Param value="11" desc="输入11" />
+		<Param value="12" desc="输入12" />
+		<Param value="13" desc="输入13" />
+		<Param value="14" desc="输入14" />
+		<Param value="15" desc="输入15" />
+		<Param value="16" desc="输入16" />
+	</Num>
+	<Menu>
+		<Param value="1" desc="上行1" />
+		<Param value="2" desc="上行2" />
+		<Param value="3" desc="上行3" />
+		<Param value="4" desc="遥测校验" />
+		<Param value="5" desc="多普调频安控小环" />
+		<Param value="6" desc="扩频1小环" />
+		<Param value="7" desc="扩频2小环" />
+		<Param value="8" desc="和闭环" />
+		<Param value="9" desc="差闭环" />
+		<Param value="10" desc="自动化测试信号" />
+		<Param value="11" desc="输出11" />
+		<Param value="12" desc="输出12" />
+		<Param value="13" desc="输出13" />
+		<Param value="14" desc="输出14" />
+		<Param value="15" desc="输出15" />
+		<Param value="16" desc="输出16" />
+	</Menu>
+</Config>

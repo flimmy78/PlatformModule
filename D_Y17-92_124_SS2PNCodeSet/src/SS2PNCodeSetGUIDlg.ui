@@ -1,0 +1,665 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SS2PNCodeSetGUIDlg</class>
+ <widget class="QDialog" name="SS2PNCodeSetGUIDlg">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>929</width>
+    <height>657</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>DDTBBE_CodFrmSynSetGUIDlg</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QGroupBox
+{
+	border-width:2px;
+	border-style:solid;
+	border-color:gray;
+	margin-top:1ex;
+}
+
+QGroupBox::title
+{
+	subcontrol-origin:margin;
+	subcontrol-position:top left;
+	left:10px;
+	padding: 0px;
+}</string>
+  </property>
+  <widget class="QPushButton" name="pushButton_Set">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>620</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>设置</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_Modify">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>620</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>更改</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_2">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>80</y>
+     <width>891</width>
+     <height>531</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>主接受伪码</string>
+   </property>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>13</y>
+      <width>67</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>伪码来源</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_VirtualCodeSource">
+    <property name="geometry">
+     <rect>
+      <x>296</x>
+      <y>13</y>
+      <width>100</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_3">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>50</y>
+      <width>851</width>
+      <height>211</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>上行伪码</string>
+    </property>
+    <widget class="QLabel" name="label_UpTCtrlPseOriginPoly2">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>94</y>
+       <width>183</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>遥控支路伪码本源多项式2</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_UpTCtrlPseOriginPoly2">
+     <property name="geometry">
+      <rect>
+       <x>275</x>
+       <y>94</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_UpTCtrlPsePhase1">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>130</y>
+       <width>183</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>遥控支路伪码初相1</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_UpTCtrlPsePhase1">
+     <property name="geometry">
+      <rect>
+       <x>275</x>
+       <y>130</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_UpTCtrlPseCodeNum">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>21</y>
+       <width>183</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>上行遥控支路伪码码号</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_UpTCtrlPseCodeNum">
+     <property name="geometry">
+      <rect>
+       <x>275</x>
+       <y>21</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_UpTCtrlPseOriginPoly1">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>57</y>
+       <width>183</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>遥控支路伪码本源多项式1</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_UpTCtrlPseOriginPoly1">
+     <property name="geometry">
+      <rect>
+       <x>275</x>
+       <y>57</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_UpTCtrlPsePhase2">
+     <property name="geometry">
+      <rect>
+       <x>275</x>
+       <y>170</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_UpTCtrlPsePhase2">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>170</y>
+       <width>183</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>遥控支路伪码初相2</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_UpMeterPsePhase2">
+     <property name="geometry">
+      <rect>
+       <x>635</x>
+       <y>170</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_UpMeterPseOriginPoly2">
+     <property name="geometry">
+      <rect>
+       <x>470</x>
+       <y>94</y>
+       <width>184</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>测量支路伪码本源多项式2</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_UpMeterPsePhase1">
+     <property name="geometry">
+      <rect>
+       <x>470</x>
+       <y>130</y>
+       <width>184</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>测量支路伪码初相1</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_UpMeterPseCodeNum">
+     <property name="geometry">
+      <rect>
+       <x>635</x>
+       <y>21</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_UpMeterPseOriginPoly2">
+     <property name="geometry">
+      <rect>
+       <x>635</x>
+       <y>94</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_UpMeterPseCodeNum">
+     <property name="geometry">
+      <rect>
+       <x>470</x>
+       <y>21</y>
+       <width>184</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>上行测量支路伪码码号</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_UpMeterPsePhase2">
+     <property name="geometry">
+      <rect>
+       <x>470</x>
+       <y>170</y>
+       <width>184</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>测量支路伪码初相2</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_UpMeterPseOriginPoly1">
+     <property name="geometry">
+      <rect>
+       <x>635</x>
+       <y>57</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_UpMeterPseOriginPoly1">
+     <property name="geometry">
+      <rect>
+       <x>470</x>
+       <y>57</y>
+       <width>184</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>测量支路伪码本源多项式1</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_UpMeterPsePhase1">
+     <property name="geometry">
+      <rect>
+       <x>635</x>
+       <y>130</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="pushButton_Search">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>13</y>
+      <width>100</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>查询</string>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_4">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>270</y>
+      <width>851</width>
+      <height>251</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>下行伪码</string>
+    </property>
+    <widget class="QLabel" name="label_DownTCtrlPseOriginPoly2">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>107</y>
+       <width>167</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>遥控支路伪码本源多项式2</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_DownTCtrlPseOriginPoly2">
+     <property name="geometry">
+      <rect>
+       <x>275</x>
+       <y>107</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_DownTCtrlPsePhase1">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>154</y>
+       <width>167</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>遥控支路伪码初相1</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_DownTCtrlPsePhase1">
+     <property name="geometry">
+      <rect>
+       <x>275</x>
+       <y>154</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_DownTCtrlPseCodeNum">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>21</y>
+       <width>167</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>下行遥控支路伪码码号</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_DownTCtrlPseCodeNum">
+     <property name="geometry">
+      <rect>
+       <x>275</x>
+       <y>21</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_DownTCtrlPseOriginPoly1">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>63</y>
+       <width>167</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>遥控支路伪码本源多项式1</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_DownTCtrlPseOriginPoly1">
+     <property name="geometry">
+      <rect>
+       <x>275</x>
+       <y>63</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_DownTCtrlPsePhase2">
+     <property name="geometry">
+      <rect>
+       <x>275</x>
+       <y>200</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_DownTCtrlPsePhase2">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>200</y>
+       <width>167</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>遥控支路伪码初相2</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_DownMeterPsePhase2">
+     <property name="geometry">
+      <rect>
+       <x>635</x>
+       <y>200</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_17">
+     <property name="geometry">
+      <rect>
+       <x>470</x>
+       <y>107</y>
+       <width>167</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>测量支路伪码本源多项式2</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_18">
+     <property name="geometry">
+      <rect>
+       <x>470</x>
+       <y>154</y>
+       <width>167</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>测量支路伪码初相1</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_DownMeterPseCodeNum">
+     <property name="geometry">
+      <rect>
+       <x>635</x>
+       <y>21</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_DownMeterPseOriginPoly2">
+     <property name="geometry">
+      <rect>
+       <x>635</x>
+       <y>107</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_DownMeterPseCodeNum">
+     <property name="geometry">
+      <rect>
+       <x>470</x>
+       <y>21</y>
+       <width>167</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>下行测量支路伪码码号</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_20">
+     <property name="geometry">
+      <rect>
+       <x>470</x>
+       <y>200</y>
+       <width>167</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>测量支路伪码初相2</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_DownMeterPseOriginPoly1">
+     <property name="geometry">
+      <rect>
+       <x>635</x>
+       <y>63</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_21">
+     <property name="geometry">
+      <rect>
+       <x>470</x>
+       <y>63</y>
+       <width>167</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>测量支路伪码本源多项式1</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_DownMeterPsePhase1">
+     <property name="geometry">
+      <rect>
+       <x>635</x>
+       <y>154</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_targat">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>20</y>
+     <width>891</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>目标选择</string>
+   </property>
+   <widget class="QRadioButton" name="radioButton_Target1">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>16</y>
+      <width>100</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>目标1</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_Target2">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>16</y>
+      <width>100</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>目标2</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_Target3">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>16</y>
+      <width>100</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>目标3</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_Target4">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>16</y>
+      <width>100</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>目标4</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

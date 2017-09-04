@@ -1,0 +1,1064 @@
+﻿#include "RecordMonitorGUIDlg.h"
+#include "ui_RecordMonitorGUIDlg.h"
+#include <QCloseEvent>
+#include <QMessageBox>
+#include <QDateTime>
+#include <QDebug>
+#include <string>
+#include <QDir>
+using std::string;
+#include "RecordDialog.h"
+#include "ReplayDialog.h"
+#include "../../Common/CommonFunction.h"
+#pragma pack(1)
+extern ushort g_usRecordMonitorDeviceID;
+
+extern quint64 GetID(ushort usStationID, uchar ucSubSysID, ushort usDeviceID, ushort usType,
+              uchar ucSn);
+
+RecordMonitorGUIDlg::RecordMonitorGUIDlg(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::RecordMonitorGUIDlg)
+{
+    ui->setupUi(this);
+    m_pStateMgr = NULL;
+    m_pILxTsspMessageManager = NULL;
+    m_pILxTsspLogManager = NULL;
+    m_pPublicInfo = NULL;
+    m_pHAManager = NULL;
+
+    m_pStatusWorkRes = NULL;
+    m_pFileListRes = NULL;
+    m_pFileInfoRes = NULL;
+
+
+    m_pModel = NULL;
+    setAttribute(Qt::WA_DeleteOnClose);
+
+    m_strDeviceName = QString("%1一").arg(MODULENAME);
+
+    m_bOnLine = false;
+
+    m_pCodec = QTextCodec::codecForName("GB2312");
+    m_oldCtrl = -1;
+    setMinimumSize(960, 570);
+    memset(&m_fileListRes, 0, sizeof(m_fileListRes));
+}
+
+RecordMonitorGUIDlg::~RecordMonitorGUIDlg()
+{
+    killTimer(m_TimerID);
+    killTimer(m_timerWhetherUpdateFileList);
+    delete ui;
+    delete m_pModel;
+}
+
+void RecordMonitorGUIDlg::setText(const QString& strTitle, ParaStruct xmlsetText[3][60], QString MapMean[50][30], int MapNum[50], uchar Type, ILxTsspParameterMacro* pMacroObj)
+{
+    m_strTitle = strTitle;
+    setWindowTitle(strTitle);
+
+    memcpy(m_DlgParaSetStruct, xmlsetText, sizeof(ParaStruct) * 50 * 3);
+
+    for(int i=0; i<50; i++)
+    {
+        for(int j=0; j<30; j++)
+        {
+            m_DlgMapMean[i][j] = MapMean[i][j];
+        }
+    }
+
+    memset(DlgMapLineNum, 0, 50);
+
+    for(int i=0; i<49; i++)
+    {
+        DlgMapLineNum[i] = MapNum[i];
+    }
+    //初始化界面
+    InitDLG(Type, pMacroObj);
+    //启动时发送一次查询
+    SendCmdData(0x36, 0, 0);
+    m_TimerFileListID = startTimer(1000);
+    if(isRemote())
+        m_timerWhetherUpdateFileList = startTimer(1000);
+}
+
+bool RecordMonitorGUIDlg::isRemote()
+{
+    QDir dir;
+    QString strPath = dir.currentPath();
+    QString filePath = strPath + "/TM/System/ModuleConfig/RecordMonitor.xml";
+    qDebug()<<filePath;
+    QFile file(filePath);
+    if  (!file.open(QIODevice::ReadOnly))
+        return false;
+    QDomDocument doc;
+    if  (!doc.setContent(&file))
+    {
+        file.close();
+        return false;
+    }
+    file.close();
+    QDomNode node = doc.documentElement();
+    QDomNodeList nodeList = node.childNodes();
+    int iCount = nodeList.count();
+    for(int i = 0;i<iCount;i++)
+    {
+        QDomElement tmpNode = nodeList.at(i).toElement();
+        QString nodeName = tmpNode.tagName();
+        if(nodeName.toLower().compare("control") != 0)
+            continue;
+        if (tmpNode.hasAttribute("remote"))
+        {
+            bool ok = false;
+            int remote = tmpNode.attribute("remote").toInt(&ok);
+            if(!ok)return false;
+            return 1 == remote;
+        }
+    }
+    return false;
+}
+//初始化对话框
+void RecordMonitorGUIDlg::InitDLG(int Type, ILxTsspParameterMacro* pMacroObj)
+{
+    //设置编辑框状态可读
+    //系统时间
+    ui->lineEdit_CollectTime->setReadOnly(true);
+    //记录器状态
+    ui->lineEdit_RecoedStatus->setReadOnly(true);
+    //时长
+    ui->lineEdit_TimeLength->setReadOnly(true);
+    //控制方式
+    ui->lineEdit_ControlType->setReadOnly(true);
+    //剩余容量
+    ui->lineEdit_ResidualCapacity->setReadOnly(true);
+    //总容量
+    ui->lineEdit_TotalCapacity->setReadOnly(true);
+    //文件信息
+    ui->textEdit_FileInfo->setReadOnly(true);
+
+    //初始化表格
+    initFileTabView();
+
+    if(Type == 0)//取当前参数
+    {
+        if(m_pStateMgr != NULL)
+        {
+            //检前记录工作状态结构的共享内存数据
+            DWORD stLen = sizeof(StatusFindResStruct);
+            //查找信息源
+            m_pStatusWorkRes = (StatusFindResStruct*)m_pStateMgr->FindOneItem(m_StatusWorkSynID, stLen);
+            if(m_pStatusWorkRes == NULL || stLen != sizeof(StatusFindResStruct))
+                return;
+
+            //文件信息列表查询结构体的共享内存数据
+            stLen = sizeof(RECORDFILELIST);
+            m_pFileListRes = (RECORDFILELIST*)m_pStateMgr->FindOneItem(m_FileListSynID, stLen);
+            if(m_pFileListRes == NULL || stLen != sizeof(RECORDFILELIST))
+                return;
+
+            //查询单个文件信息结构体的共享内存数据
+            stLen = sizeof(RECORDFILEINFOCOMM);
+            m_pFileInfoRes = (RECORDFILEINFOCOMM*)m_pStateMgr->FindOneItem(m_FileInfoSynID, stLen);
+            if(m_pFileInfoRes == NULL || stLen != sizeof(RECORDFILEINFOCOMM))
+                return;
+        }
+        //启动定时器
+        m_TimerID = startTimer(500);
+    }
+    else if(Type == 1)//取宏里参数
+    {
+        if(pMacroObj != NULL)
+        {
+//            QByteArray byteArray;
+//            pMacroObj->GetParameterBlock(m_ParaMCSTargetSysID, byteArray);
+//            memcpy(&m_MCSTargetSysParam, byteArray.data(), sizeof(SMCU::MCSSysTarget4ParamStruct));
+        }
+        //显示参数
+        ShowPara(1);
+    }
+}
+
+//显示参数
+void RecordMonitorGUIDlg::ShowPara(int type)
+{
+    if(m_pStateMgr != NULL)
+    {
+        //检前记录工作状态结构
+        DWORD stLen = sizeof(StatusFindResStruct);
+        //检前记录工作状态结构
+        m_pStatusWorkRes = (StatusFindResStruct*)m_pStateMgr->FindOneItem(m_StatusWorkSynID, stLen);
+        if(m_pStatusWorkRes == NULL || stLen != sizeof(StatusFindResStruct))
+            return;
+
+        //文件信息列表查询结构体
+        stLen = sizeof(RECORDFILELIST);
+        m_pFileListRes = (RECORDFILELIST*)m_pStateMgr->FindOneItem(m_FileListSynID, stLen);
+        if(m_pFileListRes == NULL || stLen != sizeof(RECORDFILELIST))
+            return;
+
+        //文件信息列表查询结构体
+        stLen = sizeof(RECORDFILEINFOCOMM);
+        m_pFileInfoRes = (RECORDFILEINFOCOMM*)m_pStateMgr->FindOneItem(m_FileInfoSynID, stLen);
+        if(m_pFileInfoRes == NULL || stLen != sizeof(RECORDFILEINFOCOMM))
+            return;
+    }
+    if (m_pStatusWorkRes == NULL)
+        return;
+
+    /********************设备是否在线************************/
+    m_bOnLine = CCommFunc::getInstance()->getRecordStatus(m_ObjectInfo.usLocalDID - 0x1200);
+    if (!m_bOnLine)
+    {
+       // 设备离线状态
+        setOfflineStatusValue();
+        return;
+    }
+
+    /********************设备是否在线************************/
+    //文件总数
+    ui->label_FileCount->setText("文件数：" + QString::number(m_pStatusWorkRes->Files));
+    //系统时间
+    QString strSysTime;
+    strSysTime = QString("%1:%2:%3").arg(m_pStatusWorkRes->Time[0], 2, 10, (QChar)'0')
+            .arg(m_pStatusWorkRes->Time[1], 2, 10, (QChar)'0')
+            .arg(m_pStatusWorkRes->Time[2], 2, 10, (QChar)'0');
+    ui->lineEdit_CollectTime->setText(strSysTime);
+    //记录器状态
+    ui->lineEdit_RecoedStatus->setText(GetWorkStatus(m_pStatusWorkRes->Work));
+    //时长
+    QString strTimeLen;
+    strTimeLen = QString("%1:%2:%3").arg(m_pStatusWorkRes->TCnt[0], 2, 10, (QChar)'0')
+            .arg(m_pStatusWorkRes->TCnt[1], 2, 10, (QChar)'0')
+            .arg(m_pStatusWorkRes->TCnt[2], 2, 10, (QChar)'0');
+    ui->lineEdit_TimeLength->setText(strTimeLen);
+    //控制方式
+    ui->lineEdit_ControlType->setText(m_pStatusWorkRes->Ctrl == 0 ? ("分控") : ("本控"));
+
+    if(m_pStatusWorkRes->Ctrl != m_oldCtrl)// ("分控")
+    {
+        m_oldCtrl = m_pStatusWorkRes->Ctrl;
+        ui->pushButton_Record->setEnabled((bool)m_oldCtrl);
+        ui->pushButton_Stop->setEnabled((bool)m_oldCtrl);
+        ui->pushButton_Delete->setEnabled((bool)m_oldCtrl);
+        ui->pushButton_Replay->setEnabled((bool)m_oldCtrl);
+        ui->pushButton_ShutDown->setEnabled((bool)m_oldCtrl);
+    }
+    //剩余容量
+    ui->lineEdit_ResidualCapacity->setText(QString("%1GB").arg(m_pStatusWorkRes->CapLeft / (1024.0*1024.0*1024.0),0,'f',2) );
+    //总容量
+    ui->lineEdit_TotalCapacity->setText(QString("%1GB").arg(m_pStatusWorkRes->Cap / (1024.0*1024.0*1024.0),0,'f',2));
+
+    /*//存储板状态灯
+    setLight(ui->labelStorageLight, (m_pStatusWorkRes->Sys == 1 ? Light_green : Light_red));*/
+
+    //工作状态 当分系统状态中值为0 是正常 其他是为故障
+    bool bRet = ((m_pStatusWorkRes->Sys & 0xCD20) == 0);
+    setLight(ui->labelStorageLight, (bRet ? Light_green : Light_red));
+
+    //盘阵状态灯 记录磁盘或者备份硬盘故障
+    //bool bRet1 = m_pStatusWorkRes->Sys & 0x18;
+    //setLight(ui->labelDiskArrayLight, (bRet1 == 0 ? Light_green : Light_red));
+
+    //采集板状态灯
+    bool bRet1 = ((m_pStatusWorkRes->Sys & 0x100) == 0);
+    setLight(ui->labelCollectLight, (bRet1 ? Light_green : Light_red));
+
+    //硬盘容量
+    bool bRet2 = (m_pStatusWorkRes->CapLack == 0);
+    setLight(ui->labelDiskCapacityLight, (bRet2 ? Light_green : Light_red));
+
+    //连接状态灯
+    bool bRet3 = ((m_pStatusWorkRes->Sys & 0x80) == 0);
+    setLight(ui->labelConnStatusLight, (bRet3 ? Light_green : Light_red));
+}
+
+void RecordMonitorGUIDlg::SetObjInfo(TLxTsspObjectInfo ObjectInfo)
+{
+    memcpy(&m_ObjectInfo, &ObjectInfo, sizeof(TLxTsspObjectInfo));
+    //对象初始化
+    //查找对象管理器
+    LxTsspObjectManager* pObjectManager = LxTsspObjectManager::Instance();
+    if(pObjectManager == NULL)
+    {
+        return;
+    }
+
+    int nIndex = ObjectInfo.usLocalDID - g_usRecordMonitorDeviceID;
+    switch(nIndex)
+    {
+    case 0:
+        m_strDeviceName = QString("%1一").arg(MODULENAME);
+        break;
+    case 1:
+        m_strDeviceName = QString("%1二").arg(MODULENAME);
+        break;
+    case 2:
+        m_strDeviceName = QString("%1三").arg(MODULENAME);
+        break;
+    case 3:
+        m_strDeviceName = QString("%1四").arg(MODULENAME);
+        break;
+    }
+
+    bool bRet = m_DeviceMap.loadXML();
+    if (!bRet)
+    {
+        QString strInfo = QString("%1:加载配置DeviceMapping.xml配置文件出错!").arg(m_strDeviceName);
+        CLog::addLog(strInfo, 3);
+        return;
+    }
+
+    ITEM *pItem = m_DeviceMap.getItem(MODULENAME);
+    if (pItem != NULL)
+    {
+        nIndex = m_ObjectInfo.usLocalDID == 0x1200 ? nIndex : 3;
+        SUBITEM sItem = pItem->vSubItem.at(nIndex);
+        //检前记录工作状态结构使用
+        m_StatusWorkSynID = GetID(sItem.usStationID, sItem.ucSubSysID, sItem.usDeviceID,
+                                     sItem.usStateType, sItem.ucSN);
+
+        SUBITEM sItem1 = pItem->vSubItem.at(nIndex + 1);
+        //文件信息列表查询结构体
+        m_FileListSynID = GetID(sItem1.usStationID, sItem1.ucSubSysID, sItem1.usDeviceID,
+                                       sItem1.usStateType, sItem1.ucSN);
+
+        SUBITEM sItem2 = pItem->vSubItem.at(nIndex + 2);
+        //查询单个文件信息结构体
+        m_FileInfoSynID = GetID(sItem2.usStationID, sItem2.ucSubSysID, sItem2.usDeviceID,
+                                       sItem2.usStateType, sItem2.ucSN);
+
+        m_usC = sItem.usCMD;
+        m_usTID = sItem.usTID;
+    }
+
+    m_pHAManager = pObjectManager->GetHAManager();
+
+    //日志
+    m_pILxTsspLogManager = pObjectManager->GetLogManager();
+    m_pStateMgr = pObjectManager->GetStateManager();
+    m_pILxTsspMessageManager = pObjectManager->GetMessageManager();
+    m_pPublicInfo = pObjectManager->GetPublicInfoManager();
+}
+
+//保存参数宏
+int RecordMonitorGUIDlg::SaveToMacro(ILxTsspParameterMacro* pMacroObj)
+{
+    //日志信息
+     QString strLog;
+     strLog += QString("%1: 保存宏成功！").arg(m_strDeviceName);
+     CLog::addLog(strLog);
+}
+
+//定时器
+void RecordMonitorGUIDlg::timerEvent(QTimerEvent *event)
+{
+    if (event->timerId() == m_TimerID)
+        ShowPara(0);
+
+    if (event->timerId() == m_TimerFileListID)
+    {
+        showFileList();
+    }
+
+    if (event->timerId() == m_TimerFileInfoID)
+    {
+        showFileInfo();
+    }
+    if (event->timerId() == m_timerDel)
+    {
+        on_pushButton_FileListSearch_clicked();
+        killTimer(m_timerDel);
+    }
+    if (event->timerId() == m_timerStop)
+    {
+        on_pushButton_FileListSearch_clicked();
+        killTimer(m_timerStop);
+    }
+
+    if (event->timerId() == m_timerWhetherUpdateFileList)
+    {
+        if(!m_pFileListRes)return;
+        if(!whetherUpdateFileList())return;
+        m_TimerFileListID = startTimer(1000);
+        memcpy(&m_fileListRes, m_pFileListRes, sizeof(m_fileListRes));
+    }
+}
+
+void RecordMonitorGUIDlg::closeEvent(QCloseEvent *event)
+{
+    event->accept();
+}
+
+QSize RecordMonitorGUIDlg::sizeHint() const
+{
+    return QSize(this->width(), this->height());
+}
+
+void RecordMonitorGUIDlg::SendMessage(char* pData, unsigned short  usLen, unsigned short usC, unsigned short usTID)
+{
+    static uint seq = 0;
+    TLxTsspMessageHeader header = {0};
+    TLxTsspSubMsgHeader subHeader = {0};
+    header.uiSequence = seq++;
+    header.uiHandle = 1;
+    header.S = m_pPublicInfo->GetLocalDeviceID();
+    header.L = sizeof(TLxTsspMessageHeader) +sizeof(TLxTsspSubMsgHeader) + usLen;
+    header.D = m_pPublicInfo->GetLocalDeviceID();//0x09;
+    header.T = 1;
+    header.M = 1;
+    header.P = 1;
+    header.A = 0;
+    header.R = 0;
+    header.C = usC;
+
+    subHeader.Len = usLen;
+    subHeader.SID = m_pPublicInfo->GetLocalDeviceID();//m_DObjectInfo.usStationID;
+    subHeader.DID = m_ObjectInfo.usLocalDID;
+    subHeader.TID = usTID;
+    subHeader.SN = m_ObjectInfo.ucSubSysID;
+    subHeader.O = 0;
+    TLxTsspMessage message;
+    message.pData =
+            new char[sizeof(TLxTsspMessageHeader) + sizeof(TLxTsspSubMsgHeader) + usLen ];
+    memcpy(message.pData, &header, sizeof(TLxTsspMessageHeader));
+    memcpy(message.pData + sizeof(TLxTsspMessageHeader),
+           &subHeader, sizeof(TLxTsspSubMsgHeader));
+    memcpy(message.pData + sizeof(TLxTsspMessageHeader) + sizeof(TLxTsspSubMsgHeader),
+           pData, usLen);
+    message.iDataLen = sizeof(TLxTsspMessageHeader) + sizeof(TLxTsspSubMsgHeader) + usLen;
+
+    int iRet = m_pILxTsspMessageManager->FireMessage(message);
+    delete[] message.pData;
+}
+
+DWORDLONG RecordMonitorGUIDlg::StrToSynCode(const char * pStr)
+{
+    char c,C;
+    const char*  p;
+    DWORDLONG dwlValue=0;
+    char   DigVal=0;
+    USHORT nDigCount=0,MAX_DIGITS=16; //The synchronizing code should be not longer  than 16 digitals
+
+    p = pStr;     //Point to the first char of the string
+    c = *p++;   // read the first char
+    while ((c!=NULL) && (nDigCount<=MAX_DIGITS))//  Not the terminator of a string && total digitals is less than 16
+    {
+         if(isspace((int)(unsigned char)c))    c = *p++;// skip whitespace
+         else if(c>='0'&&c<='9')                        //the char is a number between 1 and 9
+         {
+             DigVal=c-'0';
+             dwlValue=dwlValue*16+DigVal;               //Accumulate the value of the hexal number so far to the current digital
+             nDigCount++;
+             c = *p++;
+         }
+         else if((C=toupper(c))>='A'&&C<='F')           //the char is a letter could be a digital of a hexal number
+         {
+             DigVal=C-'A'+10;
+             dwlValue=dwlValue*16+DigVal;               //Accumulate the value of the hexal number so far to the current digital
+             nDigCount++;
+             c = *p++;
+         }
+         else    break;                                 // An invalid char that is neither whitespace nor a hexal digital is encounted
+                                                        // Conclude the scanning process
+    }
+    return dwlValue;
+}
+
+qint32 Local2Net(qint32 lValue)
+{
+    qint32 lRetVal = 0;
+    QByteArray tgSource;
+    QDataStream tgStream(&tgSource, QIODevice::ReadWrite);
+    tgStream.setByteOrder(QDataStream::BigEndian);
+    tgStream << lValue;
+    memcpy(&lRetVal, tgSource.data(), sizeof(long));
+    return lRetVal;
+}
+
+short Local2Port(short sValue)
+{
+    short sRetVal = 0;
+    QByteArray tgSource;
+    QDataStream tgStream(&tgSource, QIODevice::ReadWrite);
+    tgStream.setByteOrder(QDataStream::BigEndian);
+    tgStream << sRetVal;
+    memcpy(&sValue, tgSource.data(), sizeof(short));
+    return sRetVal;
+}
+
+void RecordMonitorGUIDlg::SendCmdData(char cmd, char * pData, unsigned int nLen)
+{
+    static uint nCount = 0;
+    DataFrameStruct ds;
+    //记录分系统监控信息帧标志
+    memcpy(ds.REMI_Flag, "RSMI", 4);
+    //每日从零时开始累积秒数
+    QDate curDate = QDate::currentDate();
+    ds.TimeOfDay = QTime::currentTime().secsTo(QTime(curDate.year(), curDate.month(), curDate.day()));
+    //发送方IP地址
+    char szlocalIP[] = { 255, 255, 0, 0 };
+    memcpy((void*)&ds.SenderIP, szlocalIP, 4);
+    //发送方UDP端口
+    short sPort = 5031;
+    ds.SenderPort = Local2Port(sPort);
+    //发送方A/B机指示
+    ds.SenderID = 'A';
+    //接收方A/B机指示
+    ds.Recv_ID = 'B';
+    //监控命令发送计数
+    ds.Counter = nCount++;
+    //数据长度
+    ds.DataLen = nLen + 1;
+    ds.Command = cmd;
+    //g_nCount++;
+
+    char szSendData[1024];
+    memcpy(szSendData, (char*)&ds, sizeof(DataFrameStruct));
+    memcpy(szSendData + sizeof(DataFrameStruct), pData, nLen);
+    SendMessage(szSendData, sizeof(DataFrameStruct) + nLen, m_usC, m_usTID);
+}
+
+//对表格初始化
+bool RecordMonitorGUIDlg::initFileTabView()
+{
+    m_pModel = new QStandardItemModel();
+    m_pModel->setColumnCount(5);
+    m_pModel->setHeaderData(0, Qt::Horizontal, QString("文件名"));
+    m_pModel->setHeaderData(1, Qt::Horizontal, QString("开始时间"));
+    m_pModel->setHeaderData(2, Qt::Horizontal, QString("长度"));
+    m_pModel->setHeaderData(3, Qt::Horizontal, QString("时间长度"));
+    m_pModel->setHeaderData(4, Qt::Horizontal, QString("备注"));
+    ui->tableView_FileList->setModel(m_pModel);
+    ui->tableView_FileList->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->tableView_FileList->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->tableView_FileList->resizeColumnsToContents();
+    ui->tableView_FileList->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    QHeaderView *header = ui->tableView_FileList->horizontalHeader();
+    header->setStretchLastSection(true);
+    //表头信息显示居左
+    ui->tableView_FileList->horizontalHeader()->setDefaultAlignment(Qt::AlignCenter);
+    ui->tableView_FileList->setColumnWidth(0, 80);
+    ui->tableView_FileList->setColumnWidth(1, 160);
+    ui->tableView_FileList->setColumnWidth(2, 80);
+    ui->tableView_FileList->setColumnWidth(3, 80);
+    ui->tableView_FileList->setColumnWidth(4, 120);
+}
+
+QString RecordMonitorGUIDlg::GetWorkStatus(char type)
+{
+    QString strInfo("空闲");
+    switch(type)
+    {
+    case 0x0:
+        strInfo = "空闲";
+        break;
+    case 0x1:
+        strInfo = "正在设置记录参数";
+        break;
+    case 0x2:
+        strInfo = "正在等待定时记录";
+        break;
+    case 0x3:
+        strInfo = "正在记录";
+        break;
+    case 0x4:
+        strInfo = "正在回放";
+        break;
+    case 0x5:
+        strInfo = "回放暂停";
+        break;
+    case 0x6:
+        strInfo = "正在预览输入";
+        break;
+    case 0x7:
+        strInfo = "正在备份";
+        break;
+    case 0x8:
+        strInfo = "正在恢复";
+        break;
+    case 0x9:
+        strInfo = "正在设置选项";
+        break;
+    case 0x0A:
+        strInfo = "正在格式化";
+        break;
+    case 0x0B:
+        strInfo = "正在自检";
+        break;
+    case 0x0C:
+        strInfo = "正在删除文件";
+        break;
+    case 0x0D:
+        strInfo = "正在查看文件";
+        break;
+    case 0xFF:
+        strInfo = "正在忙";
+        break;
+    default:
+        strInfo = "未知";
+    }
+    return strInfo;
+}
+
+bool isBufBitValid(char *buf, unsigned offset)
+{
+    char * realBufByte = buf;
+    realBufByte += (offset / 8);
+    offset %= 8;
+    return *realBufByte & (1 << offset);
+}
+
+void RecordMonitorGUIDlg::DealWarningStatus(WORD wValue)
+{
+    /*
+    memset(m_WStatus, 1, sizeof(WARN_STATUS));
+    if (wValue == 0)
+        return ;
+
+    for (int nPos = 0; nPos < sizeof(WORD); nPos++)
+    {
+        switch(nPos)
+        {
+        case 0:
+            m_WStatus.bReplayFault = isBufBitValid(wValue, 0);
+            break;
+        case 1:
+            m_WStatus.bXHTLFault = isBufBitValid(wValue, 1);
+            break;
+        case 2:
+            m_WStatus.bJCBFault = isBufBitValid(wValue, 2);
+            break;
+        case 3:
+            m_WStatus.bJLDiskFault = isBufBitValid(wValue, 3);
+            break;
+        case 4:
+            m_WStatus.bBackDiskFault = isBufBitValid(wValue, 4);
+            break;
+        case 5:
+            m_WStatus.bNetFault = isBufBitValid(wValue, 5);
+            break;
+        case 6:
+            m_WStatus.bOSFault = isBufBitValid(wValue, 6);
+            break;
+        case 7:
+            m_WStatus.bWRCSFault = isBufBitValid(wValue, 7);
+            break;
+        case 8:
+            m_WStatus.bCollectFault = isBufBitValid(wValue, 8);
+            break;
+        case 9:
+            m_WStatus.bZXKFault = isBufBitValid(wValue, 9);
+            break;
+        case 10:
+            m_WStatus.bADTimeFault = isBufBitValid(wValue, 10);
+            break;
+        case 11:
+            m_WStatus.bDATimeFault = isBufBitValid(wValue, 11);
+            break;
+        case 12:
+            m_WStatus.bADLockFault = isBufBitValid(wValue, 12);
+            break;
+        case 13:
+            m_WStatus.bDALockFault = isBufBitValid(wValue, 13);
+            break;
+        case 14:
+            m_WStatus.bZWTimeFault = isBufBitValid(wValue, 14);
+            break;
+        case 15:
+            m_WStatus.bFPGAFault = isBufBitValid(wValue, 15);
+            break;
+        }
+    }
+    */
+}
+
+void RecordMonitorGUIDlg::setOfflineStatusValue()
+{
+    //存储板状态灯
+    setLight(ui->labelStorageLight, 0);
+    //采集板状态灯
+    setLight(ui->labelCollectLight, 0);
+    //盘阵状态灯
+    setLight(ui->labelDiskArrayLight, 0);
+    //硬盘容量状态灯
+    setLight(ui->labelDiskCapacityLight, 0);
+    //联接状态状态灯
+    setLight(ui->labelConnStatusLight, 0);
+
+    //系统时间
+    QString strEmpty("--");
+    ui->lineEdit_CollectTime->setText(strEmpty);
+    //记录器状态
+    ui->lineEdit_RecoedStatus->setText(strEmpty);
+    //时长
+    ui->lineEdit_TimeLength->setText(strEmpty);
+    //控制方式
+    ui->lineEdit_ControlType->setText(strEmpty);
+    //剩余容量
+    ui->lineEdit_ResidualCapacity->setText(strEmpty);
+    //总容量
+    ui->lineEdit_TotalCapacity->setText(strEmpty);
+}
+
+bool RecordMonitorGUIDlg::whetherUpdateFileList()
+{
+    if(m_fileListRes.FILECOUNT != m_pFileListRes->FILECOUNT)return true;
+    const int count = m_fileListRes.FILECOUNT;
+    for(int i = 0; i < count; ++i)
+    {
+        if(0 != memcmp(&m_fileListRes.fileList[i], &m_pFileListRes->fileList[i], sizeof(RECORDFILEINFO)))
+            return true;
+    }
+    return false;
+}
+void RecordMonitorGUIDlg::showFileList()
+{
+    killTimer(m_TimerFileListID);
+    if (m_pFileListRes == NULL)
+    {
+        return;
+    }
+    //ShowPara(0);
+    m_pModel->clear();
+    initFileTabView();
+    for(int nIndex = 0; nIndex < m_pFileListRes->FILECOUNT; nIndex++)
+    {
+        //设置字符颜色
+        //m_pModel->item(nIndex, 0)->setForeground(QBrush(QColor(255, 0, 0)));
+        //设置字符位置
+        //m_pModel->item(nIndex, 0)->setTextAlignment(Qt::AlignCenter);
+        //文件号
+        //m_pModel->setItem(nIndex, 0, new QStandardItem(QString::number(nIndex)));
+        //文件名字
+        QString strFileName = m_pCodec->toUnicode(m_pFileListRes->fileList[nIndex].szFileName,
+                                               strlen(m_pFileListRes->fileList[nIndex].szFileName));
+        m_pModel->setItem(nIndex, 0, new QStandardItem(strFileName));
+        //开始时间
+        QString strBeginTime = QString("%1-%2-%3 %4:%5:%6").arg(m_pFileListRes->fileList[nIndex].TStart.Year)
+                .arg(m_pFileListRes->fileList[nIndex].TStart.Month, 2, 10, (QChar)'0')
+                .arg(m_pFileListRes->fileList[nIndex].TStart.Date, 2, 10, (QChar)'0')
+                .arg(m_pFileListRes->fileList[nIndex].TStart.Hour, 2, 10, (QChar)'0')
+                .arg(m_pFileListRes->fileList[nIndex].TStart.Minute, 2, 10, (QChar)'0')
+                .arg(m_pFileListRes->fileList[nIndex].TStart.Second, 2, 10, (QChar)'0');
+        m_pModel->setItem(nIndex, 1, new QStandardItem(strBeginTime));
+        //文件长度
+        unsigned long ulFileSize = (int)(m_pFileListRes->fileList[nIndex].ullFileLenB * 1.0 / 1024 / 1024);
+        if (ulFileSize >= 1024)
+            m_pModel->setItem(nIndex, 2, new QStandardItem(QString::number(ulFileSize * 1.0 / 1024, 'f', 2) + "GB"));
+        else
+            m_pModel->setItem(nIndex, 2, new QStandardItem(QString::number(ulFileSize, 'f', 2) + "MB"));
+        //文件时间长度
+        m_pModel->setItem(nIndex, 3, new QStandardItem(QString::number(m_pFileListRes->fileList[nIndex].intFileLenmS / 1000) + " s"));
+        //文件备注
+        QString strComment = m_pCodec->toUnicode(m_pFileListRes->fileList[nIndex].szComment,
+                                               strlen(m_pFileListRes->fileList[nIndex].szComment));
+        m_pModel->setItem(nIndex, 4, new QStandardItem(strComment));
+    }
+}
+
+void RecordMonitorGUIDlg::showFileInfo()
+{
+    killTimer(m_TimerFileInfoID);
+    if (m_pFileInfoRes == NULL)
+    {
+        return;
+    }
+    QString strFileName = m_pCodec->toUnicode(m_pFileInfoRes->FILENAME, strlen(m_pFileInfoRes->FILENAME));
+
+    //文件大小
+    QString strFileSize;
+    unsigned long ulFileSize = (int)(m_pFileInfoRes->R_LENB * 1.0 / 1024 / 1024);
+    if (ulFileSize >= 1024)
+        strFileSize = QString::number(ulFileSize * 1.0 / 1024, 'f', 2) + "GB";
+    else
+        strFileSize = QString::number(ulFileSize, 'f', 2) + "MB";
+
+    //启动记录时间
+    QString strBeginTime = QString("%1-%2-%3 %4:%5:%6").arg(m_pFileInfoRes->R_TSTART.Year)
+            .arg(m_pFileInfoRes->R_TSTART.Month, 2, 10, (QChar)'0').arg(m_pFileInfoRes->R_TSTART.Date, 2, 10, (QChar)'0')
+            .arg(m_pFileInfoRes->R_TSTART.Hour, 2, 10, (QChar)'0').arg(m_pFileInfoRes->R_TSTART.Minute, 2, 10, (QChar)'0')
+            .arg(m_pFileInfoRes->R_TSTART.Second, 2, 10, (QChar)'0');
+
+    //记录时长
+    QString strLen = QString::number(m_pFileInfoRes->R_LENMS / 1000) + " s";
+    //文件类型
+    QString strComment = m_pCodec->toUnicode(m_pFileInfoRes->R_COMMENT, strlen(m_pFileInfoRes->R_COMMENT));
+
+    QString strInfo;
+    strInfo = QString("文件名:%1 文件大小:%2\r\n启动记录时间:%3 记录时长:%4\r\n"
+                      "记录数据的通道数:%5 \r\n备注信息:%6").arg(strFileName)
+            .arg(strFileSize).arg(strBeginTime).arg(strLen)
+            .arg(QString::number(m_pFileInfoRes->R_CHN)).arg(strComment);
+    ui->textEdit_FileInfo->setText(strInfo);
+}
+
+bool RecordMonitorGUIDlg::fileExists(QString file)
+{
+    if (m_pFileListRes == NULL || !m_pCodec)return false;
+    for(int nIndex = 0; nIndex < m_pFileListRes->FILECOUNT; nIndex++)
+    {
+        QString strFileName = m_pCodec->toUnicode(m_pFileListRes->fileList[nIndex].szFileName,
+                                                  strlen(m_pFileListRes->fileList[nIndex].szFileName));
+        if(strFileName == file)return true;
+    }
+    return false;
+}
+
+void RecordMonitorGUIDlg::setLight(QLabel *pLabel, int nState)
+{
+    QPixmap light;
+    bool bRet = false;
+    switch(nState)
+    {
+    case Light_empty:
+        bRet = light.load(":/empty.png");
+        break;
+    case Light_green:
+        bRet = light.load(QString(":/safe.png"));
+        break;
+    case Light_red:
+        bRet = light.load(QString(":/denter.png"));
+        break;
+    default:
+        bRet = light.load(":/empty.png");
+        break;
+    }
+    pLabel->setPixmap(light);
+    //pLabel->resize(24, 24);
+}
+
+void RecordMonitorGUIDlg::on_pushButton_Record_clicked()
+{
+    if (!m_bOnLine)
+    {
+        QString strMsg = QString(tr("%1处于离线状态，无法进行更改设置！")).arg(m_strDeviceName);
+        QMessageBox::information(this, tr("信息提示"), strMsg);
+        return;
+    }
+    RECORDCOMM rr;
+    memset(&rr, 0, sizeof(RECORDCOMM));
+
+    //当前时间
+    QDateTime datetime = QDateTime::currentDateTime();
+    QString date = datetime.toString("yyyyMMddhhmmss");
+
+    //保留
+    rr.M_CODE = 0;
+    //保留
+    memset(rr.M_NAME, 0, 16);
+    memset(rr.R_COMMENT, 0, 101);
+    memset(rr.FILENAME, 0, 64);
+    //保留
+    rr.M_ROUND = 0;
+    //定时记录开始时间
+    short Year = date.mid(0, 4).toUShort();
+    BYTE Month = date.mid(4, 2).toUShort(0, 16);
+    BYTE Day = date.mid(6, 2).toUShort(0, 16);
+    BYTE Hour = date.mid(8, 2).toUShort(0, 16);
+    BYTE Minute = date.mid(10, 2).toUShort(0, 16);
+    BYTE Second = date.mid(12, 2).toUShort(0, 16);
+    rr.R_TIMER.Year=Year;
+    rr.R_TIMER.Month= Month;
+    rr.R_TIMER.Date= Day;
+    rr.R_TIMER.Hour= Hour;
+    rr.R_TIMER.Minute = Minute;
+    rr.R_TIMER.Second = Second;
+    rr.R_TIMER.Reserved=0;
+//    //定时记录开始时间
+//    QString strBuffer;
+//    strBuffer = QString("%1-01-01 00:00:00").arg(Year);
+//    QDateTime beginTime = QDateTime::fromString(strBuffer, "yyyy-MM-dd hh:mm:ss");
+    rr.tRecordTimeB.usDay = Day;
+    rr.tRecordTimeB.Hour = Hour;
+    rr.tRecordTimeB.Minute = Minute;
+    rr.tRecordTimeB.Second = Second;
+    rr.tRecordTimeB.ucLeap = 0; //1-表示闰年，0-表示平年
+
+    RecordDialog recordDialog(m_ObjectInfo.usLocalDID,this);
+    if (recordDialog.exec() == QDialog::Accepted && recordDialog.m_bFlag)
+    {
+        QByteArray ba = m_pCodec->fromUnicode(recordDialog.m_strFileName);
+        memcpy(rr.FILENAME, ba.data(), ba.length());
+        rr.R_LENGTH = recordDialog.m_Length;
+        //备注
+        QByteArray ba1 = m_pCodec->fromUnicode(recordDialog.m_strComment);
+        memcpy(rr.R_COMMENT, ba1.data(), ba1.length());
+        rr.R_APPD_LEN = 0;//recordDialog.m_AppLen;
+        rr.RecordType = recordDialog.m_RecordType;
+        rr.TimeType = recordDialog. m_TimeType;
+        rr.ucChannal1 = recordDialog. m_Channal_1;
+        rr.ucChannal2 = recordDialog. m_Channal_2;
+        rr.ucChannal3 = recordDialog. m_Channal_3;
+        rr.ucChannal4 = recordDialog. m_Channal_4;
+
+        SendCmdData(0x3a, (char *)&rr, sizeof(RECORDCOMM));
+    }
+}
+
+void RecordMonitorGUIDlg::on_pushButton_FileInfoSearch_clicked()
+{
+    if (!m_bOnLine)
+    {
+        QString strMsg = QString(tr("%1处于离线状态，无法进行更改设置！")).arg(m_strDeviceName);
+        QMessageBox::information(this, tr("信息提示"), strMsg);
+        return;
+    }
+
+    int currRow = ui->tableView_FileList->currentIndex().row();
+    if (currRow < 0)
+    {
+        QMessageBox::information(this, "信息提示", "请选择要查询的文件！");
+        return;
+    }
+    QString strFileName = m_pModel->item(currRow, 0)->text();
+    QByteArray ba = m_pCodec->fromUnicode(strFileName);
+    //将文件名称拷贝到数据端
+    char szFileName[64] = { 0 };
+    memcpy(szFileName, ba.data(), ba.length());
+    SendCmdData(0x38, szFileName, 64);
+    m_TimerFileInfoID = startTimer(1000);
+}
+
+void RecordMonitorGUIDlg::on_pushButton_Stop_clicked()
+{
+    if (!m_bOnLine)
+    {
+        QString strMsg = QString(tr("%1处于离线状态，无法进行更改设置！")).arg(m_strDeviceName);
+        QMessageBox::information(this, tr("信息提示"), strMsg);
+        return;
+    }
+
+    //停止命令  无数据段
+    SendCmdData(0x3c, 0, 0);
+    m_timerStop = startTimer(2000);
+}
+
+void RecordMonitorGUIDlg::on_pushButton_Replay_clicked()
+{
+    if (!m_bOnLine)
+    {
+        QString strMsg = QString(tr("%1处于离线状态，无法进行更改设置！")).arg(m_strDeviceName);
+        QMessageBox::information(this, tr("信息提示"), strMsg);
+        return;
+    }
+
+    int currRow = ui->tableView_FileList->currentIndex().row();
+    if (currRow < 0)
+    {
+        QMessageBox::information(this, "信息提示", "请选择要回放的文件！");
+        return;
+    }
+
+    //偏移时间 和 是否循环 获取然后赋值
+    UINT uOffTime = 0;
+    bool bRepeatReplay = 0;     //0-不循环  1-循环
+
+    QString strFileName = m_pModel->item(currRow, 0)->text();
+    QByteArray ba = m_pCodec->fromUnicode(strFileName);
+    QString str = m_pModel->item(currRow, 3)->text();
+    str = str.left(str.size() - 2);
+    uOffTime = str.toUInt();
+    //将文件名称拷贝到数据端
+    char szFileName[64] = { 0 };
+    memcpy(szFileName, ba.data(), ba.length());
+
+    RePlayDialog replayDialog;
+    replayDialog.setTime(uOffTime);
+    if (replayDialog.exec() ==QDialog::Accepted && replayDialog.m_bFlag)
+    {
+        uOffTime = replayDialog.m_Time;
+        bRepeatReplay = replayDialog.m_bRepeatReplay;
+    }
+    else{
+        return;
+    }
+    //
+    int nIndex = 0;
+    char szSendBuf[255] = { 0 };
+    memcpy(szSendBuf, szFileName, 64);
+    nIndex += 64;
+    memcpy(szSendBuf + nIndex, &uOffTime, sizeof(UINT));
+    nIndex += sizeof(UINT);
+    szSendBuf[nIndex] = bRepeatReplay ? 0x01 : 0x00;
+    nIndex += 4;
+
+    SendCmdData(0x40, szSendBuf, nIndex);
+}
+
+void RecordMonitorGUIDlg::on_pushButton_Delete_clicked()
+{
+    if (!m_bOnLine)
+    {
+        QString strMsg = QString(tr("%1处于离线状态，无法进行更改设置！")).arg(m_strDeviceName);
+        QMessageBox::information(this, tr("信息提示"), strMsg);
+        return;
+    }
+
+    int currRow = ui->tableView_FileList->currentIndex().row();
+    if (currRow < 0)
+    {
+        QMessageBox::information(this, "信息提示", "请选择要删除的文件！");
+        return;
+    }
+    QString strFileName = m_pModel->item(currRow, 0)->text();
+    QMessageBox msgBox;
+    msgBox.setStandardButtons(QMessageBox::Ok|QMessageBox::Cancel);
+    QString strTmp = QString("是否删除") + strFileName + "?";
+    msgBox.setText(strTmp);
+    if(QMessageBox::Cancel == msgBox.exec())return;
+    QByteArray ba = m_pCodec->fromUnicode(strFileName);
+    //将文件名称拷贝到数据端
+    char szFileName[64] = { 0 };
+    memcpy(szFileName, ba.data(), ba.length());
+
+    SendCmdData(0x46, szFileName, 64);
+
+    //删除重新刷新文件列表
+    m_timerDel = startTimer(1000);
+}
+
+void RecordMonitorGUIDlg::on_pushButton_ShutDown_clicked()
+{
+    if (!m_bOnLine)
+    {
+        QString strMsg = QString(tr("%1处于离线状态，无法进行更改设置！")).arg(m_strDeviceName);
+        QMessageBox::information(this, tr("信息提示"), strMsg);
+        return;
+    }
+    QMessageBox msgBox;
+    msgBox.setStandardButtons(QMessageBox::Ok|QMessageBox::Cancel);
+    QString strTmp = QString("是否关机？");
+    msgBox.setText(strTmp);
+    if(QMessageBox::Cancel == msgBox.exec())return;
+    //0=关机（操作系统软件关机，不断电），1=系统重新启动
+    char shutMode = 0;
+    //关机命令
+    SendCmdData(0x48, &shutMode, 1);
+}
+
+void RecordMonitorGUIDlg::on_pushButton_FileListSearch_clicked()
+{
+    if (!m_bOnLine)
+    {
+        QString strMsg = QString(tr("%1处于离线状态，无法进行更改设置！")).arg(m_strDeviceName);
+        QMessageBox::information(this, tr("信息提示"), strMsg);
+        return;
+    }
+    //文件列表查询命令 无数据段
+    SendCmdData(0x36, 0, 0);
+    m_TimerFileListID = startTimer(1000);
+}
+
+void RecordMonitorGUIDlg::keyPressEvent(QKeyEvent *event)
+{
+    switch (event->key()) {
+    case Qt::Key_Escape:
+        break;
+    default:
+        QDialog::keyPressEvent(event);
+        break;
+    }
+}
+#pragma pack()

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <mode name="检前1" id="1200">
+        <ctrl objectName="comboBox_Channal_1" geometry="190,150,121,31" isShow="0" isEnabled="1" />
+        <ctrl objectName="comboBox_Channal_2" geometry="545,150,121,31" isShow="0" isEnabled="1" />
+        <ctrl objectName="comboBox_Channal_3" geometry="190,150,121,31" isShow="1" isEnabled="1" />
+        <ctrl objectName="comboBox_Channal_4" geometry="545,150,121,31" isShow="1" isEnabled="1" />
+    </mode>
+    <mode name="检前2" id="1201">
+        <ctrl objectName="comboBox_Channal_1" geometry="190,150,121,31" isShow="0" isEnabled="1" />
+        <ctrl objectName="comboBox_Channal_2" geometry="545,150,121,31" isShow="0" isEnabled="1" />
+        <ctrl objectName="comboBox_Channal_3" geometry="190,150,121,31" isShow="1" isEnabled="1" />
+        <ctrl objectName="comboBox_Channal_4" geometry="545,150,121,31" isShow="1" isEnabled="1" />
+    </mode>
+    <control remote="1"/>
+</config>

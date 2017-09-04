@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Config>
+	<!-- Matrix num表示需要绘制的矩阵的行数和列数 -->
+	<Matrix num="16" />
+	<!--Num1 Num2 中fix 表示是否固定数值-->
+	<!--Param中value表示数字 desc表示线上描述的信息-->
+	<Num id="1" fix="0">
+		<Param value="1" desc="下行流1左旋" />
+		<Param value="2" desc="下行流1右旋" />
+		<Param value="3" desc="下行流2左旋" />
+		<Param value="4" desc="下行流2右旋" />
+		<Param value="5" desc="回放1左旋" />
+		<Param value="6" desc="回放1右旋" />
+		<Param value="7" desc="回放2左旋" />
+		<Param value="8" desc="回放2右旋" />
+		<Param value="9" desc="中频校验" />
+		<Param value="10" desc="信道模拟下行" />
+		<Param value="11" desc="预留1" />
+		<Param value="12" desc="预留2" />
+		<Param value="13" desc="预留3" />
+		<Param value="14" desc="预留4" />
+		<Param value="15" desc="预留5" />
+		<Param value="16" desc="预留6" />
+	</Num>
+	<Num id="2" fix="1">
+		<Param value="1" desc="检前1左旋" />
+		<Param value="2" desc="检前1右旋" />
+		<Param value="3" desc="检前2左旋" />
+		<Param value="4" desc="检前2右旋" />
+		<Param value="5" desc="基带1左旋" />
+		<Param value="6" desc="基带1右旋" />
+		<Param value="7" desc="基带2左旋" />
+		<Param value="8" desc="基带2右旋" />
+		<Param value="9" desc="预留1" />
+		<Param value="10" desc="预留2" />
+		<Param value="11" desc="预留3" />
+		<Param value="12" desc="预留4" />
+		<Param value="13" desc="预留5" />
+		<Param value="14" desc="预留6" />
+		<Param value="15" desc="预留7" />
+		<Param value="16" desc="监测输出" />
+	</Num>
+	<Menu>
+		<Param value="1" desc="下行流1左旋" />
+		<Param value="2" desc="下行流1右旋" />
+		<Param value="3" desc="下行流2左旋" />
+		<Param value="4" desc="下行流2右旋" />
+		<Param value="5" desc="回放1左旋" />
+		<Param value="6" desc="回放1右旋" />
+		<Param value="7" desc="回放2左旋" />
+		<Param value="8" desc="回放2右旋" />
+		<Param value="9" desc="中频校验" />
+		<Param value="10" desc="信道模拟下行" />
+		<Param value="11" desc="预留1" />
+		<Param value="12" desc="预留2" />
+		<Param value="13" desc="预留3" />
+		<Param value="14" desc="预留4" />
+		<Param value="15" desc="预留5" />
+		<Param value="16" desc="预留6" />
+	</Menu>
+</Config>

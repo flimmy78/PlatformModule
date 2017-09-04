@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Config>
+	<!-- Group表示开关选择信息 name表示选择的名称 -->
+	<!-- Param表示为几个选择1个 name表示输入的链路名称 value表示输入参数的值 值为16进行 -->
+	<Group name="SL输入链路状态" >
+		<Param name="S校零上行输出" value="0" />
+		<Param name="SL安控遥控上行输出或环回出" value="1" />
+	</Group>
+	<Group name="S输出链路状态" >
+		<Param name="S校零下行输入" value="0" />
+		<Param name="S应答下行输入" value="1" />
+	</Group>
+	<Group name="开关状态" >
+		<Param name="10MHZ" value="0" />
+		<Param name="遥测左旋" value="3" />
+		<Param name="遥测右旋" value="4" />
+		<Param name="上行矩阵" value="1" />
+		<Param name="下行矩阵" value="2" />
+		<Param name="测控左旋" value="5" />
+		<Param name="测控右旋" value="6" />
+		<Param name="小环" value="7" />
+		<Param name="自环" value="8" />
+		<Param name="预留1" value="9" />
+		<Param name="预留2" value="10" />
+		<Param name="预留3" value="11" />
+	</Group>
+</Config>

@@ -1,0 +1,1082 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>USBBBE_ZKsetGUIDlg</class>
+ <widget class="QDialog" name="USBBBE_ZKsetGUIDlg">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1040</width>
+    <height>754</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>DDTBBE_CodFrmSynSetGUIDlg</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QGroupBox
+{
+	border-width:2px;
+	border-style:solid;
+	border-color:gray;
+	margin-top:1ex;
+}
+
+QGroupBox::title
+{
+	subcontrol-origin:margin;
+	subcontrol-position:top left;
+	left:10px;
+	padding: 0px;
+}</string>
+  </property>
+  <widget class="QPushButton" name="pushButton_Set">
+   <property name="geometry">
+    <rect>
+     <x>550</x>
+     <y>700</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>设置</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_Modify">
+   <property name="geometry">
+    <rect>
+     <x>396</x>
+     <y>700</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>更改</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>30</y>
+     <width>961</width>
+     <height>661</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>参数设置</string>
+   </property>
+   <widget class="QGroupBox" name="groupBox_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>20</y>
+      <width>921</width>
+      <height>161</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QLabel" name="label_MudulationSys">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>21</y>
+       <width>122</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>调制体制</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_MudulationSys">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>21</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_TeleCtrlPat">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>60</y>
+       <width>122</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>遥控工作模式</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_TeleCtrlPat">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>60</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_StartingMethod">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>101</y>
+       <width>122</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>工作期启动方式</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_StartingMethod">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>101</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_CodeType">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>21</y>
+       <width>99</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>码型</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_CodeType">
+     <property name="geometry">
+      <rect>
+       <x>448</x>
+       <y>21</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_CodeRate">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>60</y>
+       <width>99</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>码速率</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_CodeRate">
+     <property name="geometry">
+      <rect>
+       <x>448</x>
+       <y>60</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_ModulationFre">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>16</y>
+       <width>134</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>调制频率</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_ModulationFre">
+     <property name="geometry">
+      <rect>
+       <x>745</x>
+       <y>16</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_SubWaveFre">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>51</y>
+       <width>134</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>副载波1频(f1)</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_SubWaveFre">
+     <property name="geometry">
+      <rect>
+       <x>745</x>
+       <y>51</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_SubWaveFillFre">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>86</y>
+       <width>135</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>副载波填充频(f填充)</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_SubWaveFillFre">
+     <property name="geometry">
+      <rect>
+       <x>745</x>
+       <y>86</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_SubWaveExeFre">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>120</y>
+       <width>135</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>副载波执行频(f执行)</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_SubWaveExeFre">
+     <property name="geometry">
+      <rect>
+       <x>745</x>
+       <y>120</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_10">
+     <property name="geometry">
+      <rect>
+       <x>850</x>
+       <y>16</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>kHz</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_11">
+     <property name="geometry">
+      <rect>
+       <x>850</x>
+       <y>51</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>kHz</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_12">
+     <property name="geometry">
+      <rect>
+       <x>850</x>
+       <y>86</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>kHz</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_13">
+     <property name="geometry">
+      <rect>
+       <x>850</x>
+       <y>120</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>kHz</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_14">
+     <property name="geometry">
+      <rect>
+       <x>552</x>
+       <y>60</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>bps</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_3">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>190</y>
+      <width>921</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QLabel" name="label_BeforeFillCode">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>10</y>
+       <width>122</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>前补序列码样(Hex)</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_BeforeFillCode">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>10</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_LateFillCode">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>45</y>
+       <width>122</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>后补序列码样(Hex)</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_LateFillCode">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>45</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_ExeCode">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>80</y>
+       <width>122</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>执行编码码样(Hex)</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_ExeCode">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>80</y>
+       <width>141</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_FreeCode">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>115</y>
+       <width>117</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>空闲序列码样(Hex)</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_FreeCode">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>115</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_BeforeFillLen">
+     <property name="geometry">
+      <rect>
+       <x>445</x>
+       <y>11</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_BeforeFillLen">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>11</y>
+       <width>117</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>前补序列长度</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_LateFillLen">
+     <property name="geometry">
+      <rect>
+       <x>445</x>
+       <y>45</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_LateFillLen">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>45</y>
+       <width>117</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>后补序列长度</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_ExeCodeLen">
+     <property name="geometry">
+      <rect>
+       <x>445</x>
+       <y>79</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_ExeCodeLen">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>79</y>
+       <width>117</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>执行编码长度</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_22">
+     <property name="geometry">
+      <rect>
+       <x>550</x>
+       <y>11</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>字节</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_23">
+     <property name="geometry">
+      <rect>
+       <x>550</x>
+       <y>45</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>字节</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_24">
+     <property name="geometry">
+      <rect>
+       <x>550</x>
+       <y>79</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>字节</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_25">
+     <property name="geometry">
+      <rect>
+       <x>823</x>
+       <y>45</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>ms</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_BufferGap">
+     <property name="geometry">
+      <rect>
+       <x>714</x>
+       <y>45</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_BufferGap">
+     <property name="geometry">
+      <rect>
+       <x>620</x>
+       <y>45</y>
+       <width>125</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>指令保护间隙</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_BFillG4">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>350</y>
+      <width>921</width>
+      <height>131</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="Line" name="line">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>6</y>
+       <width>20</width>
+       <height>123</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+    <widget class="Line" name="line_2">
+     <property name="geometry">
+      <rect>
+       <x>720</x>
+       <y>6</y>
+       <width>20</width>
+       <height>123</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+    <widget class="Line" name="line_4">
+     <property name="geometry">
+      <rect>
+       <x>430</x>
+       <y>6</y>
+       <width>20</width>
+       <height>123</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+    <widget class="Line" name="line_5">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>60</y>
+       <width>921</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_27">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>40</y>
+       <width>70</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>前补序列</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_28">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>85</y>
+       <width>70</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>后补序列</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="checkBox_BFillG1">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>37</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="checkBox_LFillG1">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>85</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="checkBox_BFillG2">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>37</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="checkBox_LFillG2">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>85</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="checkBox_BFillG3">
+     <property name="geometry">
+      <rect>
+       <x>580</x>
+       <y>37</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="checkBox_LFillG3">
+     <property name="geometry">
+      <rect>
+       <x>580</x>
+       <y>85</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="checkBox_BFillG4">
+     <property name="geometry">
+      <rect>
+       <x>820</x>
+       <y>37</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="checkBox_LFillG4">
+     <property name="geometry">
+      <rect>
+       <x>820</x>
+       <y>85</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_29">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>10</y>
+       <width>180</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>数据注入/指令内容C7/K6B</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_30">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>10</y>
+       <width>113</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>应急数据注入C8</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_31">
+     <property name="geometry">
+      <rect>
+       <x>470</x>
+       <y>10</y>
+       <width>256</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>发执行脉宽/执行脉冲发送情况C9/KT1</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_32">
+     <property name="geometry">
+      <rect>
+       <x>740</x>
+       <y>10</y>
+       <width>180</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>数据注入/指令内容A1/K6B</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_5">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>490</y>
+      <width>921</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QLabel" name="label_BCHEncode">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>15</y>
+       <width>125</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>BCH编码</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_BCHEncode">
+     <property name="geometry">
+      <rect>
+       <x>175</x>
+       <y>15</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_BeginCtrl">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>58</y>
+       <width>125</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>起始序列控制</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_BeginCtrl">
+     <property name="geometry">
+      <rect>
+       <x>175</x>
+       <y>58</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_BeginPattern">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>100</y>
+       <width>125</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>起始序列图样(Hex)</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_BeginPattern">
+     <property name="geometry">
+      <rect>
+       <x>175</x>
+       <y>100</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_RandCtrl">
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>15</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_RandCtrl">
+     <property name="geometry">
+      <rect>
+       <x>335</x>
+       <y>15</y>
+       <width>125</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>加扰控制</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_LateCtrl">
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>58</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_LateCtrl">
+     <property name="geometry">
+      <rect>
+       <x>335</x>
+       <y>58</y>
+       <width>125</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>结尾序列控制</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_LatePattern">
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>100</y>
+       <width>121</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_LatePattern">
+     <property name="geometry">
+      <rect>
+       <x>335</x>
+       <y>100</y>
+       <width>125</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>结尾序列图样(Hex)</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_RandPolyLen">
+     <property name="geometry">
+      <rect>
+       <x>745</x>
+       <y>15</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_RandPolyLen">
+     <property name="geometry">
+      <rect>
+       <x>630</x>
+       <y>15</y>
+       <width>115</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>加扰多项式长度</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_RandPoly">
+     <property name="geometry">
+      <rect>
+       <x>630</x>
+       <y>58</y>
+       <width>115</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>加扰多项式(Hex)</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_RandPoly">
+     <property name="geometry">
+      <rect>
+       <x>745</x>
+       <y>58</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_RandPhase">
+     <property name="geometry">
+      <rect>
+       <x>630</x>
+       <y>100</y>
+       <width>115</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>加扰初相(Hex)</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_RandPhase">
+     <property name="geometry">
+      <rect>
+       <x>745</x>
+       <y>100</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SS2BBE_RcvParamSetGUIDlg</class>
+ <widget class="QDialog" name="SS2BBE_RcvParamSetGUIDlg">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>963</width>
+    <height>624</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>DDTBBE_CodFrmSynSetGUIDlg</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QGroupBox
+{
+	border-width:2px;
+	border-style:solid;
+	border-color:gray;
+	margin-top:1ex;
+}
+
+QGroupBox::title
+{
+	subcontrol-origin:margin;
+	subcontrol-position:top left;
+	left:10px;
+	padding: 0px;
+}</string>
+  </property>
+  <widget class="QPushButton" name="pushButton_Set">
+   <property name="geometry">
+    <rect>
+     <x>760</x>
+     <y>530</y>
+     <width>100</width>
+     <height>35</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>设置</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_Modify">
+   <property name="geometry">
+    <rect>
+     <x>606</x>
+     <y>530</y>
+     <width>100</width>
+     <height>35</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>更改</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>100</y>
+     <width>881</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QGroupBox
+{
+	border-width:2px;
+	border-style:solid;
+	border-color:gray;
+	margin-top:1ex;
+}
+
+QGroupBox::title
+{
+	subcontrol-origin:margin;
+	subcontrol-position:top left;
+	left:10px;
+	padding: 0px;
+}</string>
+   </property>
+   <property name="title">
+    <string>公共参数</string>
+   </property>
+   <widget class="QLabel" name="label_RecvChannel">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>30</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>接收通道</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_RecvChannel">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>30</y>
+      <width>110</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_AGCTime">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>30</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>AGC时间常数</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_AGCTime">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>30</y>
+      <width>110</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_CodeBn">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>30</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>载波环路带宽</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_CodeBn">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>30</y>
+      <width>110</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_2">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>200</y>
+     <width>881</width>
+     <height>311</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>目标参数</string>
+   </property>
+   <widget class="QGroupBox" name="groupBox_3">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>120</y>
+      <width>831</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>测量支路</string>
+    </property>
+    <widget class="QComboBox" name="comboBox_ExpandFrRateM">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>25</y>
+       <width>110</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_ExpandFrRateM">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>25</y>
+       <width>75</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>扩频码速率</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_CodeBnDEM">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>25</y>
+       <width>110</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_CodeBnDEM">
+     <property name="geometry">
+      <rect>
+       <x>286</x>
+       <y>25</y>
+       <width>121</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>码环带宽(双边)</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_8">
+     <property name="geometry">
+      <rect>
+       <x>520</x>
+       <y>25</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Hz</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_11">
+     <property name="geometry">
+      <rect>
+       <x>750</x>
+       <y>25</y>
+       <width>41</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>dBHz</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_CapThresholdM">
+     <property name="geometry">
+      <rect>
+       <x>560</x>
+       <y>25</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>捕获门限</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_CapThresholdM">
+     <property name="geometry">
+      <rect>
+       <x>640</x>
+       <y>25</y>
+       <width>110</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_4">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>210</y>
+      <width>831</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>遥测支路</string>
+    </property>
+    <widget class="QComboBox" name="comboBox_ExpandFrRateT">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>24</y>
+       <width>110</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_ExpandFrRateT">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>24</y>
+       <width>75</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>扩频码速率</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_CodeBnDET">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>24</y>
+       <width>110</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_CodeBnDET">
+     <property name="geometry">
+      <rect>
+       <x>286</x>
+       <y>24</y>
+       <width>121</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>码环带宽(双边)</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_9">
+     <property name="geometry">
+      <rect>
+       <x>520</x>
+       <y>24</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Hz</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_14">
+     <property name="geometry">
+      <rect>
+       <x>750</x>
+       <y>24</y>
+       <width>41</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>dBHz</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_CapThresholdT">
+     <property name="geometry">
+      <rect>
+       <x>560</x>
+       <y>24</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>捕获门限</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_CapThresholdT">
+     <property name="geometry">
+      <rect>
+       <x>640</x>
+       <y>24</y>
+       <width>110</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_5">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>30</y>
+      <width>831</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>目标选择</string>
+    </property>
+    <widget class="QRadioButton" name="radioButton_Target1">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>30</y>
+       <width>89</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>目标1</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="radioButton_Target2">
+     <property name="geometry">
+      <rect>
+       <x>260</x>
+       <y>30</y>
+       <width>89</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>目标2</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="radioButton_Target3">
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>30</y>
+       <width>89</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>目标3</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="radioButton_Target4">
+     <property name="geometry">
+      <rect>
+       <x>650</x>
+       <y>30</y>
+       <width>89</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>目标4</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

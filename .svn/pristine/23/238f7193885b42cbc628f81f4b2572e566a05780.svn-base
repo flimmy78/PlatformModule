@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>denter.png</file>
+        <file>empty.png</file>
+        <file>safe.png</file>
+    </qresource>
+</RCC>

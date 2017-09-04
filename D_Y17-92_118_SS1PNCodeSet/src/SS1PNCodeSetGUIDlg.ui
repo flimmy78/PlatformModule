@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SS1PNCodeSetGUIDlg</class>
+ <widget class="QDialog" name="SS1PNCodeSetGUIDlg">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>952</width>
+    <height>619</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>DDTBBE_CodFrmSynSetGUIDlg</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QGroupBox{
+	border:1px solid;
+}</string>
+  </property>
+  <widget class="QPushButton" name="pushButton_Set">
+   <property name="geometry">
+    <rect>
+     <x>770</x>
+     <y>500</y>
+     <width>110</width>
+     <height>35</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>设置</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_Modify">
+   <property name="geometry">
+    <rect>
+     <x>616</x>
+     <y>500</y>
+     <width>110</width>
+     <height>35</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>更改</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>60</y>
+     <width>891</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QGroupBox
+{
+	border-width:2px;
+	border-style:solid;
+	border-color:gray;
+	margin-top:1ex;
+}
+
+QGroupBox::title
+{
+	subcontrol-origin:margin;
+	subcontrol-position:top left;
+	left:10px;
+	padding: 0px;
+}</string>
+   </property>
+   <property name="title">
+    <string>目标选择</string>
+   </property>
+   <widget class="QRadioButton" name="radioButton_Target1">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>35</y>
+      <width>89</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>目标1</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_Target2">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>35</y>
+      <width>89</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>目标2</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_Target3">
+    <property name="geometry">
+     <rect>
+      <x>500</x>
+      <y>35</y>
+      <width>89</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>目标3</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_Target4">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>35</y>
+      <width>89</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>目标4</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_2">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>150</y>
+     <width>891</width>
+     <height>321</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QGroupBox
+{
+	border-width:2px;
+	border-style:solid;
+	border-color:gray;
+	margin-top:1ex;
+}
+
+QGroupBox::title
+{
+	subcontrol-origin:margin;
+	subcontrol-position:top left;
+	left:10px;
+	padding: 0px;
+}</string>
+   </property>
+   <property name="title">
+    <string>主接受伪码</string>
+   </property>
+   <widget class="QLabel" name="label_VirtualCodeSource">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>20</y>
+      <width>71</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>伪码来源</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_VirtualCodeSource">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>20</y>
+      <width>110</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>60</y>
+      <width>871</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>上行伪码</string>
+    </property>
+    <widget class="QLabel" name="label_UpShortVirtualPhase1">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>25</y>
+       <width>128</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>短码伪码初相1</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_UpShortVirtualPhase1">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>25</y>
+       <width>110</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_UpShortVirtualPhase2">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>67</y>
+       <width>128</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>短码伪码初相2</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_UpShortVirtualPhase2">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>67</y>
+       <width>110</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_UpShortVirtualPoly1">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>25</y>
+       <width>151</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>短码伪码本源多项式1</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_UpShortVirtualPoly1">
+     <property name="geometry">
+      <rect>
+       <x>440</x>
+       <y>25</y>
+       <width>110</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_UpShortVirtualPoly2">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>67</y>
+       <width>151</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>短码伪码本源多项式2</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_UpShortVirtualPoly2">
+     <property name="geometry">
+      <rect>
+       <x>440</x>
+       <y>67</y>
+       <width>110</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_UpLongVirtualPhase1">
+     <property name="geometry">
+      <rect>
+       <x>580</x>
+       <y>25</y>
+       <width>151</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>长伪码初相1</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_UpLongVirtualPhase1">
+     <property name="geometry">
+      <rect>
+       <x>730</x>
+       <y>25</y>
+       <width>110</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_UpLongVirtualPoly1">
+     <property name="geometry">
+      <rect>
+       <x>580</x>
+       <y>70</y>
+       <width>151</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>长码伪码本源多项式1</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_UpLongVirtualPoly1">
+     <property name="geometry">
+      <rect>
+       <x>730</x>
+       <y>70</y>
+       <width>110</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_4">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>190</y>
+      <width>871</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>下行伪码</string>
+    </property>
+    <widget class="QLabel" name="label_8">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>70</y>
+       <width>128</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>短码伪码初相2</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_9">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>25</y>
+       <width>128</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>短码伪码初相1</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_DownShortVirtualPoly1">
+     <property name="geometry">
+      <rect>
+       <x>440</x>
+       <y>25</y>
+       <width>110</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_10">
+     <property name="geometry">
+      <rect>
+       <x>580</x>
+       <y>73</y>
+       <width>151</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>长码伪码本源多项式1</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_DownLongVirtualPhase1">
+     <property name="geometry">
+      <rect>
+       <x>730</x>
+       <y>25</y>
+       <width>110</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_11">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>25</y>
+       <width>151</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>短码伪码本源多项式1</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_DownShortVirtualPhase1">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>25</y>
+       <width>110</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_DownLongVirtualPoly1">
+     <property name="geometry">
+      <rect>
+       <x>730</x>
+       <y>73</y>
+       <width>110</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_DownShortVirtualPoly2">
+     <property name="geometry">
+      <rect>
+       <x>440</x>
+       <y>70</y>
+       <width>110</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_DownShortVirtualPhase2">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>70</y>
+       <width>110</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_12">
+     <property name="geometry">
+      <rect>
+       <x>580</x>
+       <y>25</y>
+       <width>141</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>长伪码初相1</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_13">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>70</y>
+       <width>151</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>短码伪码本源多项式2</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

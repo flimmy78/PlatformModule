@@ -1,0 +1,817 @@
+﻿#include "DDTBBE_RecSetGUIDlg.h"
+#include "ui_DDTBBE_RecSetGUIDlg.h"
+#include <QCloseEvent>
+#include <QMessageBox>
+#include <QDateTime>
+#include "../../Common/DeviceMap.h"
+#include "../../Common/Log.h"
+#include <QDebug>
+
+extern quint64 GetID(ushort usStationID, uchar ucSubSysID, ushort usDeviceID, ushort usType,
+                     uchar ucSn);
+DDTBBE_RecSetGUIDlg::DDTBBE_RecSetGUIDlg(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::DDTBBE_RecSetGUIDlg)
+{
+    ui->setupUi(this);
+    m_pStateMgr = NULL;
+    m_pILxTsspMessageManager = NULL;
+    m_pILxTsspLogManager = NULL;
+    m_pPublicInfo = NULL;
+    m_pHAManager = NULL;
+    m_IQSwitch = false;
+    m_MCSDDTRevStatus = NULL;
+    setAttribute(Qt::WA_DeleteOnClose);
+}
+
+DDTBBE_RecSetGUIDlg::~DDTBBE_RecSetGUIDlg()
+{
+    killTimer(m_TimerID);
+    delete ui;
+}
+
+void DDTBBE_RecSetGUIDlg::setText(const QString& strTitle,ParaStruct xmlsetText[3][60],QString MapMean[50][30],int MapNum[50],uchar Type,ILxTsspParameterMacro* pMacroObj)
+{
+    m_strTitle = strTitle;
+    setWindowTitle(strTitle);
+
+    memcpy(m_DlgParaSetStruct,xmlsetText,sizeof(ParaStruct)*50*3);
+
+    for(int i=0;i<50;i++)
+    {
+        for(int j=0;j<30;j++)
+        {
+            m_DlgMapMean[i][j] = MapMean[i][j];
+        }
+    }
+
+    memset(DlgMapLineNum,0,50);
+
+    for(int i=0;i<49;i++)
+    {
+        DlgMapLineNum[i] = MapNum[i];
+    }
+    //初始化界面
+    InitDLG(Type,pMacroObj);
+}
+
+//初始化对话框
+void DDTBBE_RecSetGUIDlg::InitDLG(int Type,ILxTsspParameterMacro* pMacroObj)
+{
+    iParaSetFlag = Type;
+    //设置输入格式
+    InitInput();
+    //显示变量名字和范围
+    ShowControls();
+
+    if(Type == 0)//取当前参数
+    {
+        //取当前设置的参数
+        QByteArray byteArray;
+        if(m_pHAManager!=NULL)
+        {
+            m_pHAManager->GetParameter(m_ParaMCSDDTRevParamID,byteArray);
+            memcpy(&m_MCSDDTRevParam,byteArray.data(),sizeof(m_MCSDDTRevParam));
+        }
+
+        if(m_pStateMgr != NULL)
+        {
+            DWORD stLen = sizeof(MCSDDTRevStatusStruct);
+            m_MCSDDTRevStatus  =(MCSDDTRevStatusStruct*)m_pStateMgr->FindOneItem(m_StatusParaMCSDDTRevParamID, stLen);
+            if(m_MCSDDTRevStatus == NULL || stLen != sizeof(MCSDDTRevStatusStruct))
+                return;
+        }
+        //启动定时器
+        m_TimerID = startTimer(500);
+        //不使能
+        EnabledControls(false);
+
+    }
+    else if(Type == 1)//取宏里参数
+    {
+        ui->pushButton_Modify->setText("");
+        if(pMacroObj!=NULL)
+        {
+            QByteArray byteArray;
+            //码同步参数
+            pMacroObj->GetParameterBlock(m_ParaMCSDDTRevParamID,byteArray);
+            memcpy(&m_MCSDDTRevParam,byteArray.data(),sizeof(m_MCSDDTRevParam));
+        }
+        ui->pushButton_Modify->setVisible(false);
+        ui->pushButton_Set->setVisible(false);
+        //显示参数
+        ShowPara(1);
+    }
+}
+
+//设置输入格式
+void DDTBBE_RecSetGUIDlg::InitInput()
+{
+    QRegExp regExp("[A-Fa-f0-9]{1,8}");
+
+    //正整数
+    QRegExp regExp2("[0-9//-]{1,16}");
+    //ui->lineEdit_CarrFreq->setValidator(new QRegExpValidator(regExp2, this));
+    QRegExp regExp_PowerRate("[1-9]?|10");
+    ui->lineEdit_IPowerRate->setValidator(new QRegExpValidator(regExp_PowerRate, this));
+    ui->lineEdit_QPowerRate->setValidator(new QRegExpValidator(regExp_PowerRate, this));
+    QRegExp regExpIORatio("-?([0-9](\\.[0-9])?|10)");//-10～10 小数点后保留1位
+    ui->lineEdit_Ratio_dB->setValidator(new QRegExpValidator(regExpIORatio, this));
+    //ui->lineEdit_CarrFreqCapRge->setValidator(new QRegExpValidator(regExp2, this));
+}
+
+void DDTBBE_RecSetGUIDlg::ShowControls()
+{
+    //向下拉框控件中写入从xml中读取的内容
+    int i;
+
+    //AGC时间常数
+    for(i=0; i<DlgMapLineNum[0];i++)
+    {
+        ui->comboBox_AgcTime->addItem(m_DlgMapMean[0][i]);
+    }
+    ui->comboBox_AgcTime->setCurrentIndex(m_DlgParaSetStruct[0][1].InitVal.lval);
+    //载波环路带宽
+    for(i=0; i<DlgMapLineNum[1];i++)
+    {
+        ui->comboBox_CarrBn->addItem(m_DlgMapMean[1][i]);
+    }
+    ui->comboBox_CarrBn->setCurrentIndex(m_DlgParaSetStruct[0][2].InitVal.lval);
+    //调制体制
+    for(i=0; i<DlgMapLineNum[2];i++)
+    {
+        ui->comboBox_DebugType->addItem(m_DlgMapMean[2][i]);
+    }
+    ui->comboBox_DebugType->setCurrentIndex(m_DlgParaSetStruct[0][3].InitVal.lval);
+    //功率比有效标志
+    for(i=0; i<DlgMapLineNum[5];i++)
+    {
+        ui->comboBox_RatioFlag->addItem(m_DlgMapMean[5][i]);
+    }
+    ui->comboBox_RatioFlag->setCurrentIndex(m_DlgParaSetStruct[0][9].InitVal.lval);
+    //8PSK星座图
+    for(i=0; i<DlgMapLineNum[3];i++)
+    {
+        //ui->comboBox_MapType->addItem(m_DlgMapMean[3][i]);
+    }
+    //ui->comboBox_MapType->setCurrentIndex(m_DlgParaSetStruct[0][4].InitVal.lval);
+    //解调数据输出选择
+    for(i=0; i<DlgMapLineNum[4];i++)
+    {
+        ui->comboBox_OutputSel->addItem(m_DlgMapMean[4][i]);
+    }
+    ui->comboBox_OutputSel->setCurrentIndex(m_DlgParaSetStruct[0][5].InitVal.lval);
+    //格雷编码选择
+    for(i=0; i<DlgMapLineNum[6];i++)
+    {
+        ui->comboBox_GrayType->addItem(m_DlgMapMean[6][i]);
+    }
+    ui->comboBox_GrayType->setCurrentIndex(m_DlgParaSetStruct[0][10].InitVal.lval);
+    //往静态控件中写入参数缺省值
+    //载波中频
+    //ui->lineEdit_CarrFreq->setText(QString::number(m_DlgParaSetStruct[0][0].InitVal.lval));
+    //I路功率因子
+    ui->lineEdit_IPowerRate->setText(QString::number(m_DlgParaSetStruct[0][6].InitVal.lval));
+    ui->label_IPowerRate->setText("I路功率因子\n[" + QString::number(m_DlgParaSetStruct[0][6].MinVal.lmin) +
+            "~" + QString::number(m_DlgParaSetStruct[0][6].MaxVal.lmax) + "]");
+    //Q路功率因子
+    ui->lineEdit_QPowerRate->setText(QString::number(m_DlgParaSetStruct[0][7].InitVal.lval));
+    ui->label_QPowerRate->setText("Q路功率因子\n[" + QString::number(m_DlgParaSetStruct[0][7].MinVal.lmin) +
+            "~" + QString::number(m_DlgParaSetStruct[0][7].MaxVal.lmax) + "]");
+    //IO功率比
+    ui->lineEdit_Ratio_dB->setText(QString::number(m_DlgParaSetStruct[0][8].InitVal.lval));
+    ui->label_Ratio_dB->setText("IO功率比\n[" + QString::number(m_DlgParaSetStruct[0][8].MinVal.lmin) +
+            "~" + QString::number(m_DlgParaSetStruct[0][8].MaxVal.lmax) + "]");
+    //载波频率捕获范围
+    //ui->lineEdit_CarrFreqCapRge->setText(QString::number(m_DlgParaSetStruct[0][11].InitVal.lval));
+}
+
+//显示参数
+void DDTBBE_RecSetGUIDlg::ShowPara(int type)
+{
+    if(type == 0)       //参数设置
+    {
+        //码同步
+        if(m_MCSDDTRevStatus != NULL)
+        {
+            m_MCSDDTRevParam = m_MCSDDTRevStatus->tParams;
+        }
+        else
+        {
+            DWORD stLen = sizeof(MCSDDTRevStatusStruct);
+            if(m_pStateMgr != NULL)
+                m_MCSDDTRevStatus = (MCSDDTRevStatusStruct*)m_pStateMgr->FindOneItem(m_StatusParaMCSDDTRevParamID, stLen);
+        }
+    }
+    else
+    {
+        //解扰使能或禁止
+        //副帧方式控件使能
+        if (ui->pushButton_Modify->text() != "更改")
+        {
+            //            EnabledControlsSubFrmType(ui->comboBox_SubFrmType->currentIndex());
+        }
+    }
+
+    /********************************中频接收参数设置*********************************/
+    //载波中频
+    //ui->lineEdit_CarrFreq->setText(QString::number(m_MCSDDTRevParam.usCodeType));
+    //AGC时间常数
+    if(m_MCSDDTRevParam.ucAgcTime > 0)
+        ui->comboBox_AgcTime->setCurrentIndex(m_MCSDDTRevParam.ucAgcTime - 2);
+    //载波环路带宽
+    if(m_MCSDDTRevParam.ucPllBw > 0)
+        ui->comboBox_CarrBn->setCurrentIndex(m_MCSDDTRevParam.ucPllBw - 1);
+    //调制体制
+    if(m_MCSDDTRevParam.ucModesel > 0)
+        ui->comboBox_DebugType->setCurrentIndex(m_MCSDDTRevParam.ucModesel - 1);
+    //SPSK星座图选择
+    //ui->comboBox_MapType->setCurrentIndex(m_MCSDDTRevParam.ucMapType);
+    //解调数据输出选择
+    if (m_MCSDDTRevParam.ucSignalSel > 0)
+        ui->comboBox_OutputSel->setCurrentIndex(setIOMethod());
+
+    //I路功率因子
+    ui->lineEdit_IPowerRate->setText(QString::number(m_MCSDDTRevParam.ucIPowRate));
+    //Q路功率因子
+    ui->lineEdit_QPowerRate->setText(QString::number(m_MCSDDTRevParam.ucQPowRate));
+    //IQ功率比
+    ui->lineEdit_Ratio_dB->setText(QString::number(m_MCSDDTRevParam.cRatiodB));
+    //功率比有效标志
+    if (m_MCSDDTRevParam.ucPowerType > 0)
+        ui->comboBox_RatioFlag->setCurrentIndex(m_MCSDDTRevParam.ucPowerType - 1);
+    //格雷编码类型
+    if (m_MCSDDTRevParam.ucGrayType > 0)
+        ui->comboBox_GrayType->setCurrentIndex(m_MCSDDTRevParam.ucGrayType - 1);
+    //载波频率捕获范围
+    //ui->lineEdit_CarrFreqCapRge->setText(QString::number(m_MCSDDTRevParam.ucCarrierRange));
+    /********************************中频接收参数设置参数*********************************/
+
+    on_comboBox_DebugType_currentIndexChanged(ui->comboBox_DebugType->currentIndex());
+    on_comboBox_RatioFlag_currentIndexChanged(ui->comboBox_RatioFlag->currentIndex());
+}
+
+//设置帧长范围
+void DDTBBE_RecSetGUIDlg::SetFrameLenRange(int iWordLen)
+{
+    if(iWordLen ==8)
+    {
+        m_DlgParaSetStruct[1][3].MinVal.lmin = 4;
+        m_DlgParaSetStruct[1][3].MaxVal.lmax = 4096;
+    }
+    else
+    {
+        m_DlgParaSetStruct[1][3].MinVal.lmin = 4;
+        m_DlgParaSetStruct[1][3].MaxVal.lmax = 2048;
+    }
+    QString strTemp = "帧长["+QString::number(m_DlgParaSetStruct[1][3].MinVal.lmin)+"~"+
+            QString::number(m_DlgParaSetStruct[1][3].MaxVal.lmax)+"]字";
+    //    ui->label_FrameLen->setText(strTemp);
+}
+
+void DDTBBE_RecSetGUIDlg::SetObjInfo(TLxTsspObjectInfo ObjectInfo)
+{
+    memcpy(&m_ObjectInfo, &ObjectInfo, sizeof(TLxTsspObjectInfo));
+    //对象初始化
+    //查找对象管理器
+    LxTsspObjectManager* pObjectManager = LxTsspObjectManager::Instance();
+
+    if(pObjectManager == NULL)
+    {
+        return;
+    }
+
+    m_pHAManager = pObjectManager->GetHAManager();
+
+    bool bRet = m_DeviceMap.loadXML();
+    if (!bRet)
+    {
+        QString strInfo = QString("load device map failed %1");
+        CLog::addLog(strInfo);
+        return;
+    }
+
+    ITEM *pItem = m_DeviceMap.getItem(MODULENAME);
+    if (pItem->vSubItem.size() > 0)
+    {
+        int index;
+        switch (m_ObjectInfo.usLocalDID) {
+        case 0x400:
+            index = 0;
+            break;
+        case 0x401:
+            index = 1;
+            break;
+        default:
+            break;
+        }
+        SUBITEM sItem = pItem->vSubItem.at(index);
+        m_usC = sItem.usCMD;
+        m_usTID = sItem.usTID;
+
+        /*************************框架**********************************/
+        //中频接收参数
+        m_ParaMCSDDTRevParamID = GetID(sItem.usStationID,
+                                       sItem.ucSubSysID, sItem.usDeviceID,sItem.usTID,
+                                       sItem.ucSN);
+        /*************************框架**********************************/
+
+        /*************************状态**********************************/
+        //中频接收参数
+        m_StatusParaMCSDDTRevParamID = GetID(sItem.usStationID,
+                                             sItem.ucSubSysID, sItem.usDeviceID,sItem.usStateType,
+                                             sItem.ucSN);
+        /*************************状态**********************************/
+    }
+
+    //日志
+    m_pILxTsspLogManager = pObjectManager->GetLogManager();
+    m_pStateMgr = pObjectManager->GetStateManager();
+    m_pILxTsspMessageManager = pObjectManager->GetMessageManager();
+    m_pPublicInfo = pObjectManager->GetPublicInfoManager();
+}
+
+//使能或不使能控件
+void DDTBBE_RecSetGUIDlg::EnabledControls(bool bFlag)
+{
+    /*************************中频接收参数选择组*************************/
+    //载波中频
+    //ui->lineEdit_CarrFreq->setEnabled(bFlag);
+    //载波环路带宽
+    ui->comboBox_CarrBn->setEnabled(bFlag);
+    //AGC时间常数
+    ui->comboBox_AgcTime->setEnabled(bFlag);
+    //I路功率因子
+    ui->lineEdit_IPowerRate->setEnabled(false);
+    //Q路功率因子
+    ui->lineEdit_QPowerRate->setEnabled(false);
+    //功率有效标志
+    ui->comboBox_RatioFlag->setEnabled(false);
+    //8PSK星座图
+    //ui->comboBox_MapType->setEnabled(bFlag);
+    //I/O功率比
+    ui->lineEdit_Ratio_dB->setEnabled(false);
+    //解调数据的输出选择
+    ui->comboBox_OutputSel->setEnabled(bFlag);
+    //输入选择
+    ui->comboBox_DebugType->setEnabled(bFlag);
+    //格雷编码选择
+    ui->comboBox_GrayType->setEnabled(false);
+    //载波频率捕获范围
+    //ui->lineEdit_CarrFreqCapRge->setEnabled(bFlag);
+    /*************************中频接收参数选择组*************************/
+    if (bFlag)
+    {
+        //副帧方式控件使能
+        //        EnabledControlsSubFrmType(ui->comboBox_SubFrmType->currentIndex());
+        ui->pushButton_Modify->setText("恢复");
+        ui->pushButton_Set->setEnabled(true);
+    }
+    else
+    {
+        ui->pushButton_Modify->setText("更改");
+        ui->pushButton_Set->setEnabled(false);
+    }
+}
+
+//保存参数宏
+int DDTBBE_RecSetGUIDlg::SaveToMacro(ILxTsspParameterMacro* pMacroObj)
+{
+    //判断合法性
+    int iRet = CheckPara();
+    if(iRet == -1)
+    {
+        return -1;
+    }
+    else
+    {
+        GetPara();
+        //取当前设置的参数
+        QByteArray byteArray;
+        //码同步参数
+        byteArray.resize(sizeof(m_MCSDDTRevParam));
+        memcpy(byteArray.data(),&m_MCSDDTRevParam, sizeof(m_MCSDDTRevParam));
+        pMacroObj->UpdateParameterBlock(m_ParaMCSDDTRevParamID, byteArray);
+
+        //日志信息
+        QString strLog;
+        strLog += QString("%1: 保存宏成功！").arg(MODULENAME);
+        CLog::addLog(strLog);
+    }
+}
+
+//从界面取参数
+void DDTBBE_RecSetGUIDlg::GetPara()
+{
+    /***********************************接收单元****************************/
+    //载波环路带宽
+    m_MCSDDTRevParam.ucPllBw = ui->comboBox_CarrBn->currentIndex() + 1;
+    //AGC时间常数
+    m_MCSDDTRevParam.ucAgcTime = ui->comboBox_AgcTime->currentIndex() + 2;
+    //调制体制
+    m_MCSDDTRevParam.ucModesel = ui->comboBox_DebugType->currentIndex() + 1;
+    //I路功率因子
+    m_MCSDDTRevParam.ucIPowRate = ui->lineEdit_IPowerRate->text().toInt();
+    //Q路功率因子
+    m_MCSDDTRevParam.ucQPowRate = ui->lineEdit_QPowerRate->text().toInt();
+    //功率比有效标志
+    m_MCSDDTRevParam.ucPowerType = ui->comboBox_RatioFlag->currentIndex() + 1;
+    //解调数据输出选择
+    m_MCSDDTRevParam.ucSignalSel = getucSignalSel();
+    //格雷编码选择
+    m_MCSDDTRevParam.ucGrayType = ui->comboBox_GrayType->currentIndex() + 1;
+    //IO功率比
+    m_MCSDDTRevParam.cRatiodB = ui->lineEdit_Ratio_dB->text().toInt();
+
+    /***********************************接收单元****************************/
+
+}
+
+//验证参数范围
+int DDTBBE_RecSetGUIDlg::CheckPara()
+{
+    QMessageBox msgBox;
+    msgBox.setWindowTitle(MODULENAME);
+    //I路功率因子
+    if((ui->lineEdit_IPowerRate->text().toInt())<m_DlgParaSetStruct[0][6].MinVal.lmin || (ui->lineEdit_IPowerRate->text().toInt())>m_DlgParaSetStruct[0][6].MaxVal.lmax)
+    {
+        msgBox.setText("I路功率因子的范围：["+QString::number(m_DlgParaSetStruct[0][6].MinVal.lmin)+"~"+QString::number(m_DlgParaSetStruct[0][6].MaxVal.lmax)+"]，请重新输入!");
+        msgBox.exec();
+        return -1;
+    }
+    //Q路功率因子
+    if((ui->lineEdit_QPowerRate->text().toInt())<m_DlgParaSetStruct[0][7].MinVal.lmin || (ui->lineEdit_QPowerRate->text().toInt())>m_DlgParaSetStruct[0][7].MaxVal.lmax)
+    {
+        msgBox.setText("Q路功率因子的范围：["+QString::number(m_DlgParaSetStruct[0][7].MinVal.lmin)+"~"+QString::number(m_DlgParaSetStruct[0][7].MaxVal.lmax)+"]，请重新输入!");
+        msgBox.exec();
+        return -1;
+    }
+    //I/Q功率比
+    if((ui->lineEdit_Ratio_dB->text().toInt())<m_DlgParaSetStruct[0][8].MinVal.lmin || (ui->lineEdit_Ratio_dB->text().toInt())>m_DlgParaSetStruct[0][8].MaxVal.lmax)
+    {
+        msgBox.setText("功率比的范围：["+QString::number(m_DlgParaSetStruct[0][8].MinVal.lmin)+"~"+QString::number(m_DlgParaSetStruct[0][8].MaxVal.lmax)+"]，请重新输入!");
+        msgBox.exec();
+        return -1;
+    }
+    if(ui->lineEdit_Ratio_dB->text().isEmpty())
+    {
+        msgBox.setText("I/Q功率比（分贝）输入为空，请重新输入！");
+        msgBox.exec();
+        return -1;
+    }
+    return 1;
+}
+
+//定时器
+void DDTBBE_RecSetGUIDlg::timerEvent(QTimerEvent *event)
+{
+    ShowPara(0);
+}
+
+void DDTBBE_RecSetGUIDlg::on_pushButton_Modify_clicked()
+{
+    if(ui->pushButton_Modify->text() == "更改")
+    {
+        EnabledControls(true);
+        int nIndex = ui->comboBox_DebugType->currentIndex();
+        ui->comboBox_DebugType->setCurrentIndex(nIndex);
+        nIndex = ui->comboBox_RatioFlag->currentIndex();
+        ui->comboBox_RatioFlag->setCurrentIndex(nIndex);
+        on_comboBox_DebugType_currentIndexChanged(ui->comboBox_DebugType->currentIndex());
+        on_comboBox_RatioFlag_currentIndexChanged(ui->comboBox_RatioFlag->currentIndex());
+        killTimer(m_TimerID);
+        return;
+    }
+
+    if(ui->pushButton_Modify->text() == "恢复")
+    {
+        EnabledControls(false);
+        m_TimerID = startTimer(500);
+        return;
+    }
+}
+
+void DDTBBE_RecSetGUIDlg::on_pushButton_Set_clicked()
+{
+    //验证参数范围
+    if(CheckPara() == 1)
+    {
+        //从界面取参数
+        GetPara();
+
+        //设置参数
+        //取当前设置的参数
+        if(m_pHAManager!=NULL)
+        {
+            QByteArray byteArray;
+
+            //码同步参数
+            byteArray.resize(sizeof(m_MCSDDTRevParam));
+            memcpy(byteArray.data(),&m_MCSDDTRevParam,sizeof(MCSDDTRevParamStruct));
+            m_pHAManager->SetParameter(m_ParaMCSDDTRevParamID,byteArray);
+            SendMessage((char*)&m_MCSDDTRevParam, sizeof(MCSDDTRevParamStruct), m_usC, m_usTID);
+
+        }
+
+        //日志信息
+        QString strLog;
+        strLog += QString("%1: 设置参数成功！").arg(MODULENAME);
+        CLog::addLog(strLog);
+
+        //不使能控件
+        EnabledControls(false);
+        m_TimerID = startTimer(500);
+    }
+}
+
+void DDTBBE_RecSetGUIDlg::closeEvent(QCloseEvent *event)
+{
+    event->accept();
+}
+
+QSize DDTBBE_RecSetGUIDlg::sizeHint() const
+{
+    return QSize(this->width(), this->height());
+}
+
+
+//根据副帧类型，使能副帧控件
+void DDTBBE_RecSetGUIDlg::EnabledControlsSubFrmType(int iSubFrm)
+{
+    switch(iSubFrm)
+    {
+    case 0:     //无副帧
+        SubFrmEn(false);            //副帧通用
+        IDSubFrmEn(false);          //ID副帧
+        CycSubFrmEn(false);         //循环副帧
+        ReserveSubFrmEn(false);     //反码副帧
+        break;
+    case 1:     //ID副帧
+        SubFrmEn(true);             //副帧通用
+        IDSubFrmEn(true);           //ID副帧
+        CycSubFrmEn(false);         //循环副帧
+        ReserveSubFrmEn(false);     //反码副帧
+        break;
+    case 2:     //循环副帧
+        SubFrmEn(true);             //副帧通用
+        IDSubFrmEn(false);          //ID副帧
+        CycSubFrmEn(true);          //循环副帧
+        ReserveSubFrmEn(false);     //反码副帧
+        break;
+    case 3:     //反码副帧
+        SubFrmEn(true);         //副帧通用
+        IDSubFrmEn(false);      //ID副帧
+        CycSubFrmEn(false);     //循环副帧
+        ReserveSubFrmEn(true);  //反码副帧
+        break;
+    default:
+        break;
+    }
+}
+
+void DDTBBE_RecSetGUIDlg::SubFrmEn(bool bFlag)
+{
+    //副帧长度
+    //    ui->label_SubFrmLen->setEnabled(bFlag);
+    //    ui->lineEdit_SubFrmLen->setEnabled(bFlag);
+
+    //    ui->label_CFSearchErrBits->setEnabled(bFlag);
+    //    ui->comboBox_CFSearchErrBits->setEnabled(bFlag);
+    //    ui->label_CFVerifyErrBits->setEnabled(bFlag);
+    //    ui->comboBox_CFVerifyErrBits->setEnabled(bFlag);
+    //    ui->label_CFLockErrBits->setEnabled(bFlag);
+    //    ui->comboBox_CFLockErrBits->setEnabled(bFlag);
+    //    ui->label_CFVerifyCheckFrame->setEnabled(bFlag);
+    //    ui->comboBox_SubFVerifyFrame->setEnabled(bFlag);
+    //    ui->label_CFLockCheckFrame->setEnabled(bFlag);
+    //    ui->comboBox_SubFLockFrame->setEnabled(bFlag);
+}
+
+//有无ID副帧
+void DDTBBE_RecSetGUIDlg::IDSubFrmEn(bool bFlag)
+{
+    //    ui->groupBox_IDSubFrm->setEnabled(bFlag);
+    //    //ID副帧位置
+    //    ui->label_IDSubFrmPos->setEnabled(bFlag);
+    //    ui->lineEdit_IDSubFrmPos->setEnabled(bFlag);
+
+    //    //ID基值
+    //    ui->label_IdBase->setEnabled(bFlag);
+    //    ui->comboBox_IdBase->setEnabled(bFlag);
+
+    //    //ID字方向
+    //    ui->label_IdDirect->setEnabled(bFlag);
+    //    ui->comboBox_IdDirect->setEnabled(bFlag);
+}
+
+//有无循环副帧
+void DDTBBE_RecSetGUIDlg::CycSubFrmEn(bool bFlag)
+{
+    //循环副帧
+    //    ui->groupBox_CycSubFrm_->setEnabled(bFlag);
+    //    ui->label_CycFrmSyncCode->setEnabled(bFlag);
+    //    ui->lineEdit_CycFrmSyncCode->setEnabled(bFlag);
+    //    ui->label_CycFrmSynCodePos->setEnabled(bFlag);
+    //    ui->lineEdit_CycFrmSynCodePos->setEnabled(bFlag);
+    //    ui->label_CycFrmSynCodeLen->setEnabled(bFlag);
+    //    ui->lineEdit_CycFrmSynCodeLen->setEnabled(bFlag);
+}
+
+//有无反码副帧
+void DDTBBE_RecSetGUIDlg::ReserveSubFrmEn(bool bFlag)
+{
+
+}
+
+void DDTBBE_RecSetGUIDlg::SendMessage(char* pData, unsigned short  usLen, unsigned short usC, unsigned short usTID)
+{
+    static uint seq = 0;
+    TLxTsspMessageHeader header = { 0 };
+    TLxTsspSubMsgHeader subHeader = { 0 };
+    header.uiSequence = seq++;
+    header.uiHandle = 1;
+    header.S = m_pPublicInfo->GetLocalDeviceID();
+    header.L = sizeof(TLxTsspMessageHeader)  + sizeof(TLxTsspSubMsgHeader) + usLen;
+    header.D = m_pPublicInfo->GetLocalDeviceID();//0x09;
+    header.T = 1;
+    header.M = 1;
+    header.P = 1;
+    header.A = 0;
+    header.R = 0;
+    header.C = usC;
+
+    subHeader.Len = usLen;
+    subHeader.SID = m_pPublicInfo->GetLocalDeviceID();//m_DObjectInfo.usStationID;
+    subHeader.DID = m_ObjectInfo.usLocalDID;
+    subHeader.TID = usTID;
+    subHeader.SN = m_ObjectInfo.ucSubSysID;
+    subHeader.O = 0;
+    TLxTsspMessage message;
+    message.pData =
+            new char[sizeof(TLxTsspMessageHeader) + sizeof(TLxTsspSubMsgHeader) + usLen ];
+    memcpy(message.pData, &header, sizeof(TLxTsspMessageHeader));
+    memcpy(message.pData + sizeof(TLxTsspMessageHeader),
+           &subHeader, sizeof(TLxTsspSubMsgHeader));
+    memcpy(message.pData + sizeof(TLxTsspMessageHeader) + sizeof(TLxTsspSubMsgHeader),
+           pData, usLen);
+    message.iDataLen = sizeof(TLxTsspMessageHeader) + sizeof(TLxTsspSubMsgHeader) + usLen;
+
+    int iRet = m_pILxTsspMessageManager->FireMessage(message);
+    delete[] message.pData;
+}
+
+
+
+DWORDLONG DDTBBE_RecSetGUIDlg::StrToSynCode(const char * pStr)
+{
+    char c,C;
+    const char*  p;
+    DWORDLONG dwlValue=0;
+    char   DigVal=0;
+    USHORT nDigCount=0,MAX_DIGITS=16; //The synchronizing code should be not longer  than 16 digitals
+
+    p=pStr;     //Point to the first char of the string
+    c = *p++;   // read the first char
+    while ((c!=NULL) && (nDigCount<=MAX_DIGITS))//  Not the terminator of a string && total digitals is less than 16
+    {
+        if(isspace((int)(unsigned char)c))    c = *p++;// skip whitespace
+        else if(c>='0'&&c<='9')                        //the char is a number between 1 and 9
+        {
+            DigVal=c-'0';
+            dwlValue=dwlValue*16+DigVal;               //Accumulate the value of the hexal number so far to the current digital
+            nDigCount++;
+            c = *p++;
+        }
+        else if((C=toupper(c))>='A'&&C<='F')           //the char is a letter could be a digital of a hexal number
+        {
+            DigVal=C-'A'+10;
+            dwlValue=dwlValue*16+DigVal;               //Accumulate the value of the hexal number so far to the current digital
+            nDigCount++;
+            c = *p++;
+        }
+        else    break;                                 // An invalid char that is neither whitespace nor a hexal digital is encounted
+        // Conclude the scanning process
+    }
+    return dwlValue;
+}
+
+void DDTBBE_RecSetGUIDlg::on_comboBox_DebugType_currentIndexChanged(int index)
+{
+    if (ui->pushButton_Modify->text() == "更改")
+        return;
+    ui->lineEdit_IPowerRate->setEnabled(false);
+    ui->lineEdit_QPowerRate->setEnabled(false);
+    ui->comboBox_RatioFlag->setEnabled(false);
+    ui->lineEdit_Ratio_dB->setEnabled(false);
+    ui->comboBox_GrayType->setEnabled(false);
+
+    switch (index)
+    {
+    case 0:
+        m_IQSwitch = false;
+        ui->comboBox_GrayType->setCurrentIndex(8);
+        ui->comboBox_OutputSel->clear();
+        ui->comboBox_OutputSel->addItem("I路独立");
+        ui->comboBox_OutputSel->setCurrentIndex(0);
+        break;
+    case 1:
+        ui->comboBox_GrayType->setEnabled(true);
+        if (!m_IQSwitch)
+        {
+            ui->comboBox_OutputSel->clear();
+            ui->comboBox_OutputSel->addItem("I/Q合路");
+            ui->comboBox_OutputSel->addItem("I/Q分路");
+            ui->comboBox_OutputSel->setCurrentIndex(0);
+        }
+        else if (getucSignalSel() > 0)
+            ui->comboBox_OutputSel->setCurrentIndex(getucSignalSel() - 1);
+        m_IQSwitch = true;
+        break;
+    case 3:
+        if (!m_IQSwitch)
+        {
+            ui->comboBox_OutputSel->clear();
+            ui->comboBox_OutputSel->addItem("I/Q合路");
+            ui->comboBox_OutputSel->addItem("I/Q分路");
+            ui->comboBox_OutputSel->setCurrentIndex(0);
+        }
+        else if (getucSignalSel() > 0)
+            ui->comboBox_OutputSel->setCurrentIndex(getucSignalSel() - 1);
+        m_IQSwitch = true;
+        ui->comboBox_GrayType->setCurrentIndex(8);
+        break;
+    case 2:
+        m_IQSwitch = false;
+        ui->comboBox_OutputSel->clear();
+        ui->comboBox_OutputSel->addItem("I/Q分路");
+        ui->comboBox_RatioFlag->setEnabled(true);
+        ui->comboBox_OutputSel->setCurrentText("I/Q分路");
+        ui->comboBox_GrayType->setCurrentIndex(8);
+
+        if (ui->comboBox_RatioFlag->currentText() == "分贝方式")
+        {
+            ui->lineEdit_Ratio_dB->setEnabled(true);
+        }
+        else if (ui->comboBox_RatioFlag->currentText() == "比值方式")
+        {
+            ui->lineEdit_IPowerRate->setEnabled(true);
+            ui->lineEdit_QPowerRate->setEnabled(true);
+        }
+        break;
+    default:
+        break;
+    }
+}
+
+void DDTBBE_RecSetGUIDlg::on_comboBox_RatioFlag_currentIndexChanged(int index)
+{
+    if (ui->pushButton_Modify->text() == "更改")
+        return;
+
+    if (ui->comboBox_DebugType->currentIndex() != 2)
+        return;
+
+    ui->lineEdit_IPowerRate->setEnabled(false);
+    ui->lineEdit_QPowerRate->setEnabled(false);
+    ui->lineEdit_Ratio_dB->setEnabled(false);
+    switch (index)
+    {
+    case 1:
+        ui->lineEdit_IPowerRate->setEnabled(true);
+        ui->lineEdit_QPowerRate->setEnabled(true);
+        break;
+    case 0:
+        ui->lineEdit_Ratio_dB->setEnabled(true);
+        break;
+    default:
+        break;
+    }
+}
+int DDTBBE_RecSetGUIDlg::getucSignalSel()
+{
+    switch (ui->comboBox_DebugType->currentIndex())
+    {
+    case 0:
+        return 3;
+    case 1:
+    case 3:
+        return ui->comboBox_OutputSel->currentIndex() + 1;
+    case 2:
+        return 2;
+    default:
+        return 1;//如果出错
+    }
+}
+int DDTBBE_RecSetGUIDlg::setIOMethod()
+{
+    //调制体制：0：无效，1：BPSK，2：QPSK，3：UQPSK，4：SQPSK
+    switch (m_MCSDDTRevParam.ucModesel)
+    {
+    case 0:
+    case 1:
+    case 3:
+        return 0;
+    default:
+        return m_MCSDDTRevParam.ucSignalSel - 1;     //数据输出方式，0：无效，1：I/Q合路，2：I/Q独立，3：I路单独
+    }
+}

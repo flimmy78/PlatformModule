@@ -1,0 +1,3568 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DDTBBE_ModSourceSetGUIDlg</class>
+ <widget class="QDialog" name="DDTBBE_ModSourceSetGUIDlg">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1129</width>
+    <height>750</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>DDTBBE_CodFrmSynSetGUIDlg</string>
+  </property>
+  <widget class="QGroupBox" name="groupBox_6">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>8</y>
+     <width>1071</width>
+     <height>161</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>SimSun-ExtB</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QGroupBox
+{
+	border-width:2px;
+	border-style:solid;
+	border-color:gray;
+	margin-top:1ex;
+}
+
+QGroupBox::title
+{
+	subcontrol-origin:margin;
+	subcontrol-position:top left;
+	left:10px;
+	padding: 0px;
+}</string>
+   </property>
+   <property name="title">
+    <string>模拟源公共参数</string>
+   </property>
+   <widget class="QLabel" name="label_WaveSwitch">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>15</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>载波输出开关</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_MudulatingSwitch">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>49</y>
+      <width>100</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>调制开关</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_WaveSwitch">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>15</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_NoiseOutSwitch">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>289</x>
+      <y>15</y>
+      <width>109</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>噪声输出开关</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_NoiseOutSwitch">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>15</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_IOMethod">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>558</x>
+      <y>84</y>
+      <width>109</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>I/Q分路合路</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_PowerFlag">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>558</x>
+      <y>15</y>
+      <width>109</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>功率比有效标志</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_PowerFlag">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>679</x>
+      <y>15</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_GRAYType">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>84</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_GRAYType">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>289</x>
+      <y>84</y>
+      <width>109</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>GRAY编码选择</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_NoiseRatio">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>289</x>
+      <y>49</y>
+      <width>109</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>输出载噪比</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_IORatio">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>558</x>
+      <y>49</y>
+      <width>109</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>I/Q功率比</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_MudulationSystem">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>84</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_MudulationSystem">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>84</y>
+      <width>100</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>调制体制</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_MudulatingSwitch">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>49</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_OutputPower">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>800</y>
+      <width>100</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>输出功率</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_OutputPower">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>701</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_NoiseRatio">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>49</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_NoiseRatioUnit">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>484</x>
+      <y>49</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>dBHz</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_IORatio">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>679</x>
+      <y>49</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_IORatioUnit">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>763</x>
+      <y>49</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>dB</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_IPowerFactor">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>19</x>
+      <y>120</y>
+      <width>109</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>I路功率因子</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_QPowerFactor">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>289</x>
+      <y>119</y>
+      <width>109</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>Q路功率因子</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_IPowerFactor">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>120</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_QPowerFactor">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>119</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_DopplerSwitch">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>830</x>
+      <y>15</y>
+      <width>109</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>模拟多普勒开关</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_DopplerRange">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>830</x>
+      <y>49</y>
+      <width>109</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>模拟多普勒范围</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_DopplerGrident">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>830</x>
+      <y>84</y>
+      <width>109</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>模拟多普勒变化率</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_WayOfData">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>119</y>
+      <width>109</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>数据源选择</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_DopplerSwitch">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>950</x>
+      <y>15</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_WayOfData">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>119</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_DopplerRange">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>950</x>
+      <y>49</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_DopplerGrident">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>950</x>
+      <y>84</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_DopplerRangeUnit">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>1037</x>
+      <y>52</y>
+      <width>21</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>kHz</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_counterClockCtrl">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>181</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_counterClockCtrl">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>181</y>
+      <width>100</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>左旋时延控制</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_counterClockDelay">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>181</y>
+      <width>100</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>左旋时延</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_clockWiseCtrl">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>181</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_clockWiseCtrl">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>181</y>
+      <width>100</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>右旋时延控制</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_clockWiseDelay">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>815</x>
+      <y>181</y>
+      <width>100</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>右旋时延</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_NoiseRatioUnit_2">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>475</x>
+      <y>181</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>ns</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_counterClockDelay">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>181</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_clockWiseDelay">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>950</x>
+      <y>181</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_DopplerRangeUnit_2">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>1037</x>
+      <y>181</y>
+      <width>21</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>ns</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_IOMethod">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>679</x>
+      <y>84</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_DopplerRangeUnit_3">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>1036</x>
+      <y>83</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>Hz/s</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_RoadI">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>170</y>
+     <width>521</width>
+     <height>531</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>SimSun-ExtB</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QGroupBox
+{
+	border-width:2px;
+	border-style:solid;
+	border-color:gray;
+	margin-top:1ex;
+}
+
+QGroupBox::title
+{
+	subcontrol-origin:margin;
+	subcontrol-position:top left;
+	left:10px;
+	padding: 0px;
+}</string>
+   </property>
+   <property name="title">
+    <string>I路模拟源</string>
+   </property>
+   <widget class="QGroupBox" name="groupBox_8">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>501</width>
+      <height>161</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QLabel" name="label_Enctype">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>84</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>编码方式</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_CodePattern">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>13</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="mouseTracking">
+      <bool>false</bool>
+     </property>
+     <property name="acceptDrops">
+      <bool>false</bool>
+     </property>
+     <property name="text">
+      <string>码型</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_ConoutPhase">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>278</x>
+       <y>119</y>
+       <width>109</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>卷积输出相位</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_RSType">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>13</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_RSType">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>278</x>
+       <y>13</y>
+       <width>109</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>R-S码类型</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_BitRate">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>49</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>码速率</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_RScoBase">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>49</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_RScoBase">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>278</x>
+       <y>49</y>
+       <width>109</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>R-S码坐标基</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_ConcodeType">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>119</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>卷积码类型</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_RSmixDeep">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>278</x>
+       <y>84</y>
+       <width>109</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>R-S交织深度</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_CodePattern">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>131</x>
+       <y>13</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_BitRate">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>131</x>
+       <y>49</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_BitRateUnit">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>215</x>
+       <y>49</y>
+       <width>54</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>kbps</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_Enctype">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>131</x>
+       <y>84</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_ConcodeType">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>131</x>
+       <y>119</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_ConoutPhase">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>119</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_RSmixDeep">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>84</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>470</y>
+      <width>501</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+    <widget class="QLabel" name="label_IAnologData">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>11</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>模拟数据</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_IAnologData">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>131</x>
+       <y>11</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_DataType">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>278</x>
+       <y>11</y>
+       <width>109</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>数据类型</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_DataType">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>11</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_subFrame">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>320</y>
+      <width>501</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QLabel" name="label_SubFrameLen">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>12</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>副帧长</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_SubFrameSyncType">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>45</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>副帧同步方式</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_SubFrameSyncType">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>131</x>
+       <y>45</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_SubFrameGroupLen">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>79</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>副帧码组长度</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_SubFrameGroupLen">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>131</x>
+       <y>79</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_SubFrameGroupPos">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>112</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>副帧码组位置</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_SubFrameLen">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>131</x>
+       <y>12</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_SubFrameLenUnit">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>215</x>
+       <y>12</y>
+       <width>21</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>帧</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_SubFrameGroupPos">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>131</x>
+       <y>112</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_SubFrame">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>215</x>
+       <y>107</y>
+       <width>21</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>字</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_SubFrameSyncGroup">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>278</x>
+       <y>12</y>
+       <width>109</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>副帧同步码组</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_IDCountPos">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>278</x>
+       <y>45</y>
+       <width>109</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>ID计数位置</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_IDCountBaseValue">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>278</x>
+       <y>79</y>
+       <width>109</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>ID计数基值</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_IDCountDir">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>278</x>
+       <y>112</y>
+       <width>109</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>ID计数方向</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_SubFrameSyncGroup">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>12</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_IDCountPos">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>45</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_IDCountBaseValue">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>79</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_IDCountDir">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>112</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_IDCountPosUnit">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>475</x>
+       <y>45</y>
+       <width>21</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>字</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_BeginingOfPoly">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>170</y>
+      <width>501</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QLabel" name="label_FrameSyncLen">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>46</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>帧同步码组长</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_FrameLen">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>12</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>帧长</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_AddDisturbCtr">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>278</x>
+       <y>12</y>
+       <width>109</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>加扰控制</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_FrameSyncGroupPos">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>113</y>
+       <width>121</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>帧同步码组位置</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_DisturbPoly">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>278</x>
+       <y>79</y>
+       <width>109</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>加扰多项式(Hex)</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_FrameLen">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>131</x>
+       <y>12</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_DisturbPolyLen">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>278</x>
+       <y>46</y>
+       <width>109</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>加扰多项式长度</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_DistubPhasePos">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>278</x>
+       <y>113</y>
+       <width>109</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>加扰初相(Hex)</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_FrameSyncGroupLen">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>131</x>
+       <y>46</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_DisturbPoly">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>79</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_FrameSyncGroup">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>79</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>帧同步码组</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_FrameLenUnit">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>215</x>
+       <y>12</y>
+       <width>21</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>字</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_AddDisturbCtrl">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>12</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_DisturbPhasePos">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>113</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_FrameSyncGroupPos">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>131</x>
+       <y>113</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_FrameSyncGroup">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>79</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_DisturbPolyLen">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>46</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_RoadQ">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>570</x>
+     <y>170</y>
+     <width>531</width>
+     <height>531</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>SimSun-ExtB</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QGroupBox
+{
+	border-width:2px;
+	border-style:solid;
+	border-color:gray;
+	margin-top:1ex;
+}
+
+QGroupBox::title
+{
+	subcontrol-origin:margin;
+	subcontrol-position:top left;
+	left:10px;
+	padding: 0px;
+}</string>
+   </property>
+   <property name="title">
+    <string>Q路模拟源</string>
+   </property>
+   <widget class="QGroupBox" name="groupBox_9">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>511</width>
+      <height>161</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QLabel" name="label_OEnctype">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>84</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>编码方式</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_OCodePattern">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>13</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="mouseTracking">
+      <bool>false</bool>
+     </property>
+     <property name="acceptDrops">
+      <bool>false</bool>
+     </property>
+     <property name="text">
+      <string>码型</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_OConoutPhase">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>281</x>
+       <y>119</y>
+       <width>109</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>卷积输出相位</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_ORSType">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>13</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_ORSType">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>281</x>
+       <y>13</y>
+       <width>109</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>R-S码类型</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_OBitRate">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>49</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>码速率</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_ORScoBase">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>49</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_ORScoBase">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>281</x>
+       <y>49</y>
+       <width>109</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>R-S码坐标基</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_OConcodeType">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>119</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>卷积码类型</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_ORSmixDeep">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>281</x>
+       <y>84</y>
+       <width>109</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>R-S交织深度</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_OCodePattern">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>13</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_OBitRate">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>49</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_OBitRateUnit">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>215</x>
+       <y>49</y>
+       <width>54</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>kbps</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_OEnctype">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>84</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_OConcodeType">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>119</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_OConoutPhase">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>119</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_ORSmixDeep">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>84</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_19">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>170</y>
+      <width>511</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QLabel" name="label_FrameSyncGroupLen">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>46</y>
+       <width>111</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>帧同步码组长</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_OFrameLen">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>12</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>帧长</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_OAddDisturbCtrl">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>281</x>
+       <y>12</y>
+       <width>109</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>加扰控制</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_OFrameSyncGroupPos">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>113</y>
+       <width>121</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>帧同步码组位置</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_ODisturbPoly">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>281</x>
+       <y>79</y>
+       <width>109</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>加扰多项式(Hex)</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_OFrameLen">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>12</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_ODisturbPolyLen">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>281</x>
+       <y>46</y>
+       <width>109</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>加扰多项式长度</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_ODistubPhasePos">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>281</x>
+       <y>113</y>
+       <width>109</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>加扰初相(Hex)</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_OFrameSyncGroupLen">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>46</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_ODisturbPoly">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>79</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_OFrameGroupL">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>79</y>
+       <width>111</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>帧同步码组</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_22">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>213</x>
+       <y>12</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>字</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_OAddDisturbCtrl">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>12</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_ODisturbPhasePos">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>113</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_OFrameSyncGroupPos">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>113</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_OFrameSyncGroup">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>79</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_ODisturbPolyLen">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>46</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_4">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>470</y>
+      <width>511</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+    <widget class="QLabel" name="label_OAnologData">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>11</y>
+       <width>54</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>模拟数据</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_OAnologData">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>11</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_ODataType">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>281</x>
+       <y>11</y>
+       <width>109</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>数据类型</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_ODataType">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>11</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_OSubFrame">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>320</y>
+      <width>511</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+     </font>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QLabel" name="label_OSubFrameLen">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>12</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>副帧长</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_OSubFrameSyncType">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>45</y>
+       <width>111</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>副帧同步方式</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_OSubFrameSyncType">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>45</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_OSubFrameGroupLen">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>79</y>
+       <width>121</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>副帧码组长度</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_OSubFrameGroupLen">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>79</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_OSubFrameGroupPos">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>112</y>
+       <width>121</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>副帧码组位置</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_OSubFrameLen">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>12</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_25">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>213</x>
+       <y>12</y>
+       <width>16</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>帧</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_OSubFrameGroupPos">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>112</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_26">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>213</x>
+       <y>112</y>
+       <width>21</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>字</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_OSubFrameSyncGroup">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>281</x>
+       <y>12</y>
+       <width>109</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>副帧同步码组</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_OIDCountPos">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>281</x>
+       <y>45</y>
+       <width>109</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>ID计数位置</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_OIDCountBaseValue">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>281</x>
+       <y>79</y>
+       <width>109</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>ID计数基值</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_OIDCountDir">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>281</x>
+       <y>112</y>
+       <width>109</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>ID计数方向</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_OSubFrameSyncGroup">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>12</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_OIDCountPos">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>45</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_OIDCountBaseValue">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>79</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_OIDCountDir">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>112</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_32">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>487</x>
+       <y>45</y>
+       <width>16</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>SimSun-ExtB</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>字</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="pushButton_AutoMap">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>710</y>
+     <width>75</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>SimSun-ExtB</family>
+    </font>
+   </property>
+   <property name="text">
+    <string>自动映射</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_Modify">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>525</x>
+     <y>710</y>
+     <width>75</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>SimSun-ExtB</family>
+    </font>
+   </property>
+   <property name="text">
+    <string>更改</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_Setting">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>770</x>
+     <y>710</y>
+     <width>75</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>SimSun-ExtB</family>
+    </font>
+   </property>
+   <property name="text">
+    <string>设置</string>
+   </property>
+  </widget>
+  <zorder>groupBox_RoadI</zorder>
+  <zorder>groupBox_6</zorder>
+  <zorder>groupBox_RoadQ</zorder>
+  <zorder>pushButton_AutoMap</zorder>
+  <zorder>pushButton_Modify</zorder>
+  <zorder>pushButton_Setting</zorder>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

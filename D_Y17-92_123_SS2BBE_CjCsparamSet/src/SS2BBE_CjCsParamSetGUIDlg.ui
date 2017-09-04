@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SS2BBE_CjCsParamSetGUIDlg</class>
+ <widget class="QDialog" name="SS2BBE_CjCsParamSetGUIDlg">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>864</width>
+    <height>624</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>DDTBBE_CodFrmSynSetGUIDlg</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QGroupBox
+{
+	border-width:2px;
+	border-style:solid;
+	border-color:gray;
+	margin-top:1ex;
+}
+
+QGroupBox::title
+{
+	subcontrol-origin:margin;
+	subcontrol-position:top left;
+	left:10px;
+	padding: 0px;
+}</string>
+  </property>
+  <widget class="QGroupBox" name="groupBox_2">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>160</y>
+     <width>781</width>
+     <height>341</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>目标参数</string>
+   </property>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>60</y>
+      <width>54</width>
+      <height>12</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_TargetCode">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>94</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>目标代号[Hex]</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_TargetCode">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>96</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_StationCode">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>156</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>地面测站代号[Hex]</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_StationCode">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>156</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_UseJudge">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>216</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>是否使用测站代号</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_StationNum">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>276</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_StationNum">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>276</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>工作站数目</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_UpCrcCgheck">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>36</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_UpCrcCgheck">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>36</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>上行测量帧CRC校验</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_DownMeasRp">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>94</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_DownMeasRp">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>94</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>下行测量帧RP</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_DownCrcCheck">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>156</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_DownCrcCheck">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>156</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>下行测量帧CRC校验</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_DisForType">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>216</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_DisForType">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>216</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>距离预报方式</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_SatalliteChannel">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>276</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_SatalliteChannel">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>276</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>星上通道号</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_DisAmbigous">
+    <property name="geometry">
+     <rect>
+      <x>644</x>
+      <y>36</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_DisAmbigous">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>36</y>
+      <width>100</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>距离解模糊</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_DisForValue">
+    <property name="geometry">
+     <rect>
+      <x>644</x>
+      <y>94</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_DisForValue">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>94</y>
+      <width>100</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>距离预报值</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_ResponsorZero">
+    <property name="geometry">
+     <rect>
+      <x>644</x>
+      <y>156</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_ResponsorZero">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>156</y>
+      <width>100</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>应答机距离零值</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_ResponsorDelay">
+    <property name="geometry">
+     <rect>
+      <x>644</x>
+      <y>216</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_ResponsorDelay">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>216</y>
+      <width>100</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>应答机相对时延</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_TargetType">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>36</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>目标类型</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_UseJudge">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>216</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_TargetType">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>40</y>
+      <width>110</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>100</y>
+      <width>34</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>km</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>160</y>
+      <width>34</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>m</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>220</y>
+      <width>34</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>ns</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_3">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>60</y>
+     <width>781</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>目标选择</string>
+   </property>
+   <widget class="QRadioButton" name="radioButton_Target1">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>37</y>
+      <width>89</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>目标1</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_Target2">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>37</y>
+      <width>89</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>目标2</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_Target3">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>37</y>
+      <width>89</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>目标3</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_Target4">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>37</y>
+      <width>89</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>目标4</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="pushButton_Set">
+   <property name="geometry">
+    <rect>
+     <x>680</x>
+     <y>520</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>设置</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_Modify">
+   <property name="geometry">
+    <rect>
+     <x>527</x>
+     <y>520</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>更改</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

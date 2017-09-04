@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Config>
+	<!-- Group表示开关选择信息 name表示选择的名称 -->
+	<!-- Param表示为几个选择1个 name表示输入的链路名称 value表示输入参数的值 值为16进行 -->
+	<Group name="X1输入开关状态" >
+		<Param name="A链路" value="0" />
+		<Param name="B链路" value="1" />
+	</Group>
+	<Group name="X2输入开关状态" >
+		<Param name="A链路" value="0" />
+		<Param name="B链路" value="1" />
+	</Group>
+	<Group name="X3输入开关状态" >
+		<Param name="A链路" value="0" />
+		<Param name="B链路" value="1" />
+	</Group>
+	<Group name="X4输入开关状态" >
+		<Param name="A链路" value="0" />
+		<Param name="B链路" value="1" />
+	</Group>
+	<Group name="X5输入开关状态" >
+		<Param name="A链路" value="0" />
+		<Param name="B链路" value="1" />
+	</Group>
+	<Group name="X6输入开关状态" >
+		<Param name="A链路" value="0" />
+		<Param name="B链路" value="1" />
+	</Group>
+</Config>

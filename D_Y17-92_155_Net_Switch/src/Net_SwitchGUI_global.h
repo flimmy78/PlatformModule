@@ -1,0 +1,14 @@
+#ifndef NET_SWITCHGUI_GLOBAL_HU
+#define NET_SWITCHGUI_GLOBAL_HU
+
+#include <QtCore/qglobal.h>
+
+#if defined(NET_SWITCHGUI_LIBRARY)
+#  define NET_SWITCHGUISHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define NET_SWITCHGUISHARED_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // NET_SWITCHGUI_GLOBAL_HU
+
+

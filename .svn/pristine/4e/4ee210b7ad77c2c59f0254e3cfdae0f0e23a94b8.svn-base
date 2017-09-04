@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='gb2312'?>
+<configuration>
+    <Device DeviceName="基带设备一" DeviceID="0401" StationID="2311" Note="基带分机一">
+        <System SystemName="调频模式" Alias="FM"  Note="" IndexStart="0" SubSysID="01">
+            <ParameterItem ItemName="FM遥测解调"     ObjectID="2311.00.0400.5111.00" DynamicLibraryName="libFM_DemoduSetGUI.so" />
+            <ParameterItem ItemName="FM遥测模拟源" ObjectID="2311.00.0400.5112.00" DynamicLibraryName="libFM_CodeTMEmuSetGUI.so" />
+            <ParameterItem ItemName="FM调制器"        ObjectID="2311.00.0400.5113.00" DynamicLibraryName="libFM_ModuSetGUI.so" />
+            <ParameterItem ItemName="FM接收"      ObjectID="2311.00.0400.5114.00" DynamicLibraryName="libFM_ReceiveSetGUI.so" />
+	     <ParameterItem ItemName="FM角误差输出"  ObjectID="2311.00.0400.5125.00" DynamicLibraryName="libFM_TrackRecvOutputSet.so" />
+        </System>
+      <System SystemName="BPSK模式" Alias="BPSK"  Note="" IndexStart="1" SubSysID="01">
+        <ParameterItem ItemName="BPSK遥测解调"     ObjectID="2311.01.0400.5116.00" DynamicLibraryName="libBPSK_DemoduSetGUI.so" />
+        <ParameterItem ItemName="BPSK遥测模拟源" ObjectID="2311.01.0400.5117.00" DynamicLibraryName="libBPSK_CodeTMEmuSetGUI.so" />
+        <ParameterItem ItemName="BPSK调制器"        ObjectID="2311.01.0400.5118.00" DynamicLibraryName="libBPSK_ModuSetGUI.so" />
+        <ParameterItem ItemName="BPSK接收"      ObjectID="2311.01.0400.5119.00" DynamicLibraryName="libBPSK_ReceiveSetGUI.so" />
+      </System>
+        <System SystemName="扩频模式" Alias="CDMA"  Note="" IndexStart="2" SubSysID="01">
+          <ParameterItem ItemName="扩频遥测解调"     ObjectID="2311.02.0400.511B.00" DynamicLibraryName="libSS_TMParamSet.so" />
+          <ParameterItem ItemName="扩频遥测模拟源" ObjectID="2311.02.0400.511C.00" DynamicLibraryName="libSS_TMSimParamSet.so" />
+          <ParameterItem ItemName="扩频调制器"     ObjectID="2311.02.0400.511D.00" DynamicLibraryName="libSS_RevParamSet.so" />
+          <ParameterItem ItemName="扩频接收"    ObjectID="2311.02.0400.511E.00" DynamicLibraryName="libSS_ModuParamSet.so" />
+        </System>
+	<System SystemName="数传模式" Alias="DDT"  Note="" IndexStart="3" SubSysID="01">
+	  <ParameterItem ItemName="数传系统参数设置"        ObjectID="2311.03.0400.5134.00" DynamicLibraryName="libDDTBBE_SysParaSet.so" />
+        <ParameterItem ItemName="数传接收机参数设置"     ObjectID="2311.03.0400.5133.00" DynamicLibraryName="libDDTBBE_RecSet.so" />
+        <ParameterItem ItemName="数传I路解调参数设置" ObjectID="2311.03.0400.5131.00" DynamicLibraryName="libDDTBBE_CodFrmSynSet.so" />
+	  <ParameterItem ItemName="数传Q路解调参数设置" ObjectID="2311.03.0400.5131.01" DynamicLibraryName="libDDTBBE_CodFrmSynSet.so" />
+	  <ParameterItem ItemName="数传分集合成参数设置" ObjectID="2311.03.0400.5132.00" DynamicLibraryName="libSK_BBEDivCombaraSet.so" />
+	  <ParameterItem ItemName="数传信号源参数设置" ObjectID="2311.03.0400.5130.00" DynamicLibraryName="libDDTBBE_ModSourceSet.so" />
+      </System>
+	<System SystemName="单遥控模式" Alias="TC"  Note="" IndexStart="4" SubSysID="01">
+        <ParameterItem ItemName="单遥控扩频码参数设置"     ObjectID="2311.04.0400.5160.00" DynamicLibraryName="libTCPNCodeSet.so" />
+        <ParameterItem ItemName="单遥控调制参数设置" ObjectID="2311.04.0400.5158.00" DynamicLibraryName="libTCBBE_ModuParamSet.so" />
+        <ParameterItem ItemName="单遥控遥控参数设置"        ObjectID="2311.04.0400.5154.00" DynamicLibraryName="libTCBBE_TCParamSet.so" />
+      </System>
+    </Device>
+  <Device DeviceName="基带设备二" DeviceID="0402" StationID="2311" Note="基带分机二">
+    <System SystemName="调频模式" Alias="FM"  Note="" IndexStart="0" SubSysID="01">
+      <ParameterItem ItemName="FM遥测解调"     ObjectID="2311.00.0401.5111.00" DynamicLibraryName="libFM_DemoduSetGUI.so" />
+      <ParameterItem ItemName="FM遥测模拟源" ObjectID="2311.00.0401.5112.00" DynamicLibraryName="libFM_CodeTMEmuSetGUI.so" />
+      <ParameterItem ItemName="FM调制器"        ObjectID="2311.00.0401.5113.00" DynamicLibraryName="libFM_ModuSetGUI.so" />
+      <ParameterItem ItemName="FM接收"      ObjectID="2311.00.0401.5114.00" DynamicLibraryName="libFM_ReceiveSetGUI.so" />
+      <ParameterItem ItemName="FM角误差输出"  ObjectID="2311.00.0401.5125.00" DynamicLibraryName="libFM_TrackRecvOutputSet.so" />
+    </System>
+    <System SystemName="BPSK模式" Alias="BPSK"  Note="" IndexStart="1" SubSysID="01">
+      <ParameterItem ItemName="BPSK遥测解调"     ObjectID="2311.01.0401.5116.00" DynamicLibraryName="libBPSK_DemoduSetGUI.so" />
+        <ParameterItem ItemName="BPSK遥测模拟源" ObjectID="2311.01.0401.5117.00" DynamicLibraryName="libBPSK_CodeTMEmuSetGUI.so" />
+        <ParameterItem ItemName="BPSK调制器"        ObjectID="2311.01.0401.5118.00" DynamicLibraryName="libBPSK_ModuSetGUI.so" />
+        <ParameterItem ItemName="BPSK接收"      ObjectID="2311.01.0401.5119.00" DynamicLibraryName="libBPSK_ReceiveSetGUI.so" />
+    </System>
+    <System SystemName="扩频模式" Alias="CDMA"  Note="" IndexStart="2" SubSysID="01">
+          <ParameterItem ItemName="扩频遥测解调"     ObjectID="2311.02.0401.511B.00" DynamicLibraryName="libSS_TMParamSet.so" />
+          <ParameterItem ItemName="扩频遥测模拟源" ObjectID="2311.02.0401.511C.00" DynamicLibraryName="libSS_TMSimParamSet.so" />
+          <ParameterItem ItemName="扩频调制器"     ObjectID="2311.02.0401.511D.00" DynamicLibraryName="libSS_RevParamSet.so" />
+          <ParameterItem ItemName="扩频接收"    ObjectID="2311.02.0401.511E.00" DynamicLibraryName="libSS_ModuParamSet.so" />
+        </System>
+	<System SystemName="数传模式" Alias="数传"  Note="" IndexStart="3" SubSysID="01">
+	  <ParameterItem ItemName="数传系统参数设置"        ObjectID="2311.03.0401.5134.00" DynamicLibraryName="libDDTBBE_SysParaSet.so" />
+        <ParameterItem ItemName="数传接收机参数设置"     ObjectID="2311.03.0401.5133.00" DynamicLibraryName="libDDTBBE_RecSet.so" />
+        <ParameterItem ItemName="数传I路解调参数设置" ObjectID="2311.03.0401.5131.00" DynamicLibraryName="libDDTBBE_CodFrmSynSet.so" />
+	  <ParameterItem ItemName="数传Q路解调参数设置" ObjectID="2311.03.0401.5131.01" DynamicLibraryName="libDDTBBE_CodFrmSynSet.so" />
+	  <ParameterItem ItemName="数传分集合成参数设置" ObjectID="2311.03.0401.5132.00" DynamicLibraryName="libSK_BBEDivCombaraSet.so" />
+	  <ParameterItem ItemName="数传信号源参数设置" ObjectID="2311.03.0401.5130.00" DynamicLibraryName="libDDTBBE_ModSourceSet.so" />
+      </System>
+	<System SystemName="单遥控模式" Alias="遥控"  Note="" IndexStart="4" SubSysID="01">
+        <ParameterItem ItemName="单遥控扩频码参数设置"     ObjectID="2311.04.0401.5160.00" DynamicLibraryName="libTCPNCodeSet.so" />
+        <ParameterItem ItemName="单遥控调制参数设置" ObjectID="2311.04.0401.5158.00" DynamicLibraryName="libTCBBE_ModuParamSet.so" />
+        <ParameterItem ItemName="单遥控遥控参数设置"        ObjectID="2311.04.0401.5154.00" DynamicLibraryName="libTCBBE_TCParamSet.so" />
+      </System>
+  </Device>
+
+  <Device DeviceName="安控终端" DeviceID="0700"  StationID="2311" Note="安控终端">
+    <System SystemName="PSK-FM安控" Alias="FM"  Note="" IndexStart="0" SubSysID="00">
+      <ParameterItem ItemName="PSK-FM安控基带参数"     ObjectID="2311.00.0700.510D.00" DynamicLibraryName="libFMSCBBEParamSet.so" />
+    </System>
+    <System SystemName="PSK-FM安控" Alias="FM"  Note="" IndexStart="0" SubSysID="00">
+      <ParameterItem ItemName="PSK-FM安控基带参数"     ObjectID="2311.00.0701.510D.00" DynamicLibraryName="libFMSCBBEParamSet.so" />
+
+    <System SystemName="多音调频安控" Alias="ZZM"  Note="" IndexStart="1" SubSysID="01">
+      <ParameterItem ItemName="多音调频安控基带参数"     ObjectID="2311.01.0700.510F.00" DynamicLibraryName="libZZMSCBBEParaSet.so" />
+    </System>
+    <System SystemName="多音调频安控" Alias="ZZM"  Note="" IndexStart="1" SubSysID="01">
+      <ParameterItem ItemName="多音调频安控基带参数"     ObjectID="2311.01.0701.510F.00" DynamicLibraryName="libZZMSCBBEParaSet.so" />
+    </System>
+	<System SystemName="单遥控模式" Alias="遥控"  Note="" IndexStart="2" SubSysID="02">
+        <ParameterItem ItemName="单遥控扩频码参数设置"     ObjectID="2311.04.0400.5160.00" DynamicLibraryName="libTCPNCodeSet.so" />
+        <ParameterItem ItemName="单遥控调制参数设置" ObjectID="2311.04.0400.5158.00" DynamicLibraryName="libTCBBE_ModuParamSet.so" />
+        <ParameterItem ItemName="单遥控遥控参数设置"        ObjectID="2311.04.0400.5154.00" DynamicLibraryName="libTCBBE_TCParamSet.so" />
+      </System>
+    </System>
+	<System SystemName="单遥控模式" Alias="遥控"  Note="" IndexStart="2" SubSysID="02">
+        <ParameterItem ItemName="单遥控扩频码参数设置"     ObjectID="2311.04.0401.5160.00" DynamicLibraryName="libTCPNCodeSet.so" />
+        <ParameterItem ItemName="单遥控调制参数设置" ObjectID="2311.04.0401.5158.00" DynamicLibraryName="libTCBBE_ModuParamSet.so" />
+        <ParameterItem ItemName="单遥控遥控参数设置"        ObjectID="2311.04.0401.5154.00" DynamicLibraryName="libTCBBE_TCParamSet.so" />
+      </System>
+  </Device>
+  <Device DeviceName="信道设备" DeviceID="0101"  StationID="2311" Note="信道设备接收和发射">
+      <ParameterItem ItemName="下变频器一"     ObjectID="2311.00.2F00.510A.00" DynamicLibraryName="libDCParaSetGUI.so" />
+      <ParameterItem ItemName="下变频器二"     ObjectID="2311.00.2F01.510A.00" DynamicLibraryName="libDCParaSetGUI.so" />
+	<ParameterItem ItemName="校验变频器"       ObjectID="2311.00.3A00.510B.00" DynamicLibraryName="libCheckCParaSetGUI.so" />
+	<ParameterItem ItemName="S频段功放高频箱"     ObjectID="2311.00.3200.5108.00" DynamicLibraryName="libHPATDcu.so" />
+	<ParameterItem ItemName="L频段功放高频箱"     ObjectID="2311.00.3202.5109.00" DynamicLibraryName="libHPATDcu.so" />
+  </Device>
+</configuration>

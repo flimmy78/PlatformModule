@@ -1,0 +1,690 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SS1BBE_ModuParamSetGUIDlg</class>
+ <widget class="QDialog" name="SS1BBE_ModuParamSetGUIDlg">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1043</width>
+    <height>668</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>DDTBBE_CodFrmSynSetGUIDlg</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QGroupBox
+{
+	border-width:2px;
+	border-style:solid;
+	border-color:gray;
+	margin-top:1ex;
+}
+
+QGroupBox::title
+{
+	subcontrol-origin:margin;
+	subcontrol-position:top left;
+	left:10px;
+	padding: 0px;
+}</string>
+  </property>
+  <widget class="QGroupBox" name="groupBox_common">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>80</y>
+     <width>891</width>
+     <height>191</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>公共单元参数</string>
+   </property>
+   <widget class="QGroupBox" name="groupBox_4">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>20</y>
+      <width>241</width>
+      <height>90</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QLabel" name="label_OutputElLevel">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>34</y>
+       <width>91</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>载波输出电平</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_OutputElLevel">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>34</y>
+       <width>81</width>
+       <height>30</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>198</x>
+       <y>34</y>
+       <width>31</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>dBm</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_5">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>20</y>
+      <width>221</width>
+      <height>90</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QLabel" name="label_AdjustType">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>13</y>
+       <width>75</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>调制方式</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_WaveCtrl">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>50</y>
+       <width>75</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>载波控制</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_AdjustType">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>13</y>
+       <width>85</width>
+       <height>30</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_WaveCtrl">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>50</y>
+       <width>85</width>
+       <height>30</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_6">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>20</y>
+      <width>241</width>
+      <height>90</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QComboBox" name="comboBox_NoiseSourOutput">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>13</y>
+       <width>85</width>
+       <height>30</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_NoiseSourOutput">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>13</y>
+       <width>111</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>噪声源输出</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_WaveNoiseRatio">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>50</y>
+       <width>111</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>载波输出载噪比</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_WaveNoiseRatio">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>50</y>
+       <width>85</width>
+       <height>30</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_processCtrl">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>120</y>
+      <width>741</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>多普勒补偿</string>
+    </property>
+    <widget class="QCheckBox" name="checkBox_dopplerSw">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>20</y>
+       <width>121</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>多普勒补偿开关 </string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_BackZeroRate">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>20</y>
+       <width>65</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>回零速率</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_BackZeroRate">
+     <property name="geometry">
+      <rect>
+       <x>220</x>
+       <y>20</y>
+       <width>77</width>
+       <height>30</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_14">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>20</y>
+       <width>31</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Hz/s</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_CompensateType">
+     <property name="geometry">
+      <rect>
+       <x>342</x>
+       <y>20</y>
+       <width>66</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>补偿方式</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_CompensateType">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>20</y>
+       <width>121</width>
+       <height>30</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_CompensateTime">
+     <property name="geometry">
+      <rect>
+       <x>550</x>
+       <y>20</y>
+       <width>91</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>补偿周期(ms)</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_CompensateTime">
+     <property name="geometry">
+      <rect>
+       <x>640</x>
+       <y>20</y>
+       <width>82</width>
+       <height>30</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="pushButton_ModifyCommon">
+    <property name="geometry">
+     <rect>
+      <x>790</x>
+      <y>50</y>
+      <width>75</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>更改</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_SetCommon">
+    <property name="geometry">
+     <rect>
+      <x>790</x>
+      <y>119</y>
+      <width>75</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>设置</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_target">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>280</y>
+     <width>891</width>
+     <height>351</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>目标参数</string>
+   </property>
+   <widget class="QGroupBox" name="groupBox_3">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>20</y>
+      <width>831</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>目标选择</string>
+    </property>
+    <widget class="QRadioButton" name="radioButton_Target1">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>20</y>
+       <width>89</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>目标1</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="radioButton_Target2">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>20</y>
+       <width>89</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>目标2</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="radioButton_Target3">
+     <property name="geometry">
+      <rect>
+       <x>480</x>
+       <y>20</y>
+       <width>89</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>目标3</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="radioButton_Target4">
+     <property name="geometry">
+      <rect>
+       <x>660</x>
+       <y>20</y>
+       <width>89</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>目标4</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_8">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>80</y>
+      <width>831</width>
+      <height>251</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>参数设置</string>
+    </property>
+    <widget class="QLabel" name="label_DopplerPredFre">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>32</y>
+       <width>111</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>多普勒预置频率</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_DopplerPredFre">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>32</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_OutputPowerDecrease">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>83</y>
+       <width>97</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>输出功率衰减</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_OutputPowerDecrease">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>83</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_6">
+     <property name="geometry">
+      <rect>
+       <x>235</x>
+       <y>32</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>kHz</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_7">
+     <property name="geometry">
+      <rect>
+       <x>235</x>
+       <y>83</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>dB</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_FreExpandRate">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>32</y>
+       <width>97</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>扩频码速率</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_FreExpandRate">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>32</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_ChannelOutputCtrl">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>83</y>
+       <width>97</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>通道输出控制</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_ChannelOutputCtrl">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>83</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_IORate">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>130</y>
+       <width>97</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IQ功率比</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_IORate">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>130</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_IVirtualAdd">
+     <property name="geometry">
+      <rect>
+       <x>650</x>
+       <y>32</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_IVirtualAdd">
+     <property name="geometry">
+      <rect>
+       <x>550</x>
+       <y>32</y>
+       <width>97</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>I路伪码加调</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_QVirtualAdd">
+     <property name="geometry">
+      <rect>
+       <x>650</x>
+       <y>83</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_QVirtualAdd">
+     <property name="geometry">
+      <rect>
+       <x>550</x>
+       <y>83</y>
+       <width>97</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Q路伪码加调</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_DataAdd">
+     <property name="geometry">
+      <rect>
+       <x>650</x>
+       <y>130</y>
+       <width>100</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_DataAdd">
+     <property name="geometry">
+      <rect>
+       <x>550</x>
+       <y>130</y>
+       <width>97</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>数据加调</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_21">
+     <property name="geometry">
+      <rect>
+       <x>495</x>
+       <y>132</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>dB</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_Set">
+     <property name="geometry">
+      <rect>
+       <x>730</x>
+       <y>200</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>设置</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_Modify">
+     <property name="geometry">
+      <rect>
+       <x>590</x>
+       <y>200</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>更改</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='utf-8'?>
+<configuration>
+    <Device DeviceName="基带设备一" DeviceID="0401" StationID="2311" Note="基带分机一">
+        <System SystemName="USB模式" Alias="USB"  Note="" IndexStart="0" SubSysID="01">
+            <ParameterItem ItemName="USBBBE系统参数"     ObjectID="2311.05.0400.5141.00" DynamicLibraryName="libUSBBBE_SysParaSet.so" />
+            <ParameterItem ItemName="USBBBE中频接收机" ObjectID="2311.05.0400.5142.00" DynamicLibraryName="libUSBBBE_TMCJRecSet.so" />
+            <ParameterItem ItemName="USBBBE调制器"        ObjectID="2311.05.0400.5140.00" DynamicLibraryName="libUSBBBE_PMModuSet.so" />
+            <ParameterItem ItemName="USBBBE遥测"      ObjectID="2311.05.0400.5139.00" DynamicLibraryName="libUSBBBE_CodeTMParaSet.so" />
+	      <ParameterItem ItemName="USBBBE遥控"  ObjectID="2311.05.0400.5143.00" DynamicLibraryName="libFM_TrackRecvOutputSet.so" />
+		<ParameterItem ItemName="USBBBE测距测速"  ObjectID="2311.05.0400.5137.00" DynamicLibraryName="libUSBBBE_CJParaSet.so" />
+		<ParameterItem ItemName="USBBBE模拟源"  ObjectID="2311.05.0400.5138.00" DynamicLibraryName="libUSBBBE_CodeTMEmuSet.so" />
+        </System>
+      <System SystemName="SS1模式" Alias="SS1"  Note="" IndexStart="1" SubSysID="01">
+            <ParameterItem ItemName="SS1BBE系统参数"     ObjectID="2311.06.0400.5153.00" DynamicLibraryName="libSSBBE_SysParamSet.so" />
+            <ParameterItem ItemName="SS1BBE中频接收机" ObjectID="2311.06.0400.5146.00" DynamicLibraryName="libSS1BBE_RcvParamSet.so" />
+            <ParameterItem ItemName="SS1BBE调制器"        ObjectID="2311.06.0400.5147.00" DynamicLibraryName="libSS1BBE_ModuParamSet.so" />
+  	      <ParameterItem ItemName="SS1BBE扩频码"        ObjectID="2311.06.0400.5151.00" DynamicLibraryName="libSS1PNCodeSet.so" />
+            <ParameterItem ItemName="SS1BBE遥测"      ObjectID="2311.06.0400.5149.00" DynamicLibraryName="libSSBBE_TMParaSet.so" />
+	      <ParameterItem ItemName="SS1BBE遥控"  ObjectID="2311.06.0400.5154.00" DynamicLibraryName="libSSBBE_TCParamSet.so" />
+		<ParameterItem ItemName="SS1BBE测距测速"  ObjectID="2311.06.0400.5152.00" DynamicLibraryName="libSSBBE_CjCsParamSet.so" />
+		<ParameterItem ItemName="SS1BBE角误差输出"  ObjectID="2311.06.0400.5148.00" DynamicLibraryName="libSSBBE_OutPutSelSet.so" />
+		<ParameterItem ItemName="SS1BBE模拟源"  ObjectID="2311.06.0400.5155.00" DynamicLibraryName="libSSBBE_TMSimu1ParaSet.so" />
+      </System>
+        <System SystemName="SS2模式" Alias="SS2"  Note="" IndexStart="2" SubSysID="01">
+            <ParameterItem ItemName="SS2BBE系统参数"     ObjectID="2311.07.0400.5153.00" DynamicLibraryName="libSS2BBE_SysParamSet.so" />
+            <ParameterItem ItemName="SS2BBE中频接收机" ObjectID="2311.07.0400.5157.00" DynamicLibraryName="libSS2BBE_RcvParamSet.so" />
+            <ParameterItem ItemName="SS2BBE调制器"        ObjectID="2311.07.0400.5158.00" DynamicLibraryName="libSS2BBE_ModuParamSet.so" />
+  	      <ParameterItem ItemName="SS2BBE扩频码"        ObjectID="2311.07.0400.5160.00" DynamicLibraryName="libSS2PNCodeSet.so" />
+            <ParameterItem ItemName="SS2BBE遥测"      ObjectID="2311.07.0400.5164.00" DynamicLibraryName="libSS2BBE_TMParaSet.so" />
+	      <ParameterItem ItemName="SS2BBE遥控"  ObjectID="2311.07.0400.5154.00" DynamicLibraryName="libSS2BBE_TCParamSet.so" />
+		<ParameterItem ItemName="SS2BBE测距测速"  ObjectID="2311.07.0400.5159.00" DynamicLibraryName="libSS2BBE_CjCsParamSet.so" />
+		<ParameterItem ItemName="SS2BBE角误差输出"  ObjectID="2311.07.0400.5161.00" DynamicLibraryName="libSSBBE_OutPutSelSet.so" />
+		<ParameterItem ItemName="SS2BBE模拟源"  ObjectID="2311.07.0400.5163.00" DynamicLibraryName="libSS2BBE_TMSimu1ParaSet.so" />
+        </System>
+    </Device>
+  <Device DeviceName="基带设备二" DeviceID="0402" StationID="2311" Note="基带分机二" >
+        <System SystemName="USB模式" Alias="USB"  Note="" IndexStart="0" SubSysID="01">
+            <ParameterItem ItemName="USBBBE系统参数"     ObjectID="2311.05.0401.5141.00" DynamicLibraryName="libUSBBBE_SysParaSet.so" />
+            <ParameterItem ItemName="USBBBE中频接收机" ObjectID="2311.05.0401.5142.00" DynamicLibraryName="libUSBBBE_TMCJRecSet.so" />
+            <ParameterItem ItemName="USBBBE调制器"        ObjectID="2311.05.0401.5140.00" DynamicLibraryName="libUSBBBE_PMModuSet.so" />
+            <ParameterItem ItemName="USBBBE遥测"      ObjectID="2311.05.0401.5139.00" DynamicLibraryName="libUSBBBE_CodeTMParaSet.so" />
+	      <ParameterItem ItemName="USBBBE遥控"  ObjectID="2311.05.0401.5143.00" DynamicLibraryName="libFM_TrackRecvOutputSet.so" />
+		<ParameterItem ItemName="USBBBE测距测速"  ObjectID="2311.05.0401.5137.00" DynamicLibraryName="libUSBBBE_CJParaSet.so" />
+		<ParameterItem ItemName="USBBBE模拟源"  ObjectID="2311.05.0401.5138.00" DynamicLibraryName="libUSBBBE_CodeTMEmuSet.so" />
+        </System>
+      <System SystemName="SS1模式" Alias="SS1"  Note="" IndexStart="1" SubSysID="01">
+            <ParameterItem ItemName="SS1BBE系统参数"     ObjectID="2311.06.0401.5153.00" DynamicLibraryName="libSSBBE_SysParamSet.so" />
+            <ParameterItem ItemName="SS1BBE中频接收机" ObjectID="2311.06.0401.5146.00" DynamicLibraryName="libSS1BBE_RcvParamSet.so" />
+            <ParameterItem ItemName="SS1BBE调制器"        ObjectID="2311.06.0401.5147.00" DynamicLibraryName="libSS1BBE_ModuParamSet.so" />
+  	      <ParameterItem ItemName="SS1BBE扩频码"        ObjectID="2311.06.0401.5151.00" DynamicLibraryName="libSS1PNCodeSet.so" />
+            <ParameterItem ItemName="SS1BBE遥测"      ObjectID="2311.06.0401.5149.00" DynamicLibraryName="libSSBBE_TMParaSet.so" />
+	      <ParameterItem ItemName="SS1BBE遥控"  ObjectID="2311.06.0401.5154.00" DynamicLibraryName="libSSBBE_TCParamSet.so" />
+		<ParameterItem ItemName="SS1BBE测距测速"  ObjectID="2311.06.0401.5152.00" DynamicLibraryName="libSSBBE_CjCsParamSet.so" />
+		<ParameterItem ItemName="SS1BBE角误差输出"  ObjectID="2311.06.0401.5148.00" DynamicLibraryName="libSSBBE_OutPutSelSet.so" />
+		<ParameterItem ItemName="SS1BBE模拟源"  ObjectID="2311.06.0401.5155.00" DynamicLibraryName="libSSBBE_TMSimu1ParaSet.so" />
+      </System>
+        <System SystemName="SS2模式" Alias="SS2"  Note="" IndexStart="2" SubSysID="01">
+            <ParameterItem ItemName="SS2BBE系统参数"     ObjectID="2311.07.0401.5153.00" DynamicLibraryName="libSS2BBE_SysParamSet.so" />
+            <ParameterItem ItemName="SS2BBE中频接收机" ObjectID="2311.07.0401.5157.00" DynamicLibraryName="libSS2BBE_RcvParamSet.so" />
+            <ParameterItem ItemName="SS2BBE调制器"        ObjectID="2311.07.0401.5158.00" DynamicLibraryName="libSS2BBE_ModuParamSet.so" />
+  	      <ParameterItem ItemName="SS2BBE扩频码"        ObjectID="2311.07.0401.5160.00" DynamicLibraryName="libSS2PNCodeSet.so" />
+            <ParameterItem ItemName="SS2BBE遥测"      ObjectID="2311.07.0401.5164.00" DynamicLibraryName="libSS2BBE_TMParaSet.so" />
+	      <ParameterItem ItemName="SS2BBE遥控"  ObjectID="2311.07.0401.5154.00" DynamicLibraryName="libSS2BBE_TCParamSet.so" />
+		<ParameterItem ItemName="SS2BBE测距测速"  ObjectID="2311.07.0401.5159.00" DynamicLibraryName="libSS2BBE_CjCsParamSet.so" />
+		<ParameterItem ItemName="SS2BBE角误差输出"  ObjectID="2311.07.0401.5161.00" DynamicLibraryName="libSSBBE_OutPutSelSet.so" />
+		<ParameterItem ItemName="SS2BBE模拟源"  ObjectID="2311.07.0401.5163.00" DynamicLibraryName="libSSBBE_TMSimu1ParaSet.so" />
+        </System>
+  </Device>
+
+  <Device DeviceName="信道设备" DeviceID="0101"  StationID="2311" Note="信道设备接收和发射">
+      <ParameterItem ItemName="下变频器一"     ObjectID="2311.00.2F00.510A.00" DynamicLibraryName="libDCParaSetGUI.so" />
+      <ParameterItem ItemName="下变频器二"     ObjectID="2311.00.2F01.510A.00" DynamicLibraryName="libDCParaSetGUI.so" />
+      <ParameterItem ItemName="上变频器一"     ObjectID="2311.00.2E00.6018.00" DynamicLibraryName="libDCParaSetGUI.so" />
+      <ParameterItem ItemName="上变频器二"     ObjectID="2311.00.2E01.6018.00" DynamicLibraryName="libDCParaSetGUI.so" />
+	<ParameterItem ItemName="校验变频器"       ObjectID="2311.00.3A00.510B.00" DynamicLibraryName="libCheckCParaSetGUI.so" />
+	<ParameterItem ItemName="S频段功放高频箱"     ObjectID="2311.00.3200.5108.00" DynamicLibraryName="libHPATDcu.so" />
+	<ParameterItem ItemName="测控远程监控接口"     ObjectID="2311.00.0101.6022.00" DynamicLibraryName="libTTCServerInterface.so" />
+  </Device>
+</configuration>

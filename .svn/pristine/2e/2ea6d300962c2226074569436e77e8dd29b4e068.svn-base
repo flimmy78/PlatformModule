@@ -1,0 +1,1284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SS2BBE_TMParaSetGUIDlg</class>
+ <widget class="QDialog" name="SS2BBE_TMParaSetGUIDlg">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1036</width>
+    <height>725</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>DDTBBE_CodFrmSynSetGUIDlg</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QGroupBox
+{
+	border-width:2px;
+	border-style:solid;
+	border-color:gray;
+	margin-top:1ex;
+}
+
+QGroupBox::title
+{
+	subcontrol-origin:margin;
+	subcontrol-position:top left;
+	left:10px;
+	padding: 0px;
+}</string>
+  </property>
+  <widget class="QPushButton" name="pushButton_Set">
+   <property name="geometry">
+    <rect>
+     <x>910</x>
+     <y>680</y>
+     <width>91</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>设置</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_8">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>47</y>
+     <width>971</width>
+     <height>161</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+   <widget class="QLabel" name="label_34">
+    <property name="geometry">
+     <rect>
+      <x>1390</x>
+      <y>224</y>
+      <width>24</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>字</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_ViterbType">
+    <property name="geometry">
+     <rect>
+      <x>503</x>
+      <y>68</y>
+      <width>91</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_8">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>26</y>
+      <width>109</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>RS码类型</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_CodeRate">
+    <property name="geometry">
+     <rect>
+      <x>211</x>
+      <y>120</y>
+      <width>92</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>389</x>
+      <y>68</y>
+      <width>92</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Viterbi译码</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_RSType">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>26</y>
+      <width>91</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_RSDecodeDeep">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>109</y>
+      <width>109</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>交织深度</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_DecodeType">
+    <property name="geometry">
+     <rect>
+      <x>503</x>
+      <y>26</y>
+      <width>145</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_RSDecodePlot">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>68</y>
+      <width>91</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>68</y>
+      <width>109</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>RS译码坐标</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_ViterbiPhase">
+    <property name="geometry">
+     <rect>
+      <x>503</x>
+      <y>109</y>
+      <width>91</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_CodeType">
+    <property name="geometry">
+     <rect>
+      <x>109</x>
+      <y>86</y>
+      <width>101</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>码型</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_ConvType">
+    <property name="geometry">
+     <rect>
+      <x>389</x>
+      <y>26</y>
+      <width>92</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>译码方式</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_CodeType">
+    <property name="geometry">
+     <rect>
+      <x>211</x>
+      <y>86</y>
+      <width>92</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_CodeRate">
+    <property name="geometry">
+     <rect>
+      <x>109</x>
+      <y>120</y>
+      <width>101</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>码速率</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_DecodeMode">
+    <property name="geometry">
+     <rect>
+      <x>389</x>
+      <y>109</y>
+      <width>111</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Viterbi输出相位</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_FrameSyncCodePos">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>52</y>
+      <width>91</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>109</x>
+      <y>52</y>
+      <width>101</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>帧同步码组位置</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_FrameDataFlag">
+    <property name="geometry">
+     <rect>
+      <x>211</x>
+      <y>18</y>
+      <width>91</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_FrameDataFlag">
+    <property name="geometry">
+     <rect>
+      <x>109</x>
+      <y>18</y>
+      <width>101</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>数据帧标志码</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_RSDecodeDeep">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>109</y>
+      <width>91</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_31">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>120</y>
+      <width>24</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>bps</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_18">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>460</y>
+     <width>971</width>
+     <height>201</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+   <widget class="QLabel" name="label_FrameSyncFaultTolerant">
+    <property name="geometry">
+     <rect>
+      <x>132</x>
+      <y>20</y>
+      <width>171</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>帧同步容错搜索容错位数</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_FrameSyncFaultTolerant">
+    <property name="geometry">
+     <rect>
+      <x>307</x>
+      <y>20</y>
+      <width>111</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_FaltToleranceOfFrameSync">
+    <property name="geometry">
+     <rect>
+      <x>132</x>
+      <y>55</y>
+      <width>171</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>帧同步容错校核容错位数</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_FaltToleranceOfFrameSync">
+    <property name="geometry">
+     <rect>
+      <x>307</x>
+      <y>55</y>
+      <width>111</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_FrameSyncFaultTolerantLockBit">
+    <property name="geometry">
+     <rect>
+      <x>132</x>
+      <y>90</y>
+      <width>171</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>帧同步容错锁定容错位数</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_FrameSyncFaultTolerantLockBit">
+    <property name="geometry">
+     <rect>
+      <x>307</x>
+      <y>90</y>
+      <width>111</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_CheckFrameOfFaultFrameSync">
+    <property name="geometry">
+     <rect>
+      <x>132</x>
+      <y>125</y>
+      <width>171</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>帧同步容错校核检测帧数</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_CheckFrameOfFaultFrameSync">
+    <property name="geometry">
+     <rect>
+      <x>307</x>
+      <y>125</y>
+      <width>111</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_FrameSyncFaultLockDetection">
+    <property name="geometry">
+     <rect>
+      <x>307</x>
+      <y>160</y>
+      <width>111</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_FrameSyncFaultLockDetection">
+    <property name="geometry">
+     <rect>
+      <x>132</x>
+      <y>160</y>
+      <width>171</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>帧同步容错锁定检测帧数</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_139">
+    <property name="geometry">
+     <rect>
+      <x>425</x>
+      <y>55</y>
+      <width>21</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>位</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_140">
+    <property name="geometry">
+     <rect>
+      <x>425</x>
+      <y>90</y>
+      <width>21</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>位</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_141">
+    <property name="geometry">
+     <rect>
+      <x>425</x>
+      <y>125</y>
+      <width>21</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>帧</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_142">
+    <property name="geometry">
+     <rect>
+      <x>425</x>
+      <y>160</y>
+      <width>21</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>帧</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_138">
+    <property name="geometry">
+     <rect>
+      <x>425</x>
+      <y>20</y>
+      <width>21</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>位</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_SubCheckFrameOfFaultFrameSync">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>125</y>
+      <width>111</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_143">
+    <property name="geometry">
+     <rect>
+      <x>825</x>
+      <y>160</y>
+      <width>21</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>帧</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_SubFrameSyncFaultTolerantLockBit">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>90</y>
+      <width>111</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_SubFrameSyncFaultLockDetection">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>160</y>
+      <width>111</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_SubFaltToleranceOfFrameSync">
+    <property name="geometry">
+     <rect>
+      <x>515</x>
+      <y>55</y>
+      <width>181</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>副帧同步容错校核容错位数</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_SubFrameSyncFaultTolerant">
+    <property name="geometry">
+     <rect>
+      <x>515</x>
+      <y>20</y>
+      <width>181</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>副帧同步容错搜索容错位数</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_144">
+    <property name="geometry">
+     <rect>
+      <x>825</x>
+      <y>55</y>
+      <width>21</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>位</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_146">
+    <property name="geometry">
+     <rect>
+      <x>825</x>
+      <y>20</y>
+      <width>21</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>位</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_147">
+    <property name="geometry">
+     <rect>
+      <x>825</x>
+      <y>125</y>
+      <width>21</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>帧</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_SubFrameSyncFaultLockDetection">
+    <property name="geometry">
+     <rect>
+      <x>515</x>
+      <y>160</y>
+      <width>181</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>副帧同步容错锁定检测帧数</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_SubCheckFrameOfFaultFrameSync">
+    <property name="geometry">
+     <rect>
+      <x>515</x>
+      <y>125</y>
+      <width>191</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>副帧同步容错校核检测帧数</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_SubFaltToleranceOfFrameSync">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>55</y>
+      <width>111</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_SubFrameSyncFaultTolerant">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>20</y>
+      <width>111</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_145">
+    <property name="geometry">
+     <rect>
+      <x>825</x>
+      <y>90</y>
+      <width>21</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>位</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_SubFrameSyncFaultTolerantLockBit">
+    <property name="geometry">
+     <rect>
+      <x>515</x>
+      <y>90</y>
+      <width>181</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>副帧同步容错锁定容错位数</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="pushButton_Modify">
+   <property name="geometry">
+    <rect>
+     <x>756</x>
+     <y>680</y>
+     <width>91</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>更改</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>3</y>
+     <width>971</width>
+     <height>44</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>目标选择</string>
+   </property>
+   <widget class="QRadioButton" name="radioButton_Target1">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>10</y>
+      <width>89</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>目标1</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_Target2">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>10</y>
+      <width>89</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>目标2</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_Target3">
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>10</y>
+      <width>89</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>目标3</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_Target4">
+    <property name="geometry">
+     <rect>
+      <x>750</x>
+      <y>10</y>
+      <width>89</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>目标4</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_3">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>340</y>
+     <width>971</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+   <widget class="QLineEdit" name="lineEdit_SubFrmGroup">
+    <property name="geometry">
+     <rect>
+      <x>500</x>
+      <y>70</y>
+      <width>91</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_SubFrmGroup">
+    <property name="geometry">
+     <rect>
+      <x>389</x>
+      <y>70</y>
+      <width>101</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>副帧码组(Hex)</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_CycFrmSynCodeLen">
+    <property name="geometry">
+     <rect>
+      <x>109</x>
+      <y>70</y>
+      <width>101</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>副帧码组长度</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_SubFrameGroupLen">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>70</y>
+      <width>91</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_SubFrmSynGroupPos">
+    <property name="geometry">
+     <rect>
+      <x>501</x>
+      <y>23</y>
+      <width>90</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_32">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>23</y>
+      <width>24</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>字</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_SubFrmSynGroupPos">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>23</y>
+      <width>100</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>副帧码组位置</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_SubFrmSyncType">
+    <property name="geometry">
+     <rect>
+      <x>212</x>
+      <y>23</y>
+      <width>91</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_27">
+    <property name="geometry">
+     <rect>
+      <x>109</x>
+      <y>23</y>
+      <width>100</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>副帧同步方式</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_idCountPos">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>12</y>
+      <width>91</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_SubFramePos">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>47</y>
+      <width>109</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>ID字基值</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_idDirect">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>82</y>
+      <width>91</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_idCountPos">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>12</y>
+      <width>109</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>ID计数字位置</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_24">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>82</y>
+      <width>109</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>ID计数方向</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_IDBaseValue">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>47</y>
+      <width>90</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_4">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>209</y>
+     <width>971</width>
+     <height>131</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+   <widget class="QLineEdit" name="lineEdit_WordLen">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>17</y>
+      <width>91</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_WordLen">
+    <property name="geometry">
+     <rect>
+      <x>109</x>
+      <y>17</y>
+      <width>101</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>字长</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_30">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>54</y>
+      <width>24</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>字</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_FrameLen">
+    <property name="geometry">
+     <rect>
+      <x>109</x>
+      <y>54</y>
+      <width>101</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>帧长</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_FrameLen">
+    <property name="geometry">
+     <rect>
+      <x>211</x>
+      <y>54</y>
+      <width>91</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_SubFrameLen">
+    <property name="geometry">
+     <rect>
+      <x>109</x>
+      <y>90</y>
+      <width>101</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>格式(副帧)长</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_SubFrameLen">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>90</y>
+      <width>91</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_FrameSyncGroupLen">
+    <property name="geometry">
+     <rect>
+      <x>500</x>
+      <y>17</y>
+      <width>91</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_SynCodeLen">
+    <property name="geometry">
+     <rect>
+      <x>389</x>
+      <y>17</y>
+      <width>91</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>帧同步码组长</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_FrmSyncGroup">
+    <property name="geometry">
+     <rect>
+      <x>500</x>
+      <y>54</y>
+      <width>91</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_FrmSyncGroup">
+    <property name="geometry">
+     <rect>
+      <x>389</x>
+      <y>54</y>
+      <width>101</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>帧同步码组(HEX)</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_RandEn">
+    <property name="geometry">
+     <rect>
+      <x>500</x>
+      <y>90</y>
+      <width>91</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_13">
+    <property name="geometry">
+     <rect>
+      <x>389</x>
+      <y>90</y>
+      <width>91</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>解扰控制</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_RandPolyLen">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>17</y>
+      <width>91</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_1">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>17</y>
+      <width>109</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>解扰多项式长度</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_RandPoly">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>54</y>
+      <width>91</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_RandPoly">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>54</y>
+      <width>109</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>解扰多项式(Hex)</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_RandPhase">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>90</y>
+      <width>91</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_RandPhase">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>90</y>
+      <width>109</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>解扰初相(Hex)</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>90</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>帧</string>
+    </property>
+   </widget>
+  </widget>
+  <zorder>pushButton_Set</zorder>
+  <zorder>groupBox_18</zorder>
+  <zorder>pushButton_Modify</zorder>
+  <zorder>groupBox_8</zorder>
+  <zorder>groupBox</zorder>
+  <zorder>groupBox_3</zorder>
+  <zorder>groupBox_4</zorder>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

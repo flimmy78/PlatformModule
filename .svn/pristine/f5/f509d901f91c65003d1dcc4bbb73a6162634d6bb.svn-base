@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Config>
+	<!-- Group表示开关选择信息 name表示选择的名称 -->
+	<!-- Param表示为几个选择1个 name表示输入的链路名称 value表示输入参数的值 值为16进行 -->
+	<Group name="输入参考源" >
+		<Param name="选择站时统" value="0" />
+		<Param name="选择铷钟" value="1" />
+	</Group>
+</Config>
