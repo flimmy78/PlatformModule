@@ -44,6 +44,7 @@ QWidget* CDevCtlInterfaceGUI::ShowMe(QWidget* parent, const QString& strTitle)
     CDevCtlInterfaceGUIDlg* form;
 
     form = new CDevCtlInterfaceGUIDlg(parent);
+    form->m_SearchStatusThread = &m_searchStatuThread;
 
     //设置对象配置信息
     form->SetObjInfo(m_ObjectInfo);

@@ -281,6 +281,9 @@ public:
     void ProcessRSPMarcoCmdCtrl(DATACONTENT& msg);
     bool ProcessAddZero(QString name,TLxTsspMessageHeader *pCmdHead,TLxTsspSubMsgHeader *pCmdItemHead);
     //wl end
+
+private://宏同步
+    void deleteMacroFiles();
 };
 
 #endif // CDevCtlInterfaceGUI_H

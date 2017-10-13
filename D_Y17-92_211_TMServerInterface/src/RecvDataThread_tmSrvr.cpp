@@ -70,7 +70,15 @@ void RecvDataThread::run()
             datagram.resize(iDataLen);
             memcpy(datagram.data(), m_pDataBuffer, datagram.size());
             qDebug() << "Recv len: " << datagram.size();
-            processDatagram(datagram, chlId, m_ComChannelVec[i]);
+            if(chlId == "TMServer")
+                processDatagram(datagram, chlId, m_ComChannelVec[i]);
+            else if(chlId == "TMServerS_Power" || chlId == "TMServerL_Power" )
+                processDatagramSvrSLPower(datagram, chlId);
+            else if(chlId == "TMServerUpAlter1" || chlId == "TMServerUpAlter2" ||
+                    chlId == "TMServerDownAlter1" || chlId == "TMServerDownAlter2" ||
+                    chlId == "TMServerUpAlter" || chlId == "TMServerTimer")
+                processDatagramSvr1(datagram);
+
         }
         usleep(10);
     }
@@ -112,14 +120,36 @@ void RecvDataThread::catchDs()
         {
             dsex.pContent = pStatMgr->FindOneItem(ds.id, ds.len);
             ds.data[ds.len] = STATUS;
+            ds.timeTag = pStatMgr->GetTimeTag(ds.id);
             m_listDsex.append(dsex);
         }
     }
 }
+void RecvDataThread::processDatagramSvrSLPower(QByteArray& datagram, QString &chl)
+{
+    ICommunicationChannel* pChannel = NULL;
+    QString realChl = "S_Power";
+    if(chl == "TMServerL_Power")realChl = "L_Power";
+    if(-1 == m_pPlatformRes->m_pChlMgr->GetChannel(realChl, pChannel))
+    {
+        CLog::addLog(QString("处理远控功放命令，通道获取失败。ID是：")+realChl);
+        return;
+    }
+    pChannel->SendData((uchar*)datagram.data(), datagram.size());
+    g_showDatagram.m_datagramCommSend = datagram;
+}
+void RecvDataThread::processDatagramSvr1(QByteArray& datagram)
+{
+    TLxTsspMessage msg;
+    msg.iDataLen = datagram.size();
+    msg.pData = datagram.data();
+    m_pPlatformRes->m_pMsgMgr->FireMessage(msg);
+    g_showDatagram.m_datagramCommSend = datagram;
+}
 
 void RecvDataThread::processDatagram(QByteArray& datagram, QString chlID, ICommunicationChannel* /*pChl*/)
 {
-    if(chlID != "TMServer")return;
+    QByteArray temp = datagram;
     char tmp = datagram[datagram.size() - 1];
     datagram.remove(datagram.size() - 1, 1);
     struct {TLxTsspMessageHeader header;TLxTsspSubMsgHeader subHeader;}protocol;
@@ -134,10 +164,16 @@ void RecvDataThread::processDatagram(QByteArray& datagram, QString chlID, ICommu
         msg.iDataLen = datagram.size();
         msg.pData = datagram.data();
         m_pPlatformRes->m_pMsgMgr->FireMessage(msg);
+        g_showDatagram.m_datagramCommRev = temp;
     }
     else if (tmp == STATUS)
     {
-        if(m_listDsex.size() != m_pPlatformRes->m_pStatMgr->GetItemCounts())catchDs();
+        if(m_listDsex.size() != m_pPlatformRes->m_pStatMgr->GetItemCounts())
+            catchDs();
+        for (int i = 0;i<m_listDsex.size();i++)
+        {
+            m_listDsex[i].ds.timeTag = m_pPlatformRes->m_pStatMgr->GetTimeTag(m_listDsex[i].ds.id);
+        }
         QList<ICommunicationChannel*> chls;
         bool ok = m_pPlatformRes->getChlsUsedByDevCtl(chls);
         if(!ok || !chls.size())
@@ -148,6 +184,9 @@ void RecvDataThread::processDatagram(QByteArray& datagram, QString chlID, ICommu
         QList<ICommunicationChannel*>::iterator iter = chls.begin(), iterEnd = chls.end();
         for (; iter != iterEnd; ++iter)
         {
+            QString id;
+            (*iter)->GetChannelID(id);
+            if(id != "TMServer")continue;
             for (int i = 0; i < m_listDsex.size(); ++i)
             {
                 DATASOURCE_PRO& ds = m_listDsex[i].ds;
@@ -161,6 +200,12 @@ void RecvDataThread::processDatagram(QByteArray& datagram, QString chlID, ICommu
                 {
                     CLog::addLog("状态上报消息发送失败.\n");
                     continue;
+                }
+                if (g_showDatagram.m_id == ds.id)
+                {
+                    g_showDatagram.m_datagramStatuRev.clear();
+                    g_showDatagram.m_datagramStatuRev.resize(ds.len);
+                    memcpy(g_showDatagram.m_datagramStatuRev.data(), ds.data, ds.len);
                 }
             }
         }
@@ -270,7 +315,7 @@ bool RecvDataThread::init(PlatformResource& res)
         ICommunicationChannel* pChannal = ChannelList.at(i);
         QString strChlID;
         pChannal->GetChannelID(strChlID);
-        if(strChlID != "TMServer")continue;
+        //if(strChlID != "TMServer")continue;
         if(pChannal == NULL)
         {
 
@@ -290,7 +335,13 @@ bool RecvDataThread::init(PlatformResource& res)
 bool RecvDataThread::getFileList(QFileInfoList &fileList, QString strPath)
 {
     QString filePath = strPath + "/TM/System/MacroManager/";
+    QString filePathLxts = strPath + "/System/LxTsspConfig/";
     fileList = QDir(filePath).entryInfoList();
+    QFileInfo IFMCfgMacro(filePathLxts + "IFMCfgMacro.dat");
+    if (IFMCfgMacro.exists())
+    {
+        fileList.append(IFMCfgMacro);
+    }
     if (fileList.isEmpty())
     {
         return false;
@@ -301,8 +352,12 @@ bool RecvDataThread::getFileList(QFileInfoList &fileList, QString strPath)
 bool RecvDataThread::getDatagram(QFileInfo fileInfo, QByteArray& macro, QString strPath)
 {
     TMTCMACRO data;
-    QString filePath = strPath + "/TM/System/MacroManager/";
+    QString filePath;
     QString fileName = fileInfo.fileName();
+    if (fileName == "IFMCfgMacro.dat")
+        filePath = strPath + "/System/LxTsspConfig/";
+    else
+        filePath = strPath + "/TM/System/MacroManager/";
     QFile file(filePath + fileName);
     if(!file.open(QFile::ReadOnly))
     {
@@ -342,6 +397,9 @@ bool RecvDataThread::sendDatagram(QByteArray& macro)
     QList<ICommunicationChannel*>::iterator iter = chls.begin(), end = chls.end();
     for (; iter != end; ++iter)
     {
+        QString id;
+        (*iter)->GetChannelID(id);
+        if(id != "TMServer")continue;
         macro.append(1);
         int ret = (*iter)->SendData((uchar*)macro.data(), macro.size());
         if (-1 == ret)

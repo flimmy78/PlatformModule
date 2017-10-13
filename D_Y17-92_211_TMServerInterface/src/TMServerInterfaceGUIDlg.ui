@@ -331,9 +331,9 @@
    <property name="geometry">
     <rect>
      <x>140</x>
-     <y>420</y>
+     <y>328</y>
      <width>581</width>
-     <height>221</height>
+     <height>261</height>
     </rect>
    </property>
    <property name="html">
@@ -341,24 +341,14 @@
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;20170114&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-  </widget>
-  <widget class="QTextEdit" name="textEdit_statuCmd">
-   <property name="geometry">
-    <rect>
-     <x>140</x>
-     <y>380</y>
-     <width>581</width>
-     <height>31</height>
-    </rect>
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_statuClear">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>600</y>
+     <y>546</y>
      <width>121</width>
      <height>41</height>
     </rect>
@@ -371,7 +361,7 @@ p, li { white-space: pre-wrap; }
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>550</y>
+     <y>488</y>
      <width>121</width>
      <height>41</height>
     </rect>
@@ -380,23 +370,13 @@ p, li { white-space: pre-wrap; }
     <string>查询命令开启</string>
    </property>
   </widget>
-  <widget class="QTextEdit" name="textEdit_commCmd">
-   <property name="geometry">
-    <rect>
-     <x>140</x>
-     <y>80</y>
-     <width>581</width>
-     <height>211</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QTextEdit" name="textEdit_commResponse">
    <property name="geometry">
     <rect>
      <x>140</x>
-     <y>300</y>
+     <y>66</y>
      <width>581</width>
-     <height>71</height>
+     <height>245</height>
     </rect>
    </property>
   </widget>
@@ -404,7 +384,7 @@ p, li { white-space: pre-wrap; }
    <property name="geometry">
     <rect>
      <x>22</x>
-     <y>140</y>
+     <y>98</y>
      <width>99</width>
      <height>27</height>
     </rect>
@@ -417,7 +397,7 @@ p, li { white-space: pre-wrap; }
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>190</y>
+     <y>162</y>
      <width>101</width>
      <height>27</height>
     </rect>
@@ -426,50 +406,11 @@ p, li { white-space: pre-wrap; }
     <string>一般命令清理</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_pauseStatu">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>20</y>
-     <width>121</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>暂停状态查询</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_4">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>380</y>
-     <width>91</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>发,状态查询</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_5">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>231</y>
-     <width>101</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>发,除状态查询</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_6">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>420</y>
+     <x>26</x>
+     <y>342</y>
      <width>91</width>
      <height>17</height>
     </rect>
@@ -482,7 +423,7 @@ p, li { white-space: pre-wrap; }
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>300</y>
+     <y>236</y>
      <width>101</width>
      <height>17</height>
     </rect>
@@ -508,7 +449,7 @@ p, li { white-space: pre-wrap; }
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>490</y>
+     <y>428</y>
      <width>121</width>
      <height>41</height>
     </rect>
@@ -517,44 +458,28 @@ p, li { white-space: pre-wrap; }
     <string>停止刷新</string>
    </property>
   </widget>
-  <widget class="QGroupBox" name="groupBox_6">
+  <widget class="QLabel" name="label_searchDS">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>660</y>
-     <width>151</width>
-     <height>51</height>
+     <x>154</x>
+     <y>612</y>
+     <width>123</width>
+     <height>30</height>
     </rect>
    </property>
-   <property name="layoutDirection">
-    <enum>Qt::LeftToRight</enum>
+   <property name="text">
+    <string>输入显示的信息元号：</string>
    </property>
-   <property name="title">
-    <string>本控/远控切换</string>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_searcgDS">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>612</y>
+     <width>171</width>
+     <height>30</height>
+    </rect>
    </property>
-   <property name="flat">
-    <bool>false</bool>
-   </property>
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
-     <widget class="QRadioButton" name="radioButton_local">
-      <property name="text">
-       <string>本控</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QRadioButton" name="radioButton_remote">
-      <property name="styleSheet">
-       <string notr="true">border-color: rgb(255, 255, 255);
-</string>
-      </property>
-      <property name="text">
-       <string>远控</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
   </widget>
  </widget>
  <resources/>

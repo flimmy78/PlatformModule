@@ -15,6 +15,7 @@ class CDevCtlInterfaceGUIDlg : public QDialog
 public:
     explicit CDevCtlInterfaceGUIDlg(QWidget *parent = 0);
     ~CDevCtlInterfaceGUIDlg();
+    SearchStatusThread* m_SearchStatusThread;
 protected:
 
 private:

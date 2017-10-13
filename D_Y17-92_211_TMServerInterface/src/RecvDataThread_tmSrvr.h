@@ -85,6 +85,8 @@ public:
     bool getDatagram(QFileInfo, QByteArray&, QString);
     bool sendDatagram(QByteArray&);
     void catchDs();
+    void processDatagramSvr1(QByteArray &datagram);
+    void processDatagramSvrSLPower(QByteArray &datagram, QString& chl);
 };
 
 #endif // RECVDATATHREAD_H

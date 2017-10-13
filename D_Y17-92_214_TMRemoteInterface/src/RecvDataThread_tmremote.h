@@ -62,6 +62,7 @@ public:
     CRM m_crm1;
     CRM m_crm2;
     SearchMarc *m_searchMarc;
+    QMap<quint64, uchar*> m_DSMap;
 
 private:
     //区分具体的协议 判断是协议1还是协议2
@@ -74,7 +75,9 @@ private:
     DevicesConnectStatus* m_pConnectSt;
     bool init(PlatformResource& res);
     quint64 m_devConnectID;
-
+    QMap<uint, QByteArray> m_macroList;
+    QMap<quint64, QByteArray> m_paramList;
+    QMap<quint64,uint> m_tags;//tag
 public:
     //初始化相关的通道
     bool initChlProcessor();
@@ -84,6 +87,10 @@ public:
     void proceProcotol(QByteArray& datagram);
     int getSN(int devID);
     bool setDatagram(QByteArray datagram);
+    bool updateMacroList();
+    bool macroTransferFinish();
+    QString getDATFullPath(TLxTsspParamMacroInformation *pMacroInfo);
+    void updataTimeTag(DATASOURCE_PRO&);
 };
 
 #endif // RECVDATATHREAD_H

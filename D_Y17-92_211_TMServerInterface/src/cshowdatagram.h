@@ -15,6 +15,7 @@ public:
     QByteArray m_datagramStatuSend;//状态查询
     QByteArray m_datagramCommRev;//除状态查询
     QByteArray m_datagramCommSend;//除状态查询
+    quint64 m_id;
     bool m_stopStatu;
     bool m_stopComm;
 

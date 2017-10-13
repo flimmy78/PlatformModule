@@ -34,12 +34,12 @@ void CDevCtlInterfaceGUIDlg::showDatagram()
     if(m_showStatuDatagram)//status
     {
         ui->textEdit_statuResponse->setText(getStrFromDatagram(g_showDatagram.m_datagramStatuRev));
-        ui->textEdit_statuCmd->setText(getStrFromDatagram(g_showDatagram.m_datagramStatuSend));
+        //ui->textEdit_statuCmd->setText(getStrFromDatagram(g_showDatagram.m_datagramStatuSend));
     }
     if(m_showCommDatagram)//comm
     {
         ui->textEdit_commResponse->setText(getStrFromDatagram(g_showDatagram.m_datagramCommRev));
-        ui->textEdit_commCmd->setText(getStrFromDatagram(g_showDatagram.m_datagramCommSend));
+        //ui->textEdit_commCmd->setText(getStrFromDatagram(g_showDatagram.m_datagramCommSend));
     }
 }
 
@@ -123,6 +123,11 @@ void CDevCtlInterfaceGUIDlg::InitDLG(int )
     ui->comboBoxWorkWay->addItem(tr(PCR_WORK_WAY_12));
     ui->comboBoxWorkWay->addItem(tr(PCR_WORK_WAY_13));
     ui->comboBoxWorkWay->addItem(tr(PCR_WORK_WAY_14));
+    ui->lineEdit_searcgDS->setToolTip("请输入信息元号");
+    ui->lineEdit_searcgDS->setText("2311000100901300");
+    QRegExp regExp("[A-Fa-f0-9]{1,16}");
+    ui->lineEdit_searcgDS->setValidator(new QRegExpValidator(regExp, this));
+    g_showDatagram.m_id = 0x2311000100901300;
 }
 
 void CDevCtlInterfaceGUIDlg::SetObjInfo(TLxTsspObjectInfo ObjectInfo)
@@ -426,24 +431,26 @@ void CDevCtlInterfaceGUIDlg::on_pushButtonWordWay_clicked()
 
 void CDevCtlInterfaceGUIDlg::on_pushButton_pauseStatu_clicked()
 {
-    if(ui->pushButton_pauseStatu->text() == "暂停状态查询")
-    {
-        ui->pushButton_pauseStatu->setText("开始状态查询");
-        if(g_pSearchThread)
-            g_pSearchThread->pause();
-    }
-    else
-    {
-        ui->pushButton_pauseStatu->setText("暂停状态查询");
-        if(g_pSearchThread)
-            g_pSearchThread->continu();
-    }
+//    if(ui->pushButton_pauseStatu->text() == "暂停状态查询")
+//    {
+//        ui->pushButton_pauseStatu->setText("开始状态查询");
+//        if(m_SearchStatusThread)
+//            m_SearchStatusThread->pause();
+//    }
+//    else
+//    {
+//        ui->pushButton_pauseStatu->setText("暂停状态查询");
+//        if(m_SearchStatusThread)
+//            m_SearchStatusThread->continu();
+//    }
 }
 
 void CDevCtlInterfaceGUIDlg::on_pushButton_statuCmd_clicked()
 {
-    if(g_pSearchThread)
-        g_pSearchThread->continu();
+    bool ok = false;
+    if(m_SearchStatusThread)
+        m_SearchStatusThread->continu();
+    g_showDatagram.m_id = ui->lineEdit_searcgDS->text().toLongLong(&ok, 16);
     killTimer(m_timerStatu);
     m_timerStatu = startTimer(1000);
     m_showStatuDatagram = true;
@@ -462,7 +469,7 @@ void CDevCtlInterfaceGUIDlg::on_pushButton_commClear_clicked()
     m_showCommDatagram = false;
     killTimer(m_timerComm);
     ui->textEdit_commResponse->clear();
-    ui->textEdit_commCmd->clear();
+    //ui->textEdit_commCmd->clear();
 }
 
 void CDevCtlInterfaceGUIDlg::on_pushButton_statuClear_clicked()
@@ -470,12 +477,12 @@ void CDevCtlInterfaceGUIDlg::on_pushButton_statuClear_clicked()
     m_showStatuDatagram = false;
     killTimer(m_timerStatu);
     ui->textEdit_statuResponse->clear();
-    ui->textEdit_statuCmd->clear();
+    //ui->textEdit_statuCmd->clear();
 }
 
 void CDevCtlInterfaceGUIDlg::on_pushButton_flash_clicked()
 {
-    if(ui->pushButton_flash->text() == "停止刷新" )
+    if(ui->pushButton_flash->text() == "停止刷新")
     {
         m_showCommDatagram = false;
         m_showStatuDatagram = false;

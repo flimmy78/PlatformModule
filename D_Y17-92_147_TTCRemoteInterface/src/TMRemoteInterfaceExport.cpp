@@ -1,4 +1,4 @@
-#include "../../Common/LxTsspCommonDefinition.h"
+﻿#include "../../Common/LxTsspCommonDefinition.h"
 #include "TMRemoteInterfaceGUI.h"
 extern CDevCtlInterfaceGUI* g_devCtrl;
 QMap<quint64, void*> g_ObjectList;
@@ -11,10 +11,10 @@ extern "C" int GetModuleInfo(TLxTsspModuleInfo& moduleInfo)
     strcpy(moduleInfo.szCompany, "中国航天科技集团九院七〇四所\0");
 
     /// 模块名称，如：系统工作参数设置
-    strcpy(moduleInfo.szModuleName, "测控分机设备接口\0");
+    strcpy(moduleInfo.szModuleName, "遥测远控与系统监控接口\0");
 
     /// 配置标识，如：D_Y17-61_008
-    strcpy(moduleInfo.szConfigID, "D_Y17-92_213\0");
+    strcpy(moduleInfo.szConfigID, "D_Y17-92_214\0");
 
     /// 版本
     strcpy(moduleInfo.szVersion, "01.00\0");

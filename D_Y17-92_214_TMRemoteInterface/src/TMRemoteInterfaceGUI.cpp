@@ -7,14 +7,15 @@
 #include "../../Common/DeviceMap.h"
 #include "../../Common/Log.h"
 #include "ProcessModule.h"
-
+#include <QFileInfo>
+#include <QFile>
 
 namespace
 {
-    CDevCtlInterfaceGUIDlg* g_form = NULL;
+CDevCtlInterfaceGUIDlg* g_form = NULL;
 }
 extern quint64 GetID(ushort usStationID, uchar ucSubSysID, ushort usDeviceID, ushort usType,
-              uchar ucSn);
+                     uchar ucSn);
 
 CDevCtlInterfaceGUI::CDevCtlInterfaceGUI(TLxTsspObjectInfo ObjectInfo)
 {
@@ -44,7 +45,7 @@ QWidget* CDevCtlInterfaceGUI::ShowMe(QWidget* parent, const QString& strTitle)
     CDevCtlInterfaceGUIDlg* form;
 
     form = new CDevCtlInterfaceGUIDlg(parent);
-
+    form->m_pSearchStatuThread = &m_searchStatuThread;
     //设置对象配置信息
     form->SetObjInfo(m_ObjectInfo);
     //设置界面信息
@@ -155,11 +156,13 @@ int CDevCtlInterfaceGUI::Initialize()
         return -1;
     }
 
-     if(false == m_connectStatu.init(&m_recvThread, &m_platformRes))
+    if(false == m_connectStatu.init(&m_recvThread, &m_platformRes))
     {
         CLog::addLog("链接状态处理线程初始化失败。", 1);
         return -1;
     }
+    m_platformRes.m_pMacroMgr->DeleteAll();
+    deleteMacroFiles();
     m_recvThread.start();
     m_searchStatuThread.start();
     m_searchMarc.start();
@@ -167,7 +170,17 @@ int CDevCtlInterfaceGUI::Initialize()
     g_context.initIDs();
     return 1;
 }
-
+void CDevCtlInterfaceGUI::deleteMacroFiles()
+{
+    QDir dir;
+    QString filePath = QDir::currentPath() + "/TM/System/MacroManager/";
+    dir.cd(filePath);
+    QFileInfoList fileLst = dir.entryInfoList();
+    foreach(QFileInfo v, fileLst){
+        if(v.suffix() == "dat" || v.suffix() == "mac")
+            QFile::remove(v.absoluteFilePath());
+    }
+}
 //遍历xlm文件，获取参数取值范围
 int CDevCtlInterfaceGUI::QueryParaBlock(QString )
 {
@@ -279,10 +292,10 @@ void CDevCtlInterfaceGUI::SendMessage(TLxTsspMessage )
 int CDevCtlInterfaceGUI::SetParameter(QMap<quint64, QByteArray> )
 {
     //对于参数组中的参数，首先判断是否本对象参数
-//    foreach(quint64 key, parameterList.keys())
-//    {
-//        //参数加载到硬件、本地保存、本地使用。
-//    }
+    //    foreach(quint64 key, parameterList.keys())
+    //    {
+    //        //参数加载到硬件、本地保存、本地使用。
+    //    }
     return 1;
 }
 
@@ -415,7 +428,7 @@ int CDevCtlInterfaceGUI::WriteData(quint64 , uchar* , uint )
  * @return 大于等于0：实际读取的数据长度；-1：失败。
  */
 int CDevCtlInterfaceGUI::ReadData(quint64 , uchar* , uint& ,
-                             uint& )
+                                  uint& )
 {
     return 0;
 }
@@ -428,7 +441,7 @@ int CDevCtlInterfaceGUI::CreateDefaultMacroObj(ILxTsspParameterMacro* )
 QWidget* CDevCtlInterfaceGUI::ShowMeInEdit(QWidget* parent, uchar ucType, ILxTsspParameterMacro* pMacroObj)
 {
     g_form = new CDevCtlInterfaceGUIDlg(parent);
-
+    g_form->m_pSearchStatuThread = &m_searchStatuThread;
     g_form->SetObjInfo(m_ObjectInfo);
     g_form->setText(m_strTitle, m_ParaSetStruct, m_MapMean, MapLineNum, ucType, pMacroObj);
     g_form->setAttribute(Qt::WA_DeleteOnClose);

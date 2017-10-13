@@ -20,6 +20,9 @@ CDevCtlInterfaceGUIDlg::CDevCtlInterfaceGUIDlg(QWidget *parent) :
     m_pTimer = NULL;
     m_timerComm = 0;
     m_timerStatu = 0;
+    m_showStatuDatagram = false;
+    m_showCommDatagram = false;
+    m_pSearchStatuThread = NULL;
     setAttribute(Qt::WA_DeleteOnClose);
 }
 
@@ -85,44 +88,11 @@ void CDevCtlInterfaceGUIDlg::InitDLG(int )
 {
     m_pTimer = new QTimer(this);
     connect( m_pTimer, SIGNAL(timeout()), SLOT(on_timer_show_response()) );
-    m_mapi64Str[0x0000000100000001] = "S标准TTC+DDT";
-    m_mapi64Str[0x0000000100000021] = "S标准TTC+DDT中的DDT";
-    m_mapi64Str[0x0000000000000020] = "S标准TTC+DDT中的TTC";
-    m_mapi64Str[0x0000000200000002] = "S扩1";
-    m_mapi64Str[0x0000000400000004] = "S扩2";
-    m_mapi64Str[0x0000000800000008] = "一体化";
-    m_mapi64Str[0x10] = "S频段调频遥测";
-    m_mapi64Str[0x0000002000000020] = "S频段数传";
-    m_mapi64Str[0x0000004000000040] = "C频段TTC";
-    m_mapi64Str[0x0000010000000100] = "C扩2";
-    m_mapi64Str[0x0000000000100010] = "UXB";
-    QMap<quint64, QString>::iterator mapIter = m_mapi64Str.begin();
-    for(; mapIter != m_mapi64Str.end(); ++mapIter)
-        ui->comboBox_workModeSet->addItem(mapIter.value());
-
-    ui->comboBox_type->addItem("遥测");
-    ui->comboBox_type->addItem("数传I(I+Q)路(低速)");
-    ui->comboBox_type->addItem("数传Q路(低速)");
-    ui->comboBox_rotation->addItem("左旋");
-    ui->comboBox_rotation->addItem("右旋");
-    ui->comboBox_statisticCtl->addItem("开始");
-    ui->comboBox_statisticCtl->addItem("终止");
-    ui->comboBox_doppTestReport->addItem("开始测试");
-    ui->comboBox_doppTestReport->addItem("终止测试");
-    ui->comboBoxWorkWay->addItem(tr(PCR_WORK_WAY_1));
-    ui->comboBoxWorkWay->addItem(tr(PCR_WORK_WAY_2));
-    ui->comboBoxWorkWay->addItem(tr(PCR_WORK_WAY_3));
-    ui->comboBoxWorkWay->addItem(tr(PCR_WORK_WAY_4));
-    ui->comboBoxWorkWay->addItem(tr(PCR_WORK_WAY_5));
-    ui->comboBoxWorkWay->addItem(tr(PCR_WORK_WAY_6));
-    ui->comboBoxWorkWay->addItem(tr(PCR_WORK_WAY_7));
-    ui->comboBoxWorkWay->addItem(tr(PCR_WORK_WAY_8));
-    ui->comboBoxWorkWay->addItem(tr(PCR_WORK_WAY_9));
-    ui->comboBoxWorkWay->addItem(tr(PCR_WORK_WAY_10));
-    ui->comboBoxWorkWay->addItem(tr(PCR_WORK_WAY_11));
-    ui->comboBoxWorkWay->addItem(tr(PCR_WORK_WAY_12));
-    ui->comboBoxWorkWay->addItem(tr(PCR_WORK_WAY_13));
-    ui->comboBoxWorkWay->addItem(tr(PCR_WORK_WAY_14));
+    ui->lineEdit_searchDS->setToolTip("请输入信息源号");
+    ui->lineEdit_searchDS->setText("2311000100901300");
+    QRegExp regExp("[A-Fa-f0-9]{1,16}");
+    ui->lineEdit_searchDS->setValidator(new QRegExpValidator(regExp, this));
+    g_showDatagram.m_id = 0x2311000100901300;
 }
 
 void CDevCtlInterfaceGUIDlg::SetObjInfo(TLxTsspObjectInfo ObjectInfo)
@@ -429,21 +399,23 @@ void CDevCtlInterfaceGUIDlg::on_pushButton_pauseStatu_clicked()
     if(ui->pushButton_pauseStatu->text() == "暂停状态查询")
     {
         ui->pushButton_pauseStatu->setText("开始状态查询");
-        if(g_pSearchThread)
-            g_pSearchThread->pause();
+        if(m_pSearchStatuThread)
+            m_pSearchStatuThread->pause();
     }
     else
     {
         ui->pushButton_pauseStatu->setText("暂停状态查询");
-        if(g_pSearchThread)
-            g_pSearchThread->continu();
+        if(m_pSearchStatuThread)
+            m_pSearchStatuThread->continu();
     }
 }
 
 void CDevCtlInterfaceGUIDlg::on_pushButton_statuCmd_clicked()
 {
-    if(g_pSearchThread)
-        g_pSearchThread->continu();
+    bool ok = false;
+    if(m_pSearchStatuThread)
+        m_pSearchStatuThread->continu();
+    g_showDatagram.m_id = ui->lineEdit_searchDS->text().toLongLong(&ok, 16);
     killTimer(m_timerStatu);
     m_timerStatu = startTimer(1000);
     m_showStatuDatagram = true;

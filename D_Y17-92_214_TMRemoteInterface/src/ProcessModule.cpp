@@ -28,14 +28,7 @@
 
 bool CDevCtlInterfaceGUI::filter(TLxTsspMessageHeader *pCmdHead, TLxTsspSubMsgHeader *pCmdItemHead)
 {
-    if(0x12E == pCmdHead->C || 0x12A == pCmdHead->C || 0x201 == pCmdHead->C)
-    {
-        pCmdItemHead->O = m_recvThread.getSN(pCmdItemHead->DID);
-        SUBITEM* pSubItem = m_platformRes.m_devMap.getObject(pCmdHead->C, pCmdItemHead->O, pCmdItemHead->DID);
-        if(!pSubItem)return true;
-        pCmdItemHead->TID = pSubItem->usTID;
-    }
-    else if(1793 == pCmdHead->C && 58521 == pCmdItemHead->TID)
+    if(1793 == pCmdHead->C && 58521 == pCmdItemHead->TID)
         return true;
     else if(0x701 == pCmdHead->C){
         if(0xea01 == pCmdItemHead->TID || 0x1c07 == pCmdItemHead->TID || 0xe489 == pCmdItemHead->TID ||
@@ -44,7 +37,6 @@ bool CDevCtlInterfaceGUI::filter(TLxTsspMessageHeader *pCmdHead, TLxTsspSubMsgHe
            0xea20 == pCmdItemHead->TID)
         return true;
     }
-    return false;
     return false;
 }
 int CDevCtlInterfaceGUI::proMsg(TLxTsspMessage& msg)
@@ -78,11 +70,16 @@ int CDevCtlInterfaceGUI::proMsg(TLxTsspMessage& msg)
             qDebug()<<"*******"<<i<<":"<<msg.pData[i];
         memcpy(szTemp,msg.pData,msg.iDataLen);
         CHelper::sendData(szTemp, nlen, chlID);
+        g_showDatagram.m_datagramCommSend.clear();
+        g_showDatagram.m_datagramCommSend.resize(nlen);
+        memcpy(g_showDatagram.m_datagramCommSend.data(), (char*)szTemp, nlen);
         delete szTemp;
         return 1;
     }
-    //if(szTemp!=0)
-    CHelper::sendData((uchar*)msg.pData, msg.iDataLen, chlID);
+    CHelper::sendData((uchar*)msg.pData, msg.iDataLen, chlID);//状态
+    g_showDatagram.m_datagramStatuSend.clear();
+    g_showDatagram.m_datagramStatuSend.resize(msg.iDataLen);
+    memcpy(g_showDatagram.m_datagramStatuSend.data(), msg.pData, msg.iDataLen);
     return 1;
 }
 

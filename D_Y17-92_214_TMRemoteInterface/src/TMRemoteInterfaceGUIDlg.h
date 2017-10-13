@@ -15,6 +15,7 @@ class CDevCtlInterfaceGUIDlg : public QDialog
 public:
     explicit CDevCtlInterfaceGUIDlg(QWidget *parent = 0);
     ~CDevCtlInterfaceGUIDlg();
+    SearchStatusThread* m_pSearchStatuThread;
 protected:
 
 private:
@@ -43,6 +44,8 @@ private:
     int m_timerComm;
     bool m_showStatuDatagram;
     int m_timerStatu;
+
+
 
 public:
     //设置标题 传倒信息
